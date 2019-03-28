@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "20242832-983b-4546-8146-a69b7518e7bd",
+		"name": "SIPPS",
+		"description": "Sistem Informasi Pelanggaran dan Prestasi Siswa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/sipps/api/user/delete/d033e22ae348aeb?nip=7201160101",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"user",
+						"delete",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "nip",
+							"value": "7201160101"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ganti Password User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "password_lama",
+							"value": "h3lpd35k",
+							"type": "text"
+						},
+						{
+							"key": "password_baru",
+							"value": "4dm1n",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/auth/password_user/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"auth",
+						"password_user",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/sipps/api/auth/logout_user/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"auth",
+						"logout_user",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nip",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "4dm1n",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/auth/login_user/",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"auth",
+						"login_user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nama",
+							"value": "Kalyssa Innara Putri",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "kalyssaip",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "Aktif",
+							"description": "Aktif / Nonaktif",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/user/edit/d033e22ae348aeb?nip=7201160106",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"user",
+						"edit",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "nip",
+							"value": "7201160106"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nip",
+							"value": "7201160101",
+							"type": "text"
+						},
+						{
+							"key": "nama",
+							"value": "Dian Ratna Sari",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "dianrs",
+							"type": "text"
+						},
+						{
+							"key": "level",
+							"value": "Wali",
+							"description": "Guru / BPBK / Wali / Kepsek",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/user/add/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"user",
+						"add",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/sipps/api/user/show/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"user",
+						"show",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e744671d-af96-4362-aa4b-244d59942341",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8c3e7c85-3f53-45aa-ad49-f394ce9a2d98",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
