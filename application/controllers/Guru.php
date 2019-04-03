@@ -7,4 +7,9 @@ class Guru extends CI_Controller {
 	{
 		$this->load->view('guru/main');
 	}
+
+	public function dashboard()
+	{
+		$this->load->view('guru/dashboard');
+	}
 }

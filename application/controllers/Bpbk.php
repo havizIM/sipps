@@ -7,4 +7,9 @@ class Bpbk extends CI_Controller {
 	{
 		$this->load->view('bpbk/main');
 	}
+
+	public function dashboard()
+	{
+		$this->load->view('bpbk/dashboard');
+	}
 }

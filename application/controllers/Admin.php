@@ -7,4 +7,9 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/main');
 	}
+
+	public function dashboard()
+	{
+		$this->load->view('admin/dashboard');
+	}
 }

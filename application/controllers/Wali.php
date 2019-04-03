@@ -7,4 +7,9 @@ class Wali extends CI_Controller {
 	{
 		$this->load->view('wali/main');
 	}
+
+	public function dashboard()
+	{
+		$this->load->view('wali/dashboard');
+	}
 }

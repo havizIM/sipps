@@ -49,7 +49,7 @@ File: style.css
 /**  =====================
      Google Font
 ==========================  **/
-@import url("https://fonts.googleapis.com/css?family=Baloo+Chettan");
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
 @import url("../plugins/bootstrap/css/bootstrap.min.css");
 @import url("../fonts/feather/css/feather.css");
 @import url("../plugins/jquery-scrollbar/css/perfect-scrollbar.css");
@@ -58,10 +58,10 @@ File: style.css
       Custom css start
 ==========================  **/
 body {
-  font-family: 'Baloo Chettan', cursive;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 14px;
   color: #888;
-  /* font-weight: 200; */
+  font-weight: bold;
   background: #f4f7fa;
   position: relative;
 }

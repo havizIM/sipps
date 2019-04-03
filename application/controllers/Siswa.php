@@ -7,4 +7,9 @@ class Siswa extends CI_Controller {
 	{
 		$this->load->view('siswa/main');
 	}
+
+	public function dashboard()
+	{
+		$this->load->view('siswa/dashboard');
+	}
 }
