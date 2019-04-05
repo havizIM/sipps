@@ -39,6 +39,9 @@
     .swal2-container {
       z-index: 2000 !important;
     }
+    .pcoded-header .dropdown .notification{
+      width:300px !important;
+    }
 
     </style>
   </head>
@@ -94,10 +97,17 @@
                 <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fas fa-user-cog" style="font-size:20px;"></i></a>
                 <div class="dropdown-menu dropdown-menu-right notification">
                   <div class="noti-head">
-                    <h6>Option</h6>
-                    <button type="button" class="btn btn-block btn-info btn-md" id="btn_profil" name="button">Profile</button>
-                    <button type="button" class="btn btn-block btn-success btn-md md-trigger" data-modal="modal-16" id="btn_gpass" name="button">Ganti Password</button>
-                    <button type="button" class="btn btn-block btn-danger btn-md" id="btn_logout" name="button">LogOut</button>
+                    <div class="row">
+                      <div class="col-md-6 col-6 text-right">
+                        <label class="nama"></label><br>
+                        <small class="level"></small>
+                      </div>
+                      <div class="col-md-6 col-6">
+                        <img src="<?= base_url().'assets/image/user1.png' ?>" class="img-rounded "alt="User" style="width:60px; height:60px;margin-left: 15px;">
+                      </div>
+                    </div><br>
+                    <button type="button" class="btn  btn-success btn-md md-trigger" data-modal="modal-16" id="btn_gpass" name="button">Ganti Password</button>
+                    <button type="button" class="btn  btn-danger btn-md" id="btn_logout" name="button" style="float:right;">LogOut</button>
                   </div>
                 </div>
               </div>
@@ -180,6 +190,8 @@
       var session = localStorage.getItem('sipps');
       var auth = JSON.parse(session);
 
+      $('.nama').text(auth.nama);
+      $('.level').text(auth.level);
       // Ajax Logout
       $('#btn_logout').on('click',function(){
         var link = '<?= base_url().'api/auth/logout_user/' ?>'+auth.token

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="<?= base_url().'assets/fonts/fontawesome/css/fontawesome-all.min.css' ?>">
     <!-- animation css -->
     <link rel="stylesheet" href="<?= base_url().'assets/plugins/animation/css/animate.min.css' ?>">
+    <!-- data tables css -->
+    <link rel="stylesheet" href="<?= base_url().'assets/plugins/data-tables/css/datatables.min.css' ?>">
     <!-- vendor css -->
     <link rel="stylesheet" href="<?= base_url().'assets/css/style.css' ?>">
 
@@ -41,7 +43,9 @@
     .swal2-container {
       z-index: 2000 !important;
     }
-
+    .pcoded-header .dropdown .notification{
+      width:300px !important;
+    }
     </style>
   </head>
   <body>
@@ -67,14 +71,11 @@
                     <li class="nav-item pcoded-menu-caption">
                         <label style="font-size:15px;">Menu</label>
                     </li>
-                    <li class="nav-item pcoded-hasmenu">
-                        <a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                    <li class="">
+                        <a href="#/dashboard" class="nav-link"><span class="pcoded-micon"><i class="fas fa-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                     </li>
-                    <li class="nav-item pcoded-hasmenu">
-                        <a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
-                    </li>
-                    <li class="nav-item pcoded-hasmenu">
-                        <a href="#" class="nav-link"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                    <li class="">
+                        <a href="#/user" class="nav-link"><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">User</span></a>
                     </li>
                 </ul>
             </div>
@@ -103,10 +104,17 @@
                 <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fas fa-user-cog" style="font-size:20px;"></i></a>
                 <div class="dropdown-menu dropdown-menu-right notification">
                   <div class="noti-head">
-                    <h6>Option</h6>
-                    <button type="button" class="btn btn-block btn-info btn-md" id="btn_profil" name="button">Profile</button>
-                    <button type="button" class="btn btn-block btn-success btn-md md-trigger" data-modal="modal-16" id="btn_gpass" name="button">Ganti Password</button>
-                    <button type="button" class="btn btn-block btn-danger btn-md" id="btn_logout" name="button">LogOut</button>
+                    <div class="row">
+                      <div class="col-md-6 col-6 text-right">
+                        <label class="nama"></label><br>
+                        <small class="level"></small>
+                      </div>
+                      <div class="col-md-6 col-6">
+                        <img src="<?= base_url().'assets/image/user1.png' ?>" class="img-rounded "alt="User" style="width:60px; height:60px;margin-left: 15px;">
+                      </div>
+                    </div><br>
+                    <button type="button" class="btn  btn-success btn-md md-trigger" data-modal="modal-16" id="btn_gpass" name="button">Ganti Password</button>
+                    <button type="button" class="btn  btn-danger btn-md" id="btn_logout" name="button" style="float:right;">LogOut</button>
                   </div>
                 </div>
               </div>
@@ -174,11 +182,24 @@
     <!-- SweetAlert -->
     <script src="<?= base_url().'assets/plugins/sweetalert2/sweetalert2.js' ?>"></script>
     <!-- Required Js -->
-    <script src="<?=base_url().'assets/js/vendor-all.min.js' ?>"></script>
-    <script src="<?=base_url().'assets/plugins/bootstrap/js/bootstrap.min.js' ?>"></script>
+    <script src="<?= base_url().'assets/js/vendor-all.min.js' ?>"></script>
+    <script src="<?= base_url().'assets/plugins/bootstrap/js/bootstrap.min.js' ?>"></script>
     <script src="<?=base_url().'assets/js/pcoded.min.js' ?>"></script>
+    <!-- datatable Js -->
+    <script src="<?= base_url().'assets/plugins/data-tables/js/datatables.min.js' ?>"></script>
+    <!-- Moment -->
+    <script src="<?= base_url().'assets/plugins/moment/js/moment.js' ?>"></script>
 
     <script type="text/javascript">
+
+    // Load Content
+    function load_content(link) {
+      $.get(`<?= base_url().'admin/'?>${link}`,function(response){
+
+        $('#content').html(response);
+      });
+    };
+
     $(document).ready(function() {
 
       const Toast = Swal.mixin({
@@ -192,6 +213,8 @@
       var session = localStorage.getItem('sipps');
       var auth = JSON.parse(session);
 
+      $('.nama').text(auth.nama);
+      $('.level').text(auth.level);
       // Ajax Logout
       $('#btn_logout').on('click',function(){
         var link = '<?= base_url().'api/auth/logout_user/' ?>'+auth.token
@@ -266,6 +289,22 @@
           });
         }
       })
+
+      var link;
+
+      // Load with URL
+      if (location.hash) {
+        link = location.hash.substr(2);
+        load_content(link);
+      }else {
+        location.hash ='#/dashboard';
+      }
+
+      // load with navigasi
+      $(window).on('hashchange',function(){
+        link = location.hash.substr(2);
+        load_content(link);
+      });
 
       // Modal Show Gpass
       $('#btn_gpass').on('click',function(){

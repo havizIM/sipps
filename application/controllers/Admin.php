@@ -12,4 +12,9 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/dashboard');
 	}
+
+	public function user()
+	{
+		$this->load->view('admin/user');
+	}
 }

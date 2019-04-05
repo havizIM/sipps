@@ -99,8 +99,6 @@
                         timer: 2000
                       });
 
-
-
         $('#form_login').on('submit',function(e){
           e.preventDefault();
 
