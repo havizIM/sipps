@@ -1,37 +1,46 @@
-<div class="row">
-  <div class="col-md-6">
-    <h5 class="">Data User</h5>
-  </div>
-  <div class="col-md-6">
-    <button type="button" class="btn btn-info btn-md" id="btn_adduser" name="button" style="float:right;"> <i class="fas fa-plus"></i>Tambah</button>
-  </div>
-</div>
-<hr>
-<div class="card">
-    <div class="card-body">
-      <div class="table-responsive" >
-        <table class="table table-hover dataTable" id="detail_user" >
-          <thead>
-            <tr>
-              <th>NIP</th>
-              <th>Nama</th>
-              <th>Username</th>
-              <th>Password</th>
-              <th>Level</th>
-              <th>Tgl.Regist</th>
-              <th>Status</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-
-          </tbody>
-        </table>
+<div class="app-content content">
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="content-header-left col-md-6 col-12 mb-2">
+        <h3 class="content-header-title mb-0">Data User</h3>
       </div>
+      <div class="content-header-right text-md-right col-md-6 col-12">
+        <div class="btn-group">
+          <button class="btn btn-round btn-info" id="btn_adduser" type="button"><i class="fas fa-plus"></i> Tambah</button>
+        </div>
+      </div>
+    </div><hr>
+    <div class="content-body">
+      <section>
+        <div class="card">
+            <div class="card-body">
+              <div class="table-responsive" >
+                <table class="table table-hover dataTable" id="detail_user" >
+                  <thead>
+                    <tr>
+                      <th>NIP</th>
+                      <th>Nama</th>
+                      <th>Username</th>
+                      <th>Password</th>
+                      <th>Level</th>
+                      <th>Tgl.Regist</th>
+                      <th>Status</th>
+                      <th style="width:16%"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+      </section>
     </div>
+  </div>
 </div>
 
-<!-- [ MODAL CHANGE PASS ] start -->
+<!-- [ MODAL Tambah User ] start -->
 <div class="modal fade" id="modal_add">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
@@ -172,7 +181,7 @@
       var nip = $(this).attr('data-id')
 
       $.ajax({
-        url: `<?= base_url().'api/user/delete/${token}?nip=' ?>`+nip,
+        url: `<?= base_url().'api/user/delete/'?>${token}?nip=${nip}`,
         type: 'GET',
         dataType: 'JSON',
         // data: {},

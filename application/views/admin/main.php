@@ -60,11 +60,11 @@
     <nav class="pcoded-navbar">
         <div class="navbar-wrapper">
             <div class="navbar-brand header-logo">
-              <a href="#" class="b-brand">
+              <a href="#!" class="b-brand">
                  <img src="<?= base_url().'assets/image/logo.png' ?>" alt="SMA Al-Huda" style="width:45px; height:45px;">
                  <span class="b-title">Admin</span>
               </a>
-                <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
+                <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
             </div>
             <div class="navbar-content scroll-div">
                 <ul class="nav pcoded-inner-navbar">
@@ -184,7 +184,7 @@
     <!-- Required Js -->
     <script src="<?= base_url().'assets/js/vendor-all.min.js' ?>"></script>
     <script src="<?= base_url().'assets/plugins/bootstrap/js/bootstrap.min.js' ?>"></script>
-    <script src="<?=base_url().'assets/js/pcoded.min.js' ?>"></script>
+    <script src="<?= base_url().'assets/js/pcoded.min.js' ?>"></script>
     <!-- datatable Js -->
     <script src="<?= base_url().'assets/plugins/data-tables/js/datatables.min.js' ?>"></script>
     <!-- Moment -->
