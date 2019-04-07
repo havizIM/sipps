@@ -25,7 +25,7 @@
                       <th>Level</th>
                       <th>Tgl.Regist</th>
                       <th>Status</th>
-                      <th style="width:16%"></th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -145,7 +145,7 @@
       }],
       responsive:true,
       processing:true,
-      ajax:'<?= base_url().'api/user/show/' ?>'+token,
+      ajax:'<?= base_url().'api/user/show/'?>'+token,
       columns:[
         {"data":"nip"},
         {"data":"nama"},
@@ -238,7 +238,6 @@
               title: response.message,
             })
           }
-
           table.ajax.reload();
         },
         error:function(){
