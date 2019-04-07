@@ -2,23 +2,34 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <title>SIPPS | Admin</title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets/image/logo.png' ?>">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"rel="stylesheet">
+    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"rel="stylesheet">
+    <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/vendors.css' ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/vendors/css/tables/datatable/datatables.min.css' ?>">
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN MODERN CSS-->
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/app.css' ?>">
+    <!-- END MODERN CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/core/menu/menu-types/vertical-compact-menu.css' ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/core/colors/palette-gradient.css' ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/pages/timeline.css' ?>">
+    <!-- END Page Level CSS-->
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/css/style.css' ?>">
+    <!-- END Custom CSS-->
 
-    <!-- Favicon icon -->
-    <!-- <link rel="icon" href="<?= base_url().'assets/images/favicon.ico' ?>" type="image/x-icon"> -->
-    <!-- fontawesome icon -->
-    <link rel="stylesheet" href="<?= base_url().'assets/fonts/fontawesome/css/fontawesome-all.min.css' ?>">
-    <!-- animation css -->
-    <link rel="stylesheet" href="<?= base_url().'assets/plugins/animation/css/animate.min.css' ?>">
-    <!-- data tables css -->
-    <link rel="stylesheet" href="<?= base_url().'assets/plugins/data-tables/css/datatables.min.css' ?>">
-    <!-- vendor css -->
-    <link rel="stylesheet" href="<?= base_url().'assets/css/style.css' ?>">
-
-    <!-- Required Js -->
-    <script src="<?= base_url().'assets/js/jquery/jquery.min.js' ?>"></script>
+    <!-- Jqoery -->
+    <script src="<?= base_url().'assets/app-assets/js/core/libraries/jquery/jquery.min.js' ?>" type="text/javascript"></script>
     <script type="text/javascript">
+
     function cek_auth(){
       var session = localStorage.getItem('sipps');
       var auth = JSON.parse(session);
@@ -33,175 +44,135 @@
       };
     cek_auth();
     </script>
-
-    <style media="screen">
-    .pcoded-header .dropdown .dropdown-toggle {
-      line-height: 70px;
-      display: inline-block;
-      padding-right: 20px;
-    }
-    .swal2-container {
-      z-index: 2000 !important;
-    }
-    .pcoded-header .dropdown .notification{
-      width:300px !important;
-    }
-    </style>
   </head>
-  <body>
-    <!-- [ Pre-loader ] start -->
-    <!-- <div class="loader-bg">
-        <div class="loader-track">
-            <div class="loader-fill"></div>
-        </div>
-    </div> -->
-    <!-- [ Pre-loader ] End -->
-    <!-- [ navigation menu ] start -->
-    <nav class="pcoded-navbar">
-        <div class="navbar-wrapper">
-            <div class="navbar-brand header-logo">
-              <a href="#!" class="b-brand">
-                 <img src="<?= base_url().'assets/image/logo.png' ?>" alt="SMA Al-Huda" style="width:45px; height:45px;">
-                 <span class="b-title">Admin</span>
-              </a>
-                <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-            </div>
-            <div class="navbar-content scroll-div">
-                <ul class="nav pcoded-inner-navbar">
-                    <li class="nav-item pcoded-menu-caption">
-                        <label style="font-size:15px;">Menu</label>
-                    </li>
-                    <li class="">
-                        <a href="#/dashboard" class="nav-link"><span class="pcoded-micon"><i class="fas fa-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
-                    </li>
-                    <li class="">
-                        <a href="#/user" class="nav-link"><span class="pcoded-micon"><i class="fas fa-users"></i></span><span class="pcoded-mtext">User</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- [ navigation menu ] end -->
-    <!-- [ Header ] start -->
-    <header class="navbar pcoded-header navbar-expand-lg navbar-light">
-        <div class="m-header">
-            <a class="mobile-menu" id="mobile-collapse1" href="#"><span></span></a>
-            <a href="#" class="b-brand">
-               <img src="<?= base_url().'assets/image/logo.png' ?>" alt="SMA Al-Huda" style="width:45px; height:45px;">
-               <span class="b-title">Admin</span>
+  <body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
+  <!-- fixed-top-->
+  <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-dark bg-cyan navbar-shadow navbar-brand-center">
+    <div class="navbar-wrapper">
+      <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+          <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
+          <li class="nav-item">
+            <a class="navbar-brand" href="#">
+              <img class="brand-logo" alt="modern admin logo" src="<?= base_url().'assets/image/logo.png' ?>">
+              <h3 class="brand-text">SMA AL-HUDA</h3>
             </a>
-        </div>
-        <a class="mobile-menu" id="mobile-header" href="#">
-            <i class="feather icon-more-horizontal"></i>
-        </a>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav mr-auto">
-              <li><a href="#" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
+          </li>
+          <li class="nav-item d-md-none">
+            <a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div class="navbar-container content">
+        <div class="collapse navbar-collapse" id="navbar-mobile">
+          <ul class="nav navbar-nav mr-auto float-left">
+            <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
+            <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
           </ul>
-          <ul class="navbar-nav ml-auto">
-            <li>
-              <div class="dropdown">
-                <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="fas fa-user-cog" style="font-size:20px;"></i></a>
-                <div class="dropdown-menu dropdown-menu-right notification">
-                  <div class="noti-head">
-                    <div class="row">
-                      <div class="col-md-6 col-6 text-right">
-                        <label class="nama"></label><br>
-                        <small class="level"></small>
-                      </div>
-                      <div class="col-md-6 col-6">
-                        <img src="<?= base_url().'assets/image/user1.png' ?>" class="img-rounded "alt="User" style="width:60px; height:60px;margin-left: 15px;">
-                      </div>
-                    </div><br>
-                    <button type="button" class="btn  btn-success btn-md md-trigger" data-modal="modal-16" id="btn_gpass" name="button">Ganti Password</button>
-                    <button type="button" class="btn  btn-danger btn-md" id="btn_logout" name="button" style="float:right;">LogOut</button>
-                  </div>
-                </div>
+          <ul class="nav navbar-nav float-right">
+            <li class="dropdown dropdown-user nav-item">
+              <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                <span class="mr-1">Hello,
+                  <span class="user-name text-bold-700" id="nama"></span>
+                  <b>[<span id="level"></span>]</b>
+                </span>
+                <span class="avatar">
+                  <img src="<?= base_url().'assets/image/user2.png' ?>" alt="avatar"><i></i></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" id="btn_gpass"><i class="fas fa-exchange-alt"></i> Ganti Password</a>
+                <a class="dropdown-item" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
               </div>
             </li>
           </ul>
         </div>
-    </header>
-    <!-- [ Header ] end -->
-    <!-- [ Main Content ] start -->
-    <section class="pcoded-main-container">
-      <div class="pcoded-wrapper">
-        <div class="pcoded-content">
-          <div class="pcoded-inner-content">
+      </div>
+    </div>
+  </nav>
+  <!-- ////////////////////////////////////////////////////////////////////////////-->
+  <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="main-menu-content">
+      <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+        <li class=" nav-item"><a href="#/dashboard"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
+        <li class=" nav-item"><a href="#"><i class="la la-user"></i><span class="menu-title" data-i18n="nav.templates.main">User</span></a>
+          <ul class="menu-content">
+            <li><a class="menu-item" href="#/user">Data User</a></li>
+            <li><a class="menu-item" >Log User</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Load Content-->
+  <div id="content">
 
-            <div class="main-body">
-              <div class="page-wrapper">
-                <!-- [ Main Content ] start -->
-                <div id="content">
+  </div>
+  <!-- ////////////////////////////////////////////////////////////////////////////-->
+  <footer class="footer footer-static footer-light fixed-bottom navbar-border navbar-shadow">
+    <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
+      <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block"> Made with <i class="ft-heart pink"></i></span>
+    </p>
+  </footer>
 
-                </div>
-                <!-- [ Main Content ] end -->
-              </div>
+<!-- Modal Change Password -->
+<div class="modal fade text-left" id="modal_gpass" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ganti Password</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="form_gpass">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Password Lama</label>
+            <input type="password" class="form-control" id="pass_lama" name="password_lama">
+          </div>
+          <div class="form-group">
+            <label>Password Baru</label>
+            <input type="password" class="form-control" id="pass_baru" name="password_baru">
+          </div>
+          <div class="form-group" style="margin-bottom:0px;">
+            <div class="text-md-right">
+              <input type="checkbox" id="show_pass" class="chk-remember" style="width:20px; height:20px;">
+              <label> Lihat sandi</label>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- [ Main Content ] end -->
-
-    <!-- [ MODAL CHANGE PASS ] start -->
-    <div class="modal fade" id="modal_gpass">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <h5 class="modal-title text-white" id="exampleModalLabel">Ganti Password</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-footer">
+          <button type="button" class="btn grey btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-md btn-info" id="btn_savepass">Simpan Perubahan</button>
         </div>
-        <form id="form_gpass">
-          <div class="modal-body">
-            <div class="form-group">
-                <label>Password Lama</label>
-                <input type="password" class="form-control" id="pass_lama" name="password_lama">
-            </div>
-            <div class="form-group">
-                <label>Password Baru</label>
-                <input type="password" class="form-control" id="pass_baru" name="password_baru">
-            </div>
-            <div class="form-group text-left">
-                <div class="checkbox checkbox-fill d-inline">
-                    <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" class="show_pass">
-                    <label for="checkbox-fill-a1" class="cr">Lihat Password </label>
-                </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" id="btn_savepass" class="btn btn-primary">Simpan Perubahan</button>
-          </div>
-        </form>
-      </div>
+      </form>
     </div>
-    </div>
-    <!-- [ Modal Change Pass ] end -->
-    <!-- SweetAlert -->
-    <script src="<?= base_url().'assets/plugins/sweetalert2/sweetalert2.js' ?>"></script>
-    <!-- Required Js -->
-    <script src="<?= base_url().'assets/js/vendor-all.min.js' ?>"></script>
-    <script src="<?= base_url().'assets/plugins/bootstrap/js/bootstrap.min.js' ?>"></script>
-    <script src="<?= base_url().'assets/js/pcoded.min.js' ?>"></script>
-    <!-- datatable Js -->
-    <script src="<?= base_url().'assets/plugins/data-tables/js/datatables.min.js' ?>"></script>
-    <!-- Moment -->
-    <script src="<?= base_url().'assets/plugins/moment/js/moment.js' ?>"></script>
+  </div>
+</div>
 
-    <script type="text/javascript">
+  <!-- BEGIN VENDOR JS-->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/vendors.min.js' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/vendors/js/tables/datatable/datatables.min.js' ?>" type="text/javascript"></script>
+  <!-- BEGIN VENDOR JS-->
+  <!-- BEGIN MODERN JS-->
+  <script src="<?= base_url().'assets/app-assets/js/core/app-menu.js' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/js/core/app.js' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/js/scripts/customizer.js ' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/js/scripts/moment/moment.js ' ?>" type="text/javascript"></script>
+  <!-- END MODERN JS-->
+  <!-- SWEET ALERT 2 -->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/sweetalert2/sweetalert2.js' ?>"></script>
 
-    // Load Content
-    function load_content(link) {
-      $.get(`<?= base_url().'admin/'?>${link}`,function(response){
+  <script type="text/javascript">
+  // Load Content
+  function load_content(link) {
+    $.get(`<?= base_url().'admin/'?>${link}`,function(response){
 
-        $('#content').html(response);
-      });
-    };
+      $('#content').html(response);
+    });
+  };
 
     $(document).ready(function() {
-
       const Toast = Swal.mixin({
                       toast: true,
                       position:'bottom-end',
@@ -209,12 +180,12 @@
                       timer: 2500
                     });
 
-
       var session = localStorage.getItem('sipps');
       var auth = JSON.parse(session);
 
-      $('.nama').text(auth.nama);
-      $('.level').text(auth.level);
+      $('#nama').text(auth.nama);
+      $('#level').text(auth.level);
+
       // Ajax Logout
       $('#btn_logout').on('click',function(){
         var link = '<?= base_url().'api/auth/logout_user/' ?>'+auth.token
@@ -290,7 +261,19 @@
         }
       })
 
-      var link;
+      // Modal Ganti Password
+      $('#btn_gpass').on('click',function(){
+        $('#modal_gpass').modal('show')
+      })
+
+      // Show Password
+      $('#show_pass').click(function(){
+        if($(this).is(':checked')){
+          $('#pass_baru,#pass_lama').attr('type','text');
+        }else{
+          $('#pass_baru,#pass_lama').attr('type','password');
+        };
+      });
 
       // Load with URL
       if (location.hash) {
@@ -305,22 +288,7 @@
         link = location.hash.substr(2);
         load_content(link);
       });
-
-      // Modal Show Gpass
-      $('#btn_gpass').on('click',function(){
-        $('#modal_gpass').modal('show');
-      })
-      // End Modal Show Gpass
-      // Show Password
-      $('.show_pass').click(function(){
-        if($(this).is(':checked')){
-          $('#pass_lama,#pass_baru').attr('type','text');
-        }else{
-          $('#pass_lama,#pass_baru').attr('type','password');
-        };
-      });
-      // End Show Password
     });
-    </script>
+  </script>
   </body>
 </html>

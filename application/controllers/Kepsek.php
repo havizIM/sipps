@@ -10,6 +10,6 @@ class Kepsek extends CI_Controller {
 
 	public function dashboard()
 	{
-		$this->load->view('kepseks/dashboard');
+		$this->load->view('kepsek/dashboard');
 	}
 }

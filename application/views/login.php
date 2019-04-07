@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+
     <title>SIPPS | Login</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets/image/logo.png' ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"rel="stylesheet">
     <!-- BEGIN VENDOR CSS-->
@@ -39,6 +42,14 @@
 
         cek_auth();
       </script>
+
+      <style media="screen">
+        body{
+          background-image: url('<?= base_url().'assets/image/bg20.jpg' ?>');
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+      </style>
   </head>
   <body class="vertical-layout vertical-content-menu 1-column menu-expanded fixed-navbar"data-open="click" data-menu="vertical-content-menu" data-col="1-column">
     <div class="app-content content">
