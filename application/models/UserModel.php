@@ -4,12 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class UserModel extends CI_Model {
 
-    function show($nip = null, $nama = null)
+    function show($nip = null, $nama = null, $level = null)
     {
       $this->db->select('*')->from('user');
 
       if($nip != null){
         $this->db->where('nip', $nip);
+      }
+
+      if($level != null){
+        $this->db->where('level', $level);
       }
 
       if($nama != null){

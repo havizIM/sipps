@@ -32,8 +32,9 @@ class User extends CI_Controller {
           } else {
             $nip  		    = $this->input->get('nip');
       			$nama      	  = $this->input->get('nama');
+            $level        = $this->input->get('level');
 
-            $show  = $this->UserModel->show($nip, $nama);
+            $show  = $this->UserModel->show($nip, $nama, $level);
             $user  = array();
 
             foreach($show->result() as $key){

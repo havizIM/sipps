@@ -253,6 +253,254 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Show Kapres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/kapres/show/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"kapres",
+						"show",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Kapres",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "kategori_prestasi",
+							"value": "Cobalah mengerti yaaa",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/kapres/add/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"kapres",
+						"add",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Kapres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/kapres/delete/d033e22ae348aeb?id_kapres=KPS00",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"kapres",
+						"delete",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "id_kapres",
+							"value": "KPS00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Kapel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "kategori_pelanggaran",
+							"value": "Coba yaaahhh lagi",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/kapel/add/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"kapel",
+						"add",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Kapel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/kapel/show/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"kapel",
+						"show",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Kapel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/kapel/delete/d033e22ae348aeb?id_kapel=KPL02",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"kapel",
+						"delete",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "id_kapel",
+							"value": "KPL02"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Kelas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/kelas/show/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"kelas",
+						"show",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Kelas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "kelas",
+							"value": "XII-IPS-2",
+							"type": "text"
+						},
+						{
+							"key": "nip",
+							"value": "7201160101",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/kelas/add/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"kelas",
+						"add",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Kelas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/kelas/delete/d033e22ae348aeb?kelas=XII-IPS-1",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"kelas",
+						"delete",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "kelas",
+							"value": "XII-IPS-1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
