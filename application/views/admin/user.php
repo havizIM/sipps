@@ -142,6 +142,9 @@
       columnDefs :[{
         targets:[0,2,3,4,5,6,7],
         searchable:false
+      },{
+        targets:[2,3,7],
+        orderable:false
       }],
       responsive:true,
       processing:true,

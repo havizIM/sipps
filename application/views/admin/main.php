@@ -191,24 +191,35 @@
       $('#btn_logout').on('click',function(){
         var link = '<?= base_url().'api/auth/logout_user/' ?>'+auth.token
         // alert(link)
-        $.ajax({
-          url: link,
-          type: 'GET',
-          dataType: 'JSON',
-          // data: {},
-          beforeSend:function(){},
-          success:function(response){
-            if (response.status === 200) {
-              localStorage.clear();
-              window.location.replace('<?= base_url().'auth' ?>')
-            }else {
-              alert(response.message)
-            }
-          },
-          error:function(){
-            alert('Gagal Mengakses Server')
+        Swal.fire({
+          title: 'Yakin untuk Logout ?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya logout !'
+        }).then((result) => {
+          if (result.value) {
+            $.ajax({
+              url: link,
+              type: 'GET',
+              dataType: 'JSON',
+              // data: {},
+              beforeSend:function(){},
+              success:function(response){
+                if (response.status === 200) {
+                  localStorage.clear();
+                  window.location.replace('<?= base_url().'auth' ?>')
+                }else {
+                  alert(response.message)
+                }
+              },
+              error:function(){
+                alert('Gagal Mengakses Server')
+              }
+            });
           }
-        });
+        })
       })
 
       // Ajax Change Pass
