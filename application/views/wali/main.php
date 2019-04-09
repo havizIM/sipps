@@ -182,13 +182,14 @@
 
       var session = localStorage.getItem('sipps');
       var auth = JSON.parse(session);
+      alert(auth.token)
 
       $('#nama').text(auth.nama);
       $('#level').text(auth.level);
 
       // Ajax Logout
       $('#btn_logout').on('click',function(){
-        var link = '<?= base_url().'api/auth/logout_user/' ?>'+auth.token
+        var link = '<?= base_url().'api/auth/logout_user/' ?>'+auth.token;
         // alert(link)
         Swal.fire({
           title: 'Yakin untuk Logout ?',

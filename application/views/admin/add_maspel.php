@@ -67,6 +67,13 @@
                     timer: 2500
                   });
 
+    const Toast1 = Swal.mixin({
+                    toast: true,
+                    position:'center',
+                    showConfirmButton: true,
+                    // timer: 2500
+                  });
+
     var session = localStorage.getItem('sipps');
     var auth = JSON.parse(session);
     var token = auth.token
@@ -151,31 +158,42 @@
 
       var id_kapel = $(this).attr('data-id')
 
-      $.ajax({
-        url: `<?= base_url().'api/kapel/delete/'?>${token}?id_kapel=${id_kapel}`,
-        type: 'GET',
-        dataType: 'JSON',
-        // data: {},
-        beforeSend:function(){},
-        success:function(response){
-          if (response.status === 200) {
-            Toast.fire({
-              type: 'success',
-              title: response.message,
-            })
-          }else {
-            Toast.fire({
-              type: 'Error',
-              title: response.message,
-            })
-          }
-          table.ajax.reload();
-        },
-        error:function(){
-          Toast.fire({
-            type: 'Error',
-            title: 'Gagal Mengakses Server ...',
-          })
+      Toast1.fire({
+        title: 'Hapus kategori ?',
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya'
+      }).then((result) => {
+        if (result.value) {
+          $.ajax({
+            url: `<?= base_url().'api/kapel/delete/'?>${token}?id_kapel=${id_kapel}`,
+            type: 'GET',
+            dataType: 'JSON',
+            // data: {},
+            beforeSend:function(){},
+            success:function(response){
+              if (response.status === 200) {
+                Toast.fire({
+                  type: 'success',
+                  title: response.message,
+                })
+              }else {
+                Toast.fire({
+                  type: 'Error',
+                  title: response.message,
+                })
+              }
+              table.ajax.reload();
+            },
+            error:function(){
+              Toast.fire({
+                type: 'Error',
+                title: 'Gagal Mengakses Server ...',
+              })
+            }
+          });
         }
       });
     })

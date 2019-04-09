@@ -161,7 +161,7 @@
         {"data":"status"},
         {"data":null,"render":function(data,type,row){
 
-            return `<button type="button" id="btn_edit" data-id="${row.nip}" class="btn  btn-md btn-success" name="button">Edit</button> <button type="button" data-id="${row.nip}" id="btn_delete" class="btn  btn-md btn-danger" name="button">Hapus</button>`
+            return `<button type="button" id="btn_edit" data-id="${row.nip}" class="btn  btn-sm btn-success" name="button">Edit</button> <button type="button" data-id="${row.nip}" id="btn_delete" class="btn  btn-sm btn-danger" name="button">Hapus</button>`
 
         }},
       ],
@@ -223,31 +223,42 @@
 
       var nip = $(this).attr('data-id')
 
-      $.ajax({
-        url: `<?= base_url().'api/user/delete/'?>${token}?nip=${nip}`,
-        type: 'GET',
-        dataType: 'JSON',
-        // data: {},
-        beforeSend:function(){},
-        success:function(response){
-          if (response.status === 200) {
-            Toast.fire({
-              type: 'success',
-              title: response.message,
-            })
-          }else {
-            Toast.fire({
-              type: 'Error',
-              title: response.message,
-            })
-          }
-          table.ajax.reload();
-        },
-        error:function(){
-          Toast.fire({
-            type: 'Error',
-            title: 'Gagal Mengakses Server ...',
-          })
+      Swal.fire({
+        title: 'Hapus user ?',
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya'
+      }).then((result) => {
+        if (result.value) {
+          $.ajax({
+            url: `<?= base_url().'api/user/delete/'?>${token}?nip=${nip}`,
+            type: 'GET',
+            dataType: 'JSON',
+            // data: {},
+            beforeSend:function(){},
+            success:function(response){
+              if (response.status === 200) {
+                Toast.fire({
+                  type: 'success',
+                  title: response.message,
+                })
+              }else {
+                Toast.fire({
+                  type: 'Error',
+                  title: response.message,
+                })
+              }
+              table.ajax.reload();
+            },
+            error:function(){
+              Toast.fire({
+                type: 'Error',
+                title: 'Gagal Mengakses Server ...',
+              })
+            }
+          });
         }
       });
     })

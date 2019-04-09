@@ -44,6 +44,10 @@
       };
     cek_auth();
     </script>
+
+    <style media="screen">
+
+    </style>
   </head>
   <body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
   <!-- fixed-top-->
