@@ -26,26 +26,22 @@ class Kapres extends CI_Controller {
         } else {
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin'){
-            json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
-          } else {
-            $id_kapres  	     = $this->input->get('id_kapres');
-      			$kategori_prestasi = $this->input->get('kategori_prestasi');
+          $id_kapres  	     = $this->input->get('id_kapres');
+    			$kategori_prestasi = $this->input->get('kategori_prestasi');
 
-            $show  = $this->KapresModel->show($id_kapres, $kategori_prestasi);
-            $kapres  = array();
+          $show  = $this->KapresModel->show($id_kapres, $kategori_prestasi);
+          $kapres  = array();
 
-            foreach($show->result() as $key){
-              $json = array();
+          foreach($show->result() as $key){
+            $json = array();
 
-              $json['id_kapres']            = $key->id_kapres;
-              $json['kategori_prestasi']    = $key->kategori_prestasi;
+            $json['id_kapres']            = $key->id_kapres;
+            $json['kategori_prestasi']    = $key->kategori_prestasi;
 
-              $kapres[] = $json;
-            }
-
-            json_output(200, array('status' => 200, 'description' => 'Berhasil', 'data' => $kapres));
+            $kapres[] = $json;
           }
+
+          json_output(200, array('status' => 200, 'description' => 'Berhasil', 'data' => $kapres));
         }
       }
     }
@@ -70,7 +66,7 @@ class Kapres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_kapres         = $this->KodeModel->buatKode('kapres', 'KPS', 'id_kapres', 2);
@@ -118,7 +114,7 @@ class Kapres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_kapres = $this->input->get('id_kapres');

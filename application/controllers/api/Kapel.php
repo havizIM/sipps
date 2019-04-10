@@ -26,26 +26,22 @@ class Kapel extends CI_Controller {
         } else {
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin'){
-            json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
-          } else {
-            $id_kapel  	          = $this->input->get('id_kapel');
-      			$kategori_pelanggaran = $this->input->get('kategori_pelanggaran');
+          $id_kapel  	          = $this->input->get('id_kapel');
+    			$kategori_pelanggaran = $this->input->get('kategori_pelanggaran');
 
-            $show  = $this->KapelModel->show($id_kapel, $kategori_pelanggaran);
-            $kapel  = array();
+          $show  = $this->KapelModel->show($id_kapel, $kategori_pelanggaran);
+          $kapel  = array();
 
-            foreach($show->result() as $key){
-              $json = array();
+          foreach($show->result() as $key){
+            $json = array();
 
-              $json['id_kapel']                = $key->id_kapel;
-              $json['kategori_pelanggaran']    = $key->kategori_pelanggaran;
+            $json['id_kapel']                = $key->id_kapel;
+            $json['kategori_pelanggaran']    = $key->kategori_pelanggaran;
 
-              $kapel[] = $json;
-            }
-
-            json_output(200, array('status' => 200, 'description' => 'Berhasil', 'data' => $kapel));
+            $kapel[] = $json;
           }
+
+          json_output(200, array('status' => 200, 'description' => 'Berhasil', 'data' => $kapel));
         }
       }
     }
@@ -70,7 +66,7 @@ class Kapel extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_kapel             = $this->KodeModel->buatKode('kapel', 'KPL', 'id_kapel', 2);
@@ -118,7 +114,7 @@ class Kapel extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_kapel = $this->input->get('id_kapel');
