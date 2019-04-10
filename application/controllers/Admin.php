@@ -17,4 +17,24 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/user');
 	}
+
+	public function m_prestasi()
+	{
+		$this->load->view('admin/m_prestasi');
+	}
+
+	public function m_pelanggaran()
+	{
+		$this->load->view('admin/m_pelanggaran');
+	}
+
+	public function add_maspel()
+	{
+		$this->load->view('admin/add_maspel');
+	}
+
+	public function add_maspres()
+	{
+		$this->load->view('admin/add_maspres');
+	}
 }

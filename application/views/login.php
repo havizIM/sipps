@@ -10,6 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets/image/logo.png' ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/vendors.css' ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/vendors/css/forms/icheck/icheck.css' ?>">
@@ -90,7 +91,7 @@
                           <label> Lihat sandi</label>
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-danger btn-block btn-lg"><i class="ft-unlock"></i> Login</button>
+                      <button type="submit" class="btn btn-danger btn-block btn-lg" id="btn_login"><i class="ft-unlock"></i> Login</button>
                     </form>
                   </div>
                 </div>
@@ -146,7 +147,9 @@
             type: 'POST',
             dataType: 'JSON',
             data: $('#form_login').serialize(),
-            beforeSend:function(){},
+            beforeSend:function(){
+              $('#btn_login').addClass('disabled').attr('disabled','disabled').html('<span><i class="fas fa-spinner fa-spin" style="font-size:20px;"></i> Login</span>')
+            },
             success:function(response){
               if (response.status === 200) {
                 var link = '<?= base_url().'' ?>'+response.data.level
@@ -159,6 +162,8 @@
                   title: response.message,
                 })
               }
+
+              $('#btn_login').removeClass('disabled').removeAttr('disabled','disabled').html('<span><i class="ft-unlock"></i> Login</span>')
             },
             error:function(){
               alert('Gagal Mengakses Server ... ')

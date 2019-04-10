@@ -44,6 +44,10 @@
       };
     cek_auth();
     </script>
+
+    <style media="screen">
+
+    </style>
   </head>
   <body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
   <!-- fixed-top-->
@@ -93,11 +97,12 @@
   <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-        <li class=" nav-item"><a href="#/dashboard"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
-        <li class=" nav-item"><a href="#"><i class="la la-user"></i><span class="menu-title" data-i18n="nav.templates.main">User</span></a>
+        <li class="nav-item"><a href="#/dashboard"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
+        <li class="nav-item"><a href="#/user"><i class="la la-user"></i><span class="menu-title" data-i18n="nav.templates.main">User</span></a></li>
+        <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="nav.templates.main">Data Master</span></a>
           <ul class="menu-content">
-            <li><a class="menu-item" href="#/user">Data User</a></li>
-            <li><a class="menu-item" >Log User</a></li>
+            <li><a class="menu-item" href="#/m_prestasi">Master Prestasi</a></li>
+            <li><a class="menu-item" href="#/m_pelanggaran">Master Pelanggaran</a></li>
           </ul>
         </li>
       </ul>
@@ -190,24 +195,35 @@
       $('#btn_logout').on('click',function(){
         var link = '<?= base_url().'api/auth/logout_user/' ?>'+auth.token
         // alert(link)
-        $.ajax({
-          url: link,
-          type: 'GET',
-          dataType: 'JSON',
-          // data: {},
-          beforeSend:function(){},
-          success:function(response){
-            if (response.status === 200) {
-              localStorage.clear();
-              window.location.replace('<?= base_url().'auth' ?>')
-            }else {
-              alert(response.message)
-            }
-          },
-          error:function(){
-            alert('Gagal Mengakses Server')
+        Swal.fire({
+          title: 'Yakin untuk Logout ?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya logout !'
+        }).then((result) => {
+          if (result.value) {
+            $.ajax({
+              url: link,
+              type: 'GET',
+              dataType: 'JSON',
+              // data: {},
+              beforeSend:function(){},
+              success:function(response){
+                if (response.status === 200) {
+                  localStorage.clear();
+                  window.location.replace('<?= base_url().'auth' ?>')
+                }else {
+                  alert(response.message)
+                }
+              },
+              error:function(){
+                alert('Gagal Mengakses Server')
+              }
+            });
           }
-        });
+        })
       })
 
       // Ajax Change Pass
