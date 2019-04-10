@@ -2,54 +2,38 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Tambah Master Pelanggaran</h3>
-        <div class="row breadcrumbs-top mt-1 mb-0">
-          <div class="breadcrumb-wrapper col-12">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#/dashboard">Dashboard</a>
-              </li>
-              <li class="breadcrumb-item"><a href="#/m_pelanggaran">Master Pelanggaran</a>
-              </li>
-              <li class="breadcrumb-item active">Tambah Pelanggaran
-              </li>
-            </ol>
-          </div>
-        </div>
+        <h3 class="content-header-title mb-0">Add Master Pelanggaran</h3>
       </div>
       <div class="content-header-right text-md-right col-md-6 col-12">
         <div class="btn-group">
           <a href="#/m_pelanggaran" class="btn btn-round btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
         </div>
       </div>
-    </div><hr>
+    </div>
     <div class="content-body">
-      <div class="card">
-        <div class="card-body">
-          <form id="form_addmaspel">
-            <div class="form-group">
-              <label>Deskripsi</label>
-              <input type="text" class="form-control" id="deskripsi_pelanggaran" name="deskripsi_pelanggaran">
-            </div>
-            <div class="form-group">
-              <label>Point</label>
-              <input type="text" class="form-control" id="poin_pelanggaran" name="poin_pelanggaran">
-            </div>
-            <div class="form-group">
-              <label>Kategori Pelanggaran</label>
-              <div class="input-group">
-                <input type="hidden" name="id_kapel" id="show_idkapel">
-                <input type="text" class="form-control" name="kategori_pelanggaran" class="form-control" id="show_kapel" placeholder="-- Pilih Kategori --" readonly>
-                <div class="input-group-append">
-                  <span class="input-group-text bg-info text-white" id="modal_lookup" style="cursor:pointer;">Cari</span>
-                </div>
-              </div>
-            </div>
-            <div class="content-footer">
-              <center><button type="submit" id="btn_add" class="btn btn-info">Tambah Pelanggaran</button></center>
-            </div>
-          </form>
+      <form id="form_addmaspel">
+        <div class="form-group">
+            <label>Deskripsi</label>
+            <input type="text" class="form-control" id="deskripsi_pelanggaran" name="deskripsi_pelanggaran">
         </div>
-      </div>
+        <div class="form-group">
+            <label>Point</label>
+            <input type="text" class="form-control" id="poin_pelanggaran" name="poin_pelanggaran">
+        </div>
+        <div class="form-group">
+          <label>Kategori Pelanggaran</label>
+          <div class="input-group">
+            <input type="hidden" name="id_kapel" id="show_idkapel">
+            <input type="text" class="form-control" name="kategori_pelanggaran" class="form-control" id="show_kapel" placeholder="-- Pilih Kategori --" readonly>
+            <div class="input-group-append">
+              <span class="input-group-text bg-info text-white" id="modal_lookup" style="cursor:pointer;">Cari</span>
+            </div>
+          </div>
+        </div>
+        <div class="content-footer">
+          <center><button type="submit" id="btn_add" class="btn btn-info">Tambah Pelanggaran</button></center>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -264,7 +248,7 @@
                 type: 'success',
                 title: response.message,
               })
-              window.location.replace('<?= base_url().'admin#/m_pelanggaran' ?>')
+              window.location.replace('<?= base_url().'bpbk#/m_pelanggaran' ?>')
             }else {
               Toast.fire({
                 type: 'error',
