@@ -2,38 +2,50 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Add Master Pelanggaran</h3>
+        <h3 class="content-header-title mb-0">Edit Pelanggaran</h3>
       </div>
       <div class="content-header-right text-md-right col-md-6 col-12">
         <div class="btn-group">
           <a href="#/m_pelanggaran" class="btn btn-round btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
         </div>
       </div>
-    </div>
+    </div><hr>
     <div class="content-body">
-      <form id="form_addmaspel">
-        <div class="form-group">
-            <label>Deskripsi</label>
-            <input type="text" class="form-control" id="deskripsi_pelanggaran" name="deskripsi_pelanggaran">
-        </div>
-        <div class="form-group">
-            <label>Point</label>
-            <input type="text" class="form-control" id="poin_pelanggaran" name="poin_pelanggaran">
-        </div>
-        <div class="form-group">
-          <label>Kategori Pelanggaran</label>
-          <div class="input-group">
-            <input type="hidden" name="id_kapel" id="show_idkapel">
-            <input type="text" class="form-control" name="kategori_pelanggaran" class="form-control" id="show_kapel" placeholder="-- Pilih Kategori --" readonly>
-            <div class="input-group-append">
-              <span class="input-group-text bg-info text-white" id="modal_lookup" style="cursor:pointer;">Cari</span>
+      <div class="card">
+        <div class="card-body">
+          <form id="form_editmaspel">
+            <div class="form-group">
+              <label>Deskripsi</label>
+              <input type="text" class="form-control" id="edit_deskripsi_pelanggaran" name="deskripsi_pelanggaran">
             </div>
-          </div>
+            <div class="form-group">
+              <label>Point</label>
+              <input type="text" class="form-control" id="edit_poin_pelanggaran" name="poin_pelanggaran">
+            </div>
+            <div class="form-group">
+              <label>Kategori Pelanggaran</label>
+              <div class="input-group">
+                <input type="hidden" name="id_kapel" id="show_idkapel">
+                <input type="text" class="form-control" name="kategori_pelanggaran" class="form-control" id="show_kapel" placeholder="-- Pilih Kategori --" readonly>
+                <div class="input-group-append">
+                  <span class="input-group-text bg-info text-white" id="modal_lookup" style="cursor:pointer;">Cari</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select class="form-control" name="status" id="select_status">
+                <option value="">--Pilih Status--</option>
+                <option value="Aktif">Aktif</option>
+                <option value="Nonaktif">Non Aktif</option>
+              </select>
+            </div>
+            <div class="content-footer">
+              <center><button type="submit" id="btn_edit" class="btn btn-success">Simpan Perubahan</button></center>
+            </div>
+          </form>
         </div>
-        <div class="content-footer">
-          <center><button type="submit" id="btn_add" class="btn btn-info">Tambah Pelanggaran</button></center>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
@@ -77,7 +89,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-
     const Toast = Swal.mixin({
                     toast: true,
                     position:'bottom-end',
@@ -94,7 +105,74 @@
 
     var session = localStorage.getItem('sipps');
     var auth = JSON.parse(session);
-    var token = auth.token
+    var token = auth.token;
+
+    var id_maspel = location.hash.substr(14);
+
+    // Show value edit
+    $.ajax({
+      url: `<?= base_url().'api/maspel/show/' ?>${token}?id_maspel=${id_maspel}`,
+      type: 'GET',
+      dataType: 'JSON',
+      // data: {},
+      // beforeSend:function(){},
+      success:function(response){
+        $.each(response.data,function(k,v){
+          $('#edit_deskripsi_pelanggaran').val(v.deskripsi_pelanggaran);
+          $('#edit_poin_pelanggaran').val(v.poin_pelanggaran);
+          $('#show_kapel').val(v.kategori_pelanggaran);
+          $('#select_status').val(v.status);
+          $('#show_idkapel').val(v.id_kapel);
+        })
+        // console.log(response);
+      },
+      error:function(){
+        Toast.fire({
+          type: 'Error',
+          title: 'Gagal Mengakses Server ...',
+        })
+      }
+    });
+
+    // Ajax Edit maspel
+    $('#form_editmaspel').on('submit',function(e){
+      e.preventDefault()
+
+      var edit_desc = $('#edit_deskripsi_pelanggaran').val();
+      var edit_poin = $('#edit_poin_pelanggaran').val();
+      var status = $('#select_status').val();
+      var kapel = $('#show_kapel').val();
+
+      // alert($('#form_editmaspel').serialize())
+
+      if (edit_desc === '' || edit_poin === '' || status === '' || kapel === '') {
+        Toast.fire({
+            type: 'warning',
+            title: 'Data tidak boleh kosong ...',
+          })
+      }else {
+        $.ajax({
+          url: `<?= base_url().'api/maspel/edit/' ?>${token}?id_maspel=${id_maspel}`,
+          type: 'POST',
+          dataType: 'JSON',
+          data: $('#form_editmaspel').serialize(),
+          beforeSend:function(){},
+          success:function(response){
+            Toast.fire({
+                  type: 'success',
+                  title: response.message,
+                })
+            window.location.replace('<?= base_url().'admin#/m_pelanggaran' ?>')
+          },
+          error:function(){
+            Toast.fire({
+                  type: 'warning',
+                  title: 'Tidak dapat mengakses server ...',
+                })
+          }
+        });
+      }
+    })
 
     // Modal show Lookup
     $('#modal_lookup').on('click', function(){
@@ -214,59 +292,6 @@
           });
         }
       });
-    })
-
-    // Ajax Add maspel
-    $('#form_addmaspel').on('submit',function(e){
-      e.preventDefault();
-
-      var dpel = $('#deskripsi_pelanggaran').val();
-      var poin = $('#poin_pelanggaran').val();
-      var kapel = $('#show_kapel').val();
-      var id_kapel = $('#show_idkapel').val();
-
-      if (dpel === '' || poin === '' || kapel === '') {
-        Toast.fire({
-          type: 'warning',
-          title: 'Data tidak boleh kosong ...',
-        })
-
-      }else {
-        $.ajax({
-          url: '<?= base_url().'api/maspel/add/' ?>'+token,
-          type: 'POST',
-          dataType: 'JSON',
-          data: {
-            deskripsi_pelanggaran:dpel,
-            poin_pelanggaran:poin,
-            id_kapel:id_kapel
-          },
-          // beforeSend:function(){},
-          success:function(response){
-            if (response.status === 200) {
-              Toast.fire({
-                type: 'success',
-                title: response.message,
-              })
-              window.location.replace('<?= base_url().'admin#/m_pelanggaran' ?>')
-            }else {
-              Toast.fire({
-                type: 'error',
-                title: response.message,
-              })
-            }
-            Swal.fire({
-              type: 'success',
-              title: response.message,
-              showConfirmButton: false,
-              timer: 1500
-            })
-            $('#form_addmaspel')[0].reset();
-            table.ajax.reload();
-          },
-          error:function(){}
-        });
-      }
     })
   });
 </script>

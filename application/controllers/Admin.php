@@ -37,4 +37,12 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/add_maspres');
 	}
+	public function edit_maspres()
+	{
+		$this->load->view('admin/edit_maspres');
+	}
+	public function edit_maspel()
+	{
+		$this->load->view('admin/edit_maspel');
+	}
 }

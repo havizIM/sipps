@@ -1,31 +1,29 @@
-
-
 <div class="app-content content">
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Add Master Prestasi</h3>
+        <h3 class="content-header-title mb-0">Edit Prestasi</h3>
       </div>
       <div class="content-header-right text-md-right col-md-6 col-12">
         <div class="btn-group">
           <a href="#/m_prestasi" class="btn btn-round btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
         </div>
       </div>
-    </div>
+    </div><hr>
     <div class="content-body">
       <div class="card">
         <div class="card-body">
-          <form id="form_addmaspres">
+          <form id="form_editmaspres">
             <div class="form-group">
               <label>Deskripsi</label>
-              <input type="text" class="form-control" id="deskripsi_prestasi" name="deskripsi_prestasi">
+              <input type="text" class="form-control" id="edit_deskripsi_prestasi" name="deskripsi_prestasi">
             </div>
             <div class="form-group">
               <label>Point</label>
-              <input type="text" class="form-control" id="poin_prestasi" name="poin_prestasi">
+              <input type="text" class="form-control" id="edit_poin_prestasi" name="poin_prestasi">
             </div>
             <div class="form-group">
-              <label>Kategori Prestasi</label>
+              <label>Kategori Pelanggaran</label>
               <div class="input-group">
                 <input type="hidden" name="id_kapres" id="show_idkapres">
                 <input type="text" class="form-control" name="kategori_prestasi" class="form-control" id="show_kapres" placeholder="-- Pilih Kategori --" readonly>
@@ -34,8 +32,16 @@
                 </div>
               </div>
             </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select class="form-control" name="status" id="select_status">
+                <option value="">--Pilih Status--</option>
+                <option value="Aktif">Aktif</option>
+                <option value="Nonaktif">Non Aktif</option>
+              </select>
+            </div>
             <div class="content-footer">
-              <center><button type="submit" id="btn_add" class="btn btn-info">Tambah Prestasi</button></center>
+              <center><button type="submit" id="btn_edit" class="btn btn-success">Simpan Perubahan</button></center>
             </div>
           </form>
         </div>
@@ -82,10 +88,8 @@
   </div>
 </div>
 <!-- end modal lookup -->
-
 <script type="text/javascript">
   $(document).ready(function() {
-
     const Toast = Swal.mixin({
                     toast: true,
                     position:'bottom-end',
@@ -103,6 +107,73 @@
     var session = localStorage.getItem('sipps');
     var auth = JSON.parse(session);
     var token = auth.token
+
+    var id_maspres = location.hash.substr(15);
+
+    // Show value edit
+    $.ajax({
+      url: `<?= base_url().'api/maspres/show/' ?>${token}?id_maspres=${id_maspres}`,
+      type: 'GET',
+      dataType: 'JSON',
+      // data: {},
+      // beforeSend:function(){},
+      success:function(response){
+        $.each(response.data,function(k,v){
+          $('#edit_deskripsi_prestasi').val(v.deskripsi_prestasi);
+          $('#edit_poin_prestasi').val(v.poin_prestasi);
+          $('#show_kapres').val(v.kategori_prestasi);
+          $('#select_status').val(v.status);
+          $('#show_idkapres').val(v.id_kapres);
+        })
+        // console.log(response);
+      },
+      error:function(){
+        Toast.fire({
+          type: 'Error',
+          title: 'Gagal Mengakses Server ...',
+        })
+      }
+    });
+
+    // Ajax Edit maspel
+    $('#form_editmaspres').on('submit',function(e){
+      e.preventDefault()
+
+      var edit_desc = $('#edit_deskripsi_prestasi').val();
+      var edit_poin = $('#edit_poin_prestasi').val();
+      var status = $('#select_status').val();
+      var kapres = $('#show_kapres').val();
+
+      // alert($('#form_editmaspel').serialize())
+
+      if (edit_desc === '' || edit_poin === '' || status === '' || kapres === '') {
+        Toast.fire({
+            type: 'warning',
+            title: 'Data tidak boleh kosong ...',
+          })
+      }else {
+        $.ajax({
+          url: `<?= base_url().'api/maspres/edit/' ?>${token}?id_maspres=${id_maspres}`,
+          type: 'POST',
+          dataType: 'JSON',
+          data: $('#form_editmaspres').serialize(),
+          beforeSend:function(){},
+          success:function(response){
+            Toast.fire({
+                  type: 'success',
+                  title: response.message,
+                })
+            window.location.replace('<?= base_url().'admin#/m_prestasi' ?>')
+          },
+          error:function(){
+            Toast.fire({
+                  type: 'warning',
+                  title: 'Tidak dapat mengakses server ...',
+                })
+          }
+        });
+      }
+    })
 
     // Modal show Lookup
     $('#modal_lookup').on('click', function(){
@@ -223,60 +294,5 @@
         }
       });
     })
-
-    // Ajax Add maspres
-    $('#form_addmaspres').on('submit',function(e){
-      e.preventDefault();
-
-      var dpres = $('#deskripsi_prestasi').val();
-      var poin = $('#poin_prestasi').val();
-      var kapres = $('#show_kapres').val();
-      var id_kapres = $('#show_idkapres').val();
-
-      if (dpres === '' || poin === '' || kapres === '') {
-        Toast.fire({
-          type: 'warning',
-          title: 'Data tidak boleh kosong ...',
-        })
-
-      }else {
-        $.ajax({
-          url: '<?= base_url().'api/maspres/add/' ?>'+token,
-          type: 'POST',
-          dataType: 'JSON',
-          data: {
-            deskripsi_prestasi:dpres,
-            poin_prestasi:poin,
-            id_kapres:id_kapres
-          },
-          // beforeSend:function(){},
-          success:function(response){
-            if (response.status === 200) {
-              Toast.fire({
-                type: 'success',
-                title: response.message,
-              })
-              window.location.replace('<?= base_url().'admin#/m_prestasi' ?>')
-            }else {
-              Toast.fire({
-                type: 'error',
-                title: response.message,
-              })
-            }
-            Swal.fire({
-              type: 'success',
-              title: response.message,
-              showConfirmButton: false,
-              timer: 1500
-            })
-            $('#form_addmaspres')[0].reset();
-            table.ajax.reload();
-          },
-          error:function(){}
-        });
-
-      }
-    })
-
   });
 </script>

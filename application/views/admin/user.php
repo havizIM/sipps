@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" id="btn_savepass" class="btn btn-info">Tambah</button>
+        <button type="submit" id="btn_add" class="btn btn-info">Tambah</button>
       </div>
     </form>
   </div>
@@ -211,7 +211,12 @@
             $('#form_adduser')[0].reset();
             table.ajax.reload();
           },
-          error:function(){}
+          error:function(){
+            Toast.fire({
+              type: 'Error',
+              title: 'Gagal Mengakses Server ...',
+            })
+          }
         });
 
       }
