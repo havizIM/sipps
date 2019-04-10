@@ -66,7 +66,7 @@ class Kapres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'Bpbk'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_kapres         = $this->KodeModel->buatKode('kapres', 'KPS', 'id_kapres', 2);
@@ -114,7 +114,7 @@ class Kapres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'Bpbk'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_kapres = $this->input->get('id_kapres');

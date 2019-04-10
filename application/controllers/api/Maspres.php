@@ -71,7 +71,7 @@ class Maspres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'Bpbk'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_maspres          = $this->KodeModel->buatKode('maspres', 'MPS', 'id_maspres', 3);
@@ -125,7 +125,7 @@ class Maspres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'Bpbk'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_maspres = $this->input->get('id_maspres');
@@ -166,7 +166,7 @@ class Maspres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'Bpbk'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_maspres          = $this->input->get('id_maspres');
