@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2019 at 10:24 AM
+-- Generation Time: Mar 28, 2019 at 06:56 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
@@ -46,15 +46,8 @@ CREATE TABLE `akun_siswa` (
 
 CREATE TABLE `kapel` (
   `id_kapel` varchar(5) NOT NULL,
-  `kategori_pelanggaran` varchar(20) NOT NULL
+  `ketegori_pelanggaran` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `kapel`
---
-
-INSERT INTO `kapel` (`id_kapel`, `kategori_pelanggaran`) VALUES
-('KPL01', 'Coba yaaahhh');
 
 -- --------------------------------------------------------
 
@@ -66,13 +59,6 @@ CREATE TABLE `kapres` (
   `id_kapres` varchar(5) NOT NULL,
   `kategori_prestasi` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `kapres`
---
-
-INSERT INTO `kapres` (`id_kapres`, `kategori_prestasi`) VALUES
-('KPS01', 'Cobalah mengerti yaa');
 
 -- --------------------------------------------------------
 
@@ -99,14 +85,6 @@ CREATE TABLE `maspel` (
   `status` enum('Aktif','Nonaktif','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `maspel`
---
-
-INSERT INTO `maspel` (`id_maspel`, `deskripsi_pelanggaran`, `poin_pelanggaran`, `kapel`, `status`) VALUES
-('MPL002', 'Merokok di kelas', 10, 'KPL01', 'Aktif'),
-('MPL003', 'Memakai Narkoba', 50, 'KPL01', 'Nonaktif');
-
 -- --------------------------------------------------------
 
 --
@@ -120,14 +98,6 @@ CREATE TABLE `maspres` (
   `kapres` varchar(5) NOT NULL,
   `status` enum('Aktif','Nonaktif','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `maspres`
---
-
-INSERT INTO `maspres` (`id_maspres`, `deskripsi_prestasi`, `poin_prestasi`, `kapres`, `status`) VALUES
-('MPS002', 'Ranking 2', 20, 'KPS01', 'Aktif'),
-('MPS003', 'Ranking 3', 15, 'KPS01', 'Nonaktif');
 
 -- --------------------------------------------------------
 
@@ -233,7 +203,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`nip`, `nama`, `username`, `password`, `level`, `foto`, `tgl_registrasi`, `status`, `token`) VALUES
 ('7201160101', 'Dian Ratna Sari', 'dianrs', '0i1qs', 'Wali', 'user.jpg', '2019-03-28 17:51:57', 'Aktif', 'e2baa50d717f2e8'),
 ('7201160106', 'Kalyssa Innara Putri', 'kalyssaip', '1ixhd', 'Guru', 'user.jpg', '2019-03-28 17:38:51', 'Aktif', 'e2baa50d717f2e8'),
-('admin', 'Administrator', 'admin', 'admin', 'Admin', 'user.jpg', '2019-03-28 10:55:33', 'Aktif', 'd033e22ae348aeb');
+('admin', 'Administrator', 'admin', '4dm1n', 'Admin', 'user.jpg', '2019-03-28 10:55:33', 'Aktif', 'd033e22ae348aeb');
 
 --
 -- Indexes for dumped tables

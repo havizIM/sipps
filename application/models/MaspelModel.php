@@ -31,10 +31,10 @@ class MaspelModel extends CI_Model {
       return $this->db->delete('maspel');
     }
 
-    function update($param, $data)
+    function edit($param, $data)
     {
       $this->db->where('id_maspel', $param);
-      return $this->db->delete('maspel', $data);
+      return $this->db->update('maspel', $data);
     }
 
 }

@@ -31,10 +31,10 @@ class MaspresModel extends CI_Model {
       return $this->db->delete('maspres');
     }
 
-    function update($param, $data)
+    function edit($param, $data)
     {
       $this->db->where('id_maspres', $param);
-      return $this->db->delete('maspres', $data);
+      return $this->db->update('maspres', $data);
     }
 
 }

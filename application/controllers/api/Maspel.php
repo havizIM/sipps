@@ -88,7 +88,7 @@ class Maspel extends CI_Controller {
                 'id_maspel'             => $id_maspel,
                 'deskripsi_pelanggaran' => $deskripsi_pelanggaran,
                 'poin_pelanggaran'      => $poin_pelanggaran,
-                'id_kapel'              => $id_kapel,
+                'kapel'              => $id_kapel,
                 'status'                => 'Aktif'
               );
 
@@ -125,7 +125,7 @@ class Maspel extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' || $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_maspel = $this->input->get('id_maspel');
@@ -166,30 +166,31 @@ class Maspel extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' || $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_maspel              = $this->input->get('id_maspel');
             $deskripsi_pelanggaran  = $this->input->post('deskripsi_pelanggaran');
             $poin_pelanggaran       = $this->input->post('poin_pelanggaran');
             $id_kapel               = $this->input->post('id_kapel');
+            $status                 = $this->input->post('status');
 
             if ($id_maspel == null) {
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'ID master pelanggaran tidak ditemukan'));
             } else {
-              if($deskripsi_pelanggaran == '' || $poin_pelanggaran == null || $id_kapel == null){
+              if($deskripsi_pelanggaran == '' || $poin_pelanggaran == null || $id_kapel == null || $status == null){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
               } else {
-
                 $data = array(
                   'deskripsi_pelanggaran' => $deskripsi_pelanggaran,
                   'poin_pelanggaran'      => $poin_pelanggaran,
-                  'kapel'                 => $id_kapel
+                  'kapel'                 => $id_kapel,
+                  'status'                => $status
                 );
 
-                $add = $this->MaspelModel->edit($id_maspel, $data);
+                $edit = $this->MaspelModel->edit($id_maspel, $data);
 
-                if(!$add){
+                if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit master pelanggaran'));
                 } else {
                   json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit master pelanggaran'));

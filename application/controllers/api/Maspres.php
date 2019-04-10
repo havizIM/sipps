@@ -71,10 +71,10 @@ class Maspres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' || $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
-            $id_maspres          = $this->KodeModel->buatKode('maspel', 'MPL', 'id_maspres', 3);
+            $id_maspres          = $this->KodeModel->buatKode('maspres', 'MPS', 'id_maspres', 3);
             $deskripsi_prestasi  = $this->input->post('deskripsi_prestasi');
             $poin_prestasi       = $this->input->post('poin_prestasi');
             $id_kapres           = $this->input->post('id_kapres');
@@ -88,7 +88,8 @@ class Maspres extends CI_Controller {
                 'id_maspres'         => $id_maspres,
                 'deskripsi_prestasi' => $deskripsi_prestasi,
                 'poin_prestasi'      => $poin_prestasi,
-                'kapres'             => $id_kapres
+                'kapres'             => $id_kapres,
+                'status'             => 'Aktif'
               );
 
               $add = $this->MaspresModel->add($data);
@@ -124,7 +125,7 @@ class Maspres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' || $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_maspres = $this->input->get('id_maspres');
@@ -165,30 +166,32 @@ class Maspres extends CI_Controller {
 
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin' || $otorisasi->level != 'BPBK'){
+          if($otorisasi->level != 'Admin' && $otorisasi->level != 'BPBK'){
             json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
           } else {
             $id_maspres          = $this->input->get('id_maspres');
             $deskripsi_prestasi  = $this->input->post('deskripsi_prestasi');
             $poin_prestasi       = $this->input->post('poin_prestasi');
             $id_kapres           = $this->input->post('id_kapres');
+            $status              = $this->input->post('status');
 
             if ($id_maspres == null) {
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'ID master prestasi tidak ditemukan'));
             } else {
-              if($deskripsi_prestasi == '' || $poin_prestasi == null || $id_kapres == null){
+              if($deskripsi_prestasi == '' || $poin_prestasi == null || $id_kapres == null || $status == null){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
               } else {
 
                 $data = array(
                   'deskripsi_prestasi' => $deskripsi_prestasi,
                   'poin_prestasi'      => $poin_prestasi,
-                  'kapres'             => $id_kapres
+                  'kapres'             => $id_kapres,
+                  'status'             => $status
                 );
 
-                $add = $this->MaspresModel->edit($id_maspres, $data);
+                $edit = $this->MaspresModel->edit($id_maspres, $data);
 
-                if(!$add){
+                if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit master prestasi'));
                 } else {
                   json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit master prestasi'));

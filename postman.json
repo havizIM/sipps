@@ -113,7 +113,7 @@
 						},
 						{
 							"key": "password",
-							"value": "4dm1n",
+							"value": "admin",
 							"type": "text"
 						}
 					]
@@ -496,6 +496,292 @@
 						{
 							"key": "kelas",
 							"value": "XII-IPS-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Maspel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deskripsi_pelanggaran",
+							"value": "Tindak Asusila",
+							"type": "text"
+						},
+						{
+							"key": "poin_pelanggaran",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "id_kapel",
+							"value": "KPL01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/maspel/add/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"maspel",
+						"add",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Maspres",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deskripsi_prestasi",
+							"value": "Ranking 2",
+							"type": "text"
+						},
+						{
+							"key": "poin_prestasi",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "id_kapres",
+							"value": "KPS01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/maspres/add/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"maspres",
+						"add",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Maspel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/maspel/show/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"maspel",
+						"show",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Maspres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/maspres/show/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"maspres",
+						"show",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Maspel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/maspel/delete/d033e22ae348aeb?id_maspel=MPL001",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"maspel",
+						"delete",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "id_maspel",
+							"value": "MPL001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Maspres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/maspres/delete/d033e22ae348aeb?id_maspres=MPS001",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"maspres",
+						"delete",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "id_maspres",
+							"value": "MPS001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Maspel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deskripsi_pelanggaran",
+							"value": "Memakai Narkoba",
+							"type": "text"
+						},
+						{
+							"key": "poin_pelanggaran",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "id_kapel",
+							"value": "KPL01",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "Nonaktif",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/maspel/edit/d033e22ae348aeb?id_maspel=MPL003",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"maspel",
+						"edit",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "id_maspel",
+							"value": "MPL003"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Maspres",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deskripsi_prestasi",
+							"value": "Ranking 3",
+							"type": "text"
+						},
+						{
+							"key": "poin_prestasi",
+							"value": "15",
+							"type": "text"
+						},
+						{
+							"key": "id_kapres",
+							"value": "KPS01",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "Nonaktif",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/maspres/edit/d033e22ae348aeb?id_maspres=MPS003",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"maspres",
+						"edit",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "id_maspres",
+							"value": "MPS003"
 						}
 					]
 				}
