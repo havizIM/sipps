@@ -1,5 +1,7 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
 
 class Maspel extends CI_Controller {
 
@@ -92,11 +94,24 @@ class Maspel extends CI_Controller {
                 'status'                => 'Aktif'
               );
 
+              $log = array('message' => 'Berhasil menambah maspel');
               $add = $this->MaspelModel->add($data);
 
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah master pelanggaran'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  'ced47fc67559a6b88345',
+                  '79da97fe54e6633c3802',
+                  '746694',
+                  $options
+                );
+
+                $pusher->trigger('sipps', 'maspel', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah master pelanggaran'));
               }
             }
@@ -133,11 +148,25 @@ class Maspel extends CI_Controller {
             if($id_maspel == null){
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'ID master pelanggaran tidak ditemukan'));
             } else {
+
+              $log    = array('message' => 'Berhasil menghapus maspel');
               $delete = $this->MaspelModel->delete($id_maspel);
 
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus master pelanggaran'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  'ced47fc67559a6b88345',
+                  '79da97fe54e6633c3802',
+                  '746694',
+                  $options
+                );
+
+                $pusher->trigger('sipps', 'maspel', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus master pelanggaran'));
               }
             }
@@ -188,11 +217,24 @@ class Maspel extends CI_Controller {
                   'status'                => $status
                 );
 
+                $log  = array('message' => 'Berhasil mengedit maspel');
                 $edit = $this->MaspelModel->edit($id_maspel, $data);
 
                 if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit master pelanggaran'));
                 } else {
+                  $options = array(
+                    'cluster' => 'ap1',
+                    'useTLS' => true
+                  );
+                  $pusher = new Pusher\Pusher(
+                    'ced47fc67559a6b88345',
+                    '79da97fe54e6633c3802',
+                    '746694',
+                    $options
+                  );
+
+                  $pusher->trigger('sipps', 'maspel', $log);
                   json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit master pelanggaran'));
                 }
               }

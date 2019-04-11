@@ -1,5 +1,7 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
 
 class User extends CI_Controller {
 
@@ -100,11 +102,24 @@ class User extends CI_Controller {
                 'token'     => sha1($username)
               );
 
+              $log = array('message' => 'Berhasil menambah user');
               $add = $this->UserModel->add($data);
 
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah data user'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  'ced47fc67559a6b88345',
+                  '79da97fe54e6633c3802',
+                  '746694',
+                  $options
+                );
+
+                $pusher->trigger('sipps', 'user', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah data user'));
               }
             }
@@ -151,11 +166,24 @@ class User extends CI_Controller {
                   'status'    => $status
                 );
 
+                $log  = array('message' => 'Berhasil mengedit user');
                 $edit = $this->UserModel->edit($nip, $data);
 
                 if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit user'));
                 } else {
+                  $options = array(
+                    'cluster' => 'ap1',
+                    'useTLS' => true
+                  );
+                  $pusher = new Pusher\Pusher(
+                    'ced47fc67559a6b88345',
+                    '79da97fe54e6633c3802',
+                    '746694',
+                    $options
+                  );
+
+                  $pusher->trigger('sipps', 'user', $log);
                   json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit user'));
                 }
               }
@@ -191,11 +219,25 @@ class User extends CI_Controller {
             if($nip == null){
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'NIP tidak ditemukan'));
             } else {
+
+              $log    = array('message' => 'Berhasil menghapus user');
               $delete = $this->UserModel->delete($nip);
 
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus user'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  'ced47fc67559a6b88345',
+                  '79da97fe54e6633c3802',
+                  '746694',
+                  $options
+                );
+
+                $pusher->trigger('sipps', 'user', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus user'));
               }
             }

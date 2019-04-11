@@ -1,5 +1,7 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
 
 class Kapres extends CI_Controller {
 
@@ -81,11 +83,24 @@ class Kapres extends CI_Controller {
                 'kategori_prestasi' => $kategori_prestasi
               );
 
+              $log = array('message' => 'Berhasil menambah kapres');
               $add = $this->KapresModel->add($data);
 
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah kategori prestasi'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  'ced47fc67559a6b88345',
+                  '79da97fe54e6633c3802',
+                  '746694',
+                  $options
+                );
+
+                $pusher->trigger('sipps', 'kapres', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah kategori prestasi'));
               }
             }
@@ -122,11 +137,25 @@ class Kapres extends CI_Controller {
             if($id_kapres == null){
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'ID kategori prestasi tidak ditemukan'));
             } else {
+
+              $log    = array('message' => 'Berhasil menghapus kapres');
               $delete = $this->KapresModel->delete($id_kapres);
 
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus kategori prestasi'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  'ced47fc67559a6b88345',
+                  '79da97fe54e6633c3802',
+                  '746694',
+                  $options
+                );
+
+                $pusher->trigger('sipps', 'kapres', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus kategori prestasi'));
               }
             }
