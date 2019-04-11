@@ -2,7 +2,7 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Data User</h3>
+        <h3 class="content-header-title mb-0">User</h3>
         <div class="row breadcrumbs-top mt-1 mb-0">
           <div class="breadcrumb-wrapper col-12">
             <ol class="breadcrumb">
@@ -23,6 +23,9 @@
     <div class="content-body">
       <section>
         <div class="card">
+          <div class="card-header">
+            <h3>Detail User</h3>
+          </div>
             <div class="card-body">
               <div class="table-responsive" >
                 <table class="table table-hover dataTable" id="detail_user" >

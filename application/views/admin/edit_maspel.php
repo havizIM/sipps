@@ -3,6 +3,18 @@
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-12 mb-2">
         <h3 class="content-header-title mb-0">Edit Pelanggaran</h3>
+        <div class="row breadcrumbs-top mt-1 mb-0">
+          <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#/dashboard">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item"><a href="#/m_pelanggaran">Master Pelanggaran</a>
+              </li>
+              <li class="breadcrumb-item active">Edit Pelanggaran
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
       <div class="content-header-right text-md-right col-md-6 col-12">
         <div class="btn-group">

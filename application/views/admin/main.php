@@ -138,6 +138,10 @@
             <label>Password Baru</label>
             <input type="password" class="form-control" id="pass_baru" name="password_baru">
           </div>
+          <div class="form-group">
+            <label>Ulangi Password</label>
+            <input type="password" class="form-control" id="rtp_pass">
+          </div>
           <div class="form-group" style="margin-bottom:0px;">
             <div class="text-md-right">
               <input type="checkbox" id="show_pass" class="chk-remember" style="width:20px; height:20px;">
@@ -231,12 +235,18 @@
         var link = '<?= base_url().'api/auth/password_user/' ?>'+auth.token
         var pass_lama = $('#pass_lama').val();
         var pass_baru = $('#pass_baru').val();
+        var rtp_pass = $('#rtp_pass').val();
         // alert(pass_baru)
 
-        if (pass_lama === '' || pass_baru === '') {
+        if (pass_lama === '' || pass_baru === '' || rtp_pass === '') {
           Toast.fire({
             type: 'warning',
             title: 'Password tidak boleh kosong ...',
+          })
+        }else if (rtp_pass !== pass_baru) {
+          Toast.fire({
+            type: 'warning',
+            title: 'Password tidak sama ...',
           })
         }else {
           $.ajax({
@@ -262,7 +272,7 @@
                   title: response.message,
                 })
               }
-              $('#form_gpass')[0].reset();
+
             },
             error:function(){
               Swal.fire({
@@ -278,7 +288,8 @@
 
       // Modal Ganti Password
       $('#btn_gpass').on('click',function(){
-        $('#modal_gpass').modal('show')
+        $('#modal_gpass').modal('show');
+        $('#form_gpass')[0].reset();
       })
 
       // Show Password

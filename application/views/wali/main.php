@@ -133,6 +133,10 @@
             <label>Password Baru</label>
             <input type="password" class="form-control" id="pass_baru" name="password_baru">
           </div>
+          <div class="form-group">
+            <label>Ulangi Password</label>
+            <input type="password" class="form-control" id="rtp_pass">
+          </div>
           <div class="form-group" style="margin-bottom:0px;">
             <div class="text-md-right">
               <input type="checkbox" id="show_pass" class="chk-remember" style="width:20px; height:20px;">
@@ -149,18 +153,18 @@
   </div>
 </div>
 
-  <!-- BEGIN VENDOR JS-->
-  <script src="<?= base_url().'assets/app-assets/vendors/js/vendors.min.js' ?>" type="text/javascript"></script>
-  <script src="<?= base_url().'assets/app-assets/vendors/js/tables/datatable/datatables.min.js' ?>" type="text/javascript"></script>
-  <!-- BEGIN VENDOR JS-->
-  <!-- BEGIN MODERN JS-->
-  <script src="<?= base_url().'assets/app-assets/js/core/app-menu.js' ?>" type="text/javascript"></script>
-  <script src="<?= base_url().'assets/app-assets/js/core/app.js' ?>" type="text/javascript"></script>
-  <script src="<?= base_url().'assets/app-assets/js/scripts/customizer.js ' ?>" type="text/javascript"></script>
-  <script src="<?= base_url().'assets/app-assets/js/scripts/moment/moment.js ' ?>" type="text/javascript"></script>
-  <!-- END MODERN JS-->
-  <!-- SWEET ALERT 2 -->
-  <script src="<?= base_url().'assets/app-assets/vendors/js/sweetalert2/sweetalert2.js' ?>"></script>
+<!-- BEGIN VENDOR JS-->
+<script src="<?= base_url().'assets/app-assets/vendors/js/vendors.min.js' ?>" type="text/javascript"></script>
+<script src="<?= base_url().'assets/app-assets/vendors/js/tables/datatable/datatables.min.js' ?>" type="text/javascript"></script>
+<!-- BEGIN VENDOR JS-->
+<!-- BEGIN MODERN JS-->
+<script src="<?= base_url().'assets/app-assets/js/core/app-menu.js' ?>" type="text/javascript"></script>
+<script src="<?= base_url().'assets/app-assets/js/core/app.js' ?>" type="text/javascript"></script>
+<script src="<?= base_url().'assets/app-assets/js/scripts/customizer.js ' ?>" type="text/javascript"></script>
+<script src="<?= base_url().'assets/app-assets/js/scripts/moment/moment.js ' ?>" type="text/javascript"></script>
+<!-- END MODERN JS-->
+<!-- SWEET ALERT 2 -->
+<script src="<?= base_url().'assets/app-assets/vendors/js/sweetalert2/sweetalert2.js' ?>"></script>
 
   <script type="text/javascript">
   // Load Content
@@ -227,14 +231,20 @@
         var link = '<?= base_url().'api/auth/password_user/' ?>'+auth.token
         var pass_lama = $('#pass_lama').val();
         var pass_baru = $('#pass_baru').val();
+        var rtp_pass = $('#rtp_pass').val();
         // alert(pass_baru)
 
-        if (pass_lama === '' || pass_baru === '') {
+        if (pass_lama === '' || pass_baru === '' || rtp_pass === '') {
           Toast.fire({
             type: 'warning',
             title: 'Password tidak boleh kosong ...',
           })
-        }else {
+        }else if(rtp_pass !== pass_baru) {
+          Toast.fire({
+            type: 'warning',
+            title: 'Password tidak sama ...',
+          })
+        }else{
           $.ajax({
             url: link,
             type: 'POST',
