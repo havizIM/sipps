@@ -139,7 +139,7 @@
       order : [[1, 'desc']]
     });
 
-    // Ajax Add Kategori
+    // Ajax Add Kapel
     $('#form_addkat').on('submit',function(e){
       e.preventDefault();
 
@@ -171,7 +171,13 @@
           table.ajax.reload();
         },
         error:function(){
-          alert('Gagal mengakses server ...')
+          Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+
         }
       });
     })
@@ -222,10 +228,12 @@
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
-              })
+              Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
             }
           });
         }
@@ -260,27 +268,33 @@
           // beforeSend:function(){},
           success:function(response){
             if (response.status === 200) {
-              Toast.fire({
+              Swal.fire({
                 type: 'success',
                 title: response.message,
+                showConfirmButton: false,
+                timer: 1500
               })
               location.hash='#/m_pelanggaran'
             }else {
-              Toast.fire({
+              Swal.fire({
                 type: 'error',
                 title: response.message,
+                showConfirmButton: false,
+                timer: 1500
               })
             }
-            Swal.fire({
-              type: 'success',
-              title: response.message,
-              showConfirmButton: false,
-              timer: 1500
-            })
+
             $('#form_addmaspel')[0].reset();
             table.ajax.reload();
           },
-          error:function(){}
+          error:function(){
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+          }
         });
       }
     })

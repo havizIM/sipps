@@ -139,10 +139,12 @@
         // console.log(response);
       },
       error:function(){
-        Toast.fire({
-          type: 'Error',
-          title: 'Gagal Mengakses Server ...',
-        })
+        Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
       }
     });
 
@@ -170,17 +172,22 @@
           data: $('#form_editmaspel').serialize(),
           beforeSend:function(){},
           success:function(response){
-            Toast.fire({
-                  type: 'success',
-                  title: response.message,
-                })
+            Swal.fire({
+             type: 'success',
+             title: response.message,
+             showConfirmButton: false,
+             timer: 2000
+            })
+
             location.hash='#/m_pelanggaran'
           },
           error:function(){
-            Toast.fire({
-                  type: 'warning',
-                  title: 'Tidak dapat mengakses server ...',
-                })
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
           }
         });
       }
@@ -245,7 +252,13 @@
           table.ajax.reload();
         },
         error:function(){
-          alert('Gagal mengakses server ...')
+          Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+
         }
       });
     })
@@ -296,10 +309,12 @@
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
-              })
+              Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
             }
           });
         }

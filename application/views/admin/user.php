@@ -223,10 +223,13 @@
             table.ajax.reload();
           },
           error:function(){
-            Toast.fire({
-              type: 'Error',
-              title: 'Gagal Mengakses Server ...',
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
             })
+
           }
         });
 
@@ -256,22 +259,28 @@
             beforeSend:function(){},
             success:function(response){
               if (response.status === 200) {
-                Toast.fire({
-                  type: 'success',
-                  title: response.message,
+                Swal.fire({
+                 type: 'success',
+                 title: response.message,
+                 showConfirmButton: false,
+                 timer: 1500
                 })
               }else {
-                Toast.fire({
-                  type: 'Error',
-                  title: response.message,
+                Swal.fire({
+                 type: 'error',
+                 title: response.message,
+                 showConfirmButton: false,
+                 timer: 1500
                 })
               }
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
+              Swal.fire({
+               type: 'warning',
+               title: 'Tidak dapat mengakses server ...',
+               showConfirmButton: false,
+               timer: 2000
               })
             }
           });
@@ -348,10 +357,12 @@
             table.ajax.reload();
           },
           error:function(){
-            Toast.fire({
-                  type: 'warning',
-                  title: 'Tidak dapat mengakses server ...',
-                })
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
           }
         });
       }

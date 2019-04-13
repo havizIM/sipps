@@ -140,14 +140,16 @@
         // console.log(response);
       },
       error:function(){
-        Toast.fire({
-          type: 'Error',
-          title: 'Gagal Mengakses Server ...',
-        })
+        Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
       }
     });
 
-    // Ajax Edit maspel
+    // Ajax Edit maspres
     $('#form_editmaspres').on('submit',function(e){
       e.preventDefault()
 
@@ -171,17 +173,23 @@
           data: $('#form_editmaspres').serialize(),
           beforeSend:function(){},
           success:function(response){
-            Toast.fire({
-                  type: 'success',
-                  title: response.message,
-                })
+            Swal.fire({
+               type: 'success',
+               title: response.message,
+               showConfirmButton: false,
+               timer: 2000
+              })
+
             location.hash='#/m_prestasi'
           },
           error:function(){
-            Toast.fire({
-                  type: 'warning',
-                  title: 'Tidak dapat mengakses server ...',
-                })
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+
           }
         });
       }
@@ -246,10 +254,13 @@
           table.ajax.reload();
         },
         error:function(){
-          Toast.fire({
-            type: 'error',
-            title: 'Gagal Mengakses Server ...',
-          })
+          Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+
         }
       });
     })
@@ -300,10 +311,12 @@
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'error',
-                title: 'Gagal Mengakses Server ...',
-              })
+              Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
             }
           });
         }

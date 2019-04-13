@@ -4,14 +4,26 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Add Master Prestasi</h3>
+        <h3 class="content-header-title mb-0">Tambah Master Prestasi</h3>
+        <div class="row breadcrumbs-top mt-1 mb-0">
+          <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#/dashboard">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item"><a href="#/m_prestasi">Master Prestasi</a>
+              </li>
+              <li class="breadcrumb-item active">Tambah Prestasi
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
       <div class="content-header-right text-md-right col-md-6 col-12">
         <div class="btn-group">
           <a href="#/m_prestasi" class="btn btn-round btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
         </div>
       </div>
-    </div>
+    </div><hr>
     <div class="content-body">
       <div class="card">
         <div class="card-body">
@@ -131,7 +143,7 @@
       order : [[1, 'desc']]
     });
 
-    // Ajax Add Kategori
+    // Ajax Add Kategori Prestasi
     $('#form_addpres').on('submit',function(e){
       e.preventDefault();
 
@@ -163,7 +175,12 @@
           table.ajax.reload();
         },
         error:function(){
-          alert('Gagal mengakses server ...')
+          Swal.fire({
+               type: 'warning',
+               title: 'Tidak dapat mengakses server ...',
+               showConfirmButton: false,
+               timer: 2000
+              })
         }
       });
     })
@@ -207,17 +224,20 @@
                 })
               }else {
                 Toast.fire({
-                  type: 'Error',
+                  type: 'error',
                   title: response.message,
                 })
               }
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
-              })
+              Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
+
             }
           });
         }
@@ -252,27 +272,33 @@
           // beforeSend:function(){},
           success:function(response){
             if (response.status === 200) {
-              Toast.fire({
+              Swal.fire({
                 type: 'success',
                 title: response.message,
+                showConfirmButton: false,
+                timer: 1500
               })
-              window.location.replace('<?= base_url().'bpbk#/m_prestasi' ?>')
+              location.hash='#/m_prestasi'
             }else {
-              Toast.fire({
+              Swal.fire({
                 type: 'error',
                 title: response.message,
+                showConfirmButton: false,
+                timer: 1500
               })
             }
-            Swal.fire({
-              type: 'success',
-              title: response.message,
-              showConfirmButton: false,
-              timer: 1500
-            })
+
             $('#form_addmaspres')[0].reset();
             table.ajax.reload();
           },
-          error:function(){}
+          error:function(){
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+          }
         });
 
       }
