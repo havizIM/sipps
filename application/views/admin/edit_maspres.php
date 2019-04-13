@@ -35,7 +35,7 @@
               <input type="text" class="form-control" id="edit_poin_prestasi" name="poin_prestasi">
             </div>
             <div class="form-group">
-              <label>Kategori Pelanggaran</label>
+              <label>Kategori Prestasi</label>
               <div class="input-group">
                 <input type="hidden" name="id_kapres" id="show_idkapres">
                 <input type="text" class="form-control" name="kategori_prestasi" class="form-control" id="show_kapres" placeholder="-- Pilih Kategori --" readonly>
@@ -175,7 +175,7 @@
                   type: 'success',
                   title: response.message,
                 })
-            window.location.replace('<?= base_url().'admin#/m_prestasi' ?>')
+            location.hash='#/m_prestasi'
           },
           error:function(){
             Toast.fire({
@@ -246,7 +246,10 @@
           table.ajax.reload();
         },
         error:function(){
-          alert('Gagal mengakses server ...')
+          Toast.fire({
+            type: 'error',
+            title: 'Gagal Mengakses Server ...',
+          })
         }
       });
     })
@@ -290,7 +293,7 @@
                 })
               }else {
                 Toast.fire({
-                  type: 'Error',
+                  type: 'error',
                   title: response.message,
                 })
               }
@@ -298,7 +301,7 @@
             },
             error:function(){
               Toast.fire({
-                type: 'Error',
+                type: 'error',
                 title: 'Gagal Mengakses Server ...',
               })
             }

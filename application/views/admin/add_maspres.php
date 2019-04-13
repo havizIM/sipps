@@ -268,7 +268,7 @@
                 type: 'success',
                 title: response.message,
               })
-              window.location.replace('<?= base_url().'admin#/m_prestasi' ?>')
+              location.hash='#/m_prestasi'
             }else {
               Toast.fire({
                 type: 'error',

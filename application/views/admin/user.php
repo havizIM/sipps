@@ -32,7 +32,7 @@
                   <thead>
                     <tr>
                       <th>NIP</th>
-                      <th>Nama</th>
+                      <th style="width:15%;">Nama</th>
                       <th>Username</th>
                       <th>Password</th>
                       <th>Level</th>
@@ -168,9 +168,7 @@
         {"data":"username"},
         {"data":"password"},
         {"data":"level"},
-        {"data":null,"render":function(data,type,row){
-          return moment(row.tgl_registrasi,'YYYY-MM-DD hh:mm:ss').format('L')
-        }},
+        {"data":"tgl_registrasi"},
         {"data":"status"},
         {"data":null,"render":function(data,type,row){
 
@@ -178,7 +176,7 @@
 
         }},
       ],
-      order:[[5,'asc']]
+      order:[[5,'desc']]
     });
 
     // Ajax Add User

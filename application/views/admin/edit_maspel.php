@@ -174,7 +174,7 @@
                   type: 'success',
                   title: response.message,
                 })
-            window.location.replace('<?= base_url().'admin#/m_pelanggaran' ?>')
+            location.hash='#/m_pelanggaran'
           },
           error:function(){
             Toast.fire({

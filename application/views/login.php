@@ -161,12 +161,17 @@
                   type: 'error',
                   title: response.message,
                 })
+                $('#btn_login').removeClass('disabled').removeAttr('disabled','disabled').html('<span><i class="ft-unlock"></i> Login</span>')
               }
 
-              $('#btn_login').removeClass('disabled').removeAttr('disabled','disabled').html('<span><i class="ft-unlock"></i> Login</span>')
             },
             error:function(){
-              alert('Gagal Mengakses Server ... ')
+              Swal.fire({
+               type: 'warning',
+               title: 'Tidak dapat mengakses server ...',
+               showConfirmButton: false,
+               timer: 2000
+              })
             }
           });
 
