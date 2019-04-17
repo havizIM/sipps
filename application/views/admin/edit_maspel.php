@@ -258,7 +258,6 @@
              showConfirmButton: false,
              timer: 2000
             })
-
         }
       });
     })
@@ -302,7 +301,7 @@
                 })
               }else {
                 Toast.fire({
-                  type: 'Error',
+                  type: 'error',
                   title: response.message,
                 })
               }

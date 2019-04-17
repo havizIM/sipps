@@ -46,7 +46,7 @@
     </script>
 
     <style media="screen">
-    
+
     </style>
   </head>
   <body class="vertical-layout vertical-compact-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
@@ -218,11 +218,19 @@
                   localStorage.clear();
                   window.location.replace('<?= base_url().'auth' ?>')
                 }else {
-                  alert(response.message)
+                  Toast.fire({
+                    type: 'warning',
+                    title: response.message,
+                  })
                 }
               },
               error:function(){
-                alert('Gagal Mengakses Server')
+                Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
               }
             });
           }

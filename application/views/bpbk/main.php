@@ -213,11 +213,19 @@
                   localStorage.clear();
                   window.location.replace('<?= base_url().'auth' ?>')
                 }else {
-                  alert(response.message)
+                  Toast.fire({
+                    type: 'warning',
+                    title: response.message,
+                  })
                 }
               },
               error:function(){
-                alert('Gagal Mengakses Server')
+                Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
               }
             });
           }

@@ -313,7 +313,12 @@
           })
         },
         error:function(){
-          alert('Tidak Dapat mengakses server ...')
+          Swal.fire({
+           type: 'warning',
+           title: 'Tidak dapat mengakses server ...',
+           showConfirmButton: false,
+           timer: 2000
+          })
         }
       });
     })

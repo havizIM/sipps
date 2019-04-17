@@ -229,11 +229,11 @@
             },
             error:function(){
               Swal.fire({
-             type: 'warning',
-             title: 'Tidak dapat mengakses server ...',
-             showConfirmButton: false,
-             timer: 2000
-            })
+               type: 'warning',
+               title: 'Tidak dapat mengakses server ...',
+               showConfirmButton: false,
+               timer: 2000
+              })
             }
           });
         }
