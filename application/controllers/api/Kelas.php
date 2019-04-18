@@ -1,5 +1,7 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
+require 'vendor/autoload.php';
 
 class Kelas extends CI_Controller {
 
@@ -86,12 +88,90 @@ class Kelas extends CI_Controller {
                 'wali_kelas'    => $nip
               );
 
+              $log = array('message' => 'Berhasil menambah kelas');
+
               $add = $this->KelasModel->add($data);
 
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah kelas'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  'ced47fc67559a6b88345',
+                  '79da97fe54e6633c3802',
+                  '746694',
+                  $options
+                );
+
+                $pusher->trigger('sipps', 'kelas', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah kelas'));
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function edit($token = null)
+  {
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    if ($method != 'POST') {
+			json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah'));
+		} else {
+
+      if($token == null){
+        json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Request tidak terotorisasi'));
+      } else {
+        $auth = $this->AuthModel->cekAuth($token);
+
+        if($auth->num_rows() != 1){
+          json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Token tidak dikenali'));
+        } else {
+
+          $otorisasi = $auth->row();
+
+          if($otorisasi->level != 'Admin'){
+            json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
+          } else {
+            $kelas  = $this->input->get('kelas');
+            $nip         = $this->input->post('nip');
+
+            if ($kelas == null) {
+              json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Kelas tidak ditemukan'));
+            } else {
+              if($nip == ''){
+                json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
+              } else {
+
+                $data = array(
+                  'wali_kelas' => $nip
+                );
+
+                $log  = array('message' => 'Berhasil mengedit kelas');
+                $edit = $this->KelasModel->edit($kelas, $data);
+
+                if(!$edit){
+                  json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit kelas'));
+                } else {
+                  $options = array(
+                    'cluster' => 'ap1',
+                    'useTLS' => true
+                  );
+                  $pusher = new Pusher\Pusher(
+                    'ced47fc67559a6b88345',
+                    '79da97fe54e6633c3802',
+                    '746694',
+                    $options
+                  );
+
+                  $pusher->trigger('sipps', 'kelas', $log);
+                  json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit kelas'));
+                }
               }
             }
           }
@@ -125,11 +205,24 @@ class Kelas extends CI_Controller {
             if($kelas == null){
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Kelas tidak ditemukan'));
             } else {
+              $log     = array('message' => 'Berhasil menghapus kelas');
               $delete = $this->KelasModel->delete($kelas);
 
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus kelas'));
               } else {
+                $options = array(
+                  'cluster' => 'ap1',
+                  'useTLS' => true
+                );
+                $pusher = new Pusher\Pusher(
+                  'ced47fc67559a6b88345',
+                  '79da97fe54e6633c3802',
+                  '746694',
+                  $options
+                );
+
+                $pusher->trigger('sipps', 'kelas', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus kelas'));
               }
             }

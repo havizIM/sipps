@@ -90,7 +90,7 @@ class Maspel extends CI_Controller {
                 'id_maspel'             => $id_maspel,
                 'deskripsi_pelanggaran' => $deskripsi_pelanggaran,
                 'poin_pelanggaran'      => $poin_pelanggaran,
-                'kapel'              => $id_kapel,
+                'kapel'                 => $id_kapel,
                 'status'                => 'Aktif'
               );
 

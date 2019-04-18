@@ -152,6 +152,7 @@ class User extends CI_Controller {
             $nip        = $this->input->get('nip');
             $nama       = $this->input->post('nama');
             $username   = $this->input->post('username');
+            $level      = $this->input->post('level');
             $status     = $this->input->post('status');
 
             if($nip == null){
@@ -163,6 +164,7 @@ class User extends CI_Controller {
                 $data = array(
                   'nama'      => $nama,
                   'username'  => $username,
+                  'level'     => $level,
                   'status'    => $status
                 );
 
