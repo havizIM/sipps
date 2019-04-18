@@ -1,5 +1,3 @@
-
-
 <div class="app-content content">
   <div class="content-wrapper">
     <div class="content-header row">
@@ -37,10 +35,10 @@
               <input type="text" class="form-control" id="poin_prestasi" name="poin_prestasi">
             </div>
             <div class="form-group">
-              <label>Kategori Prestasi</label>
+              <h3>Kategori Prestasi</h3>
               <div class="input-group">
                 <input type="hidden" name="id_kapres" id="show_idkapres">
-                <input type="text" class="form-control" name="kategori_prestasi" class="form-control" id="show_kapres" placeholder="-- Pilih Kategori --" readonly>
+                <input type="text" name="kategori_prestasi" class="form-control" id="show_kapres" placeholder="-- Pilih Kategori --" readonly>
                 <div class="input-group-append">
                   <span class="input-group-text bg-info text-white" id="modal_lookup" style="cursor:pointer;">Cari</span>
                 </div>
@@ -112,9 +110,9 @@
                     // timer: 2500
                   });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token
 
     // Modal show Lookup
     $('#modal_lookup').on('click', function(){
@@ -143,7 +141,7 @@
       order : [[1, 'desc']]
     });
 
-    // Ajax Add Kategori
+    // Ajax Add Kategori Prestasi
     $('#form_addpres').on('submit',function(e){
       e.preventDefault();
 
@@ -175,7 +173,12 @@
           table.ajax.reload();
         },
         error:function(){
-          alert('Gagal mengakses server ...')
+          Swal.fire({
+               type: 'warning',
+               title: 'Tidak dapat mengakses server ...',
+               showConfirmButton: false,
+               timer: 2000
+              })
         }
       });
     })
@@ -219,17 +222,20 @@
                 })
               }else {
                 Toast.fire({
-                  type: 'Error',
+                  type: 'error',
                   title: response.message,
                 })
               }
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
-              })
+              Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
+
             }
           });
         }
@@ -264,27 +270,33 @@
           // beforeSend:function(){},
           success:function(response){
             if (response.status === 200) {
-              Toast.fire({
+              Swal.fire({
                 type: 'success',
                 title: response.message,
+                showConfirmButton: false,
+                timer: 1500
               })
-              window.location.replace('<?= base_url().'admin#/m_prestasi' ?>')
+              location.hash='#/m_prestasi'
             }else {
-              Toast.fire({
+              Swal.fire({
                 type: 'error',
                 title: response.message,
+                showConfirmButton: false,
+                timer: 1500
               })
             }
-            Swal.fire({
-              type: 'success',
-              title: response.message,
-              showConfirmButton: false,
-              timer: 1500
-            })
+
             $('#form_addmaspres')[0].reset();
             table.ajax.reload();
           },
-          error:function(){}
+          error:function(){
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+          }
         });
 
       }

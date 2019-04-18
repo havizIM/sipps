@@ -183,8 +183,8 @@
                       timer: 2500
                     });
 
-      var session = localStorage.getItem('sipps');
-      var auth = JSON.parse(session);
+      var session     = localStorage.getItem('sipps');
+      var auth        = JSON.parse(session);
 
       $('#nama').text(auth.nama);
       $('#level').text(auth.level);
@@ -213,11 +213,19 @@
                   localStorage.clear();
                   window.location.replace('<?= base_url().'auth' ?>')
                 }else {
-                  alert(response.message)
+                  Toast.fire({
+                    type: 'warning',
+                    title: response.message,
+                  })
                 }
               },
               error:function(){
-                alert('Gagal Mengakses Server')
+                Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
               }
             });
           }

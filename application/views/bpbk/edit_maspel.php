@@ -3,6 +3,18 @@
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-12 mb-2">
         <h3 class="content-header-title mb-0">Edit Pelanggaran</h3>
+        <div class="row breadcrumbs-top mt-1 mb-0">
+          <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#/dashboard">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item"><a href="#/m_pelanggaran">Master Pelanggaran</a>
+              </li>
+              <li class="breadcrumb-item active">Edit Pelanggaran
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
       <div class="content-header-right text-md-right col-md-6 col-12">
         <div class="btn-group">
@@ -103,9 +115,9 @@
                     // timer: 2500
                   });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token;
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token;
 
     var id_maspel = location.hash.substr(14);
 
@@ -127,10 +139,12 @@
         // console.log(response);
       },
       error:function(){
-        Toast.fire({
-          type: 'Error',
-          title: 'Gagal Mengakses Server ...',
-        })
+        Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
       }
     });
 
@@ -158,17 +172,22 @@
           data: $('#form_editmaspel').serialize(),
           beforeSend:function(){},
           success:function(response){
-            Toast.fire({
-                  type: 'success',
-                  title: response.message,
-                })
-            window.location.replace('<?= base_url().'bpbk#/m_pelanggaran' ?>')
+            Swal.fire({
+             type: 'success',
+             title: response.message,
+             showConfirmButton: false,
+             timer: 2000
+            })
+
+            location.hash='#/m_pelanggaran'
           },
           error:function(){
-            Toast.fire({
-                  type: 'warning',
-                  title: 'Tidak dapat mengakses server ...',
-                })
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
           }
         });
       }
@@ -233,7 +252,12 @@
           table.ajax.reload();
         },
         error:function(){
-          alert('Gagal mengakses server ...')
+          Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
         }
       });
     })
@@ -277,17 +301,19 @@
                 })
               }else {
                 Toast.fire({
-                  type: 'Error',
+                  type: 'error',
                   title: response.message,
                 })
               }
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
-              })
+              Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
             }
           });
         }

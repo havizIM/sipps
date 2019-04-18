@@ -35,7 +35,7 @@
               <input type="text" class="form-control" id="edit_poin_prestasi" name="poin_prestasi">
             </div>
             <div class="form-group">
-              <label>Kategori Pelanggaran</label>
+              <label>Kategori Prestasi</label>
               <div class="input-group">
                 <input type="hidden" name="id_kapres" id="show_idkapres">
                 <input type="text" class="form-control" name="kategori_prestasi" class="form-control" id="show_kapres" placeholder="-- Pilih Kategori --" readonly>
@@ -116,11 +116,11 @@
                     // timer: 2500
                   });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token
+    var id_maspres  = location.hash.substr(15);
 
-    var id_maspres = location.hash.substr(15);
 
     // Show value edit
     $.ajax({
@@ -140,14 +140,16 @@
         // console.log(response);
       },
       error:function(){
-        Toast.fire({
-          type: 'Error',
-          title: 'Gagal Mengakses Server ...',
-        })
+        Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
       }
     });
 
-    // Ajax Edit maspel
+    // Ajax Edit maspres
     $('#form_editmaspres').on('submit',function(e){
       e.preventDefault()
 
@@ -171,17 +173,23 @@
           data: $('#form_editmaspres').serialize(),
           beforeSend:function(){},
           success:function(response){
-            Toast.fire({
-                  type: 'success',
-                  title: response.message,
-                })
-            window.location.replace('<?= base_url().'admin#/m_prestasi' ?>')
+            Swal.fire({
+               type: 'success',
+               title: response.message,
+               showConfirmButton: false,
+               timer: 2000
+              })
+
+            location.hash='#/m_prestasi'
           },
           error:function(){
-            Toast.fire({
-                  type: 'warning',
-                  title: 'Tidak dapat mengakses server ...',
-                })
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+
           }
         });
       }
@@ -246,7 +254,13 @@
           table.ajax.reload();
         },
         error:function(){
-          alert('Gagal mengakses server ...')
+          Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+
         }
       });
     })
@@ -290,17 +304,19 @@
                 })
               }else {
                 Toast.fire({
-                  type: 'Error',
+                  type: 'error',
                   title: response.message,
                 })
               }
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
-              })
+              Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
             }
           });
         }

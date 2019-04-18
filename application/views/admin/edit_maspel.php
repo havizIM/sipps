@@ -115,11 +115,11 @@
                     // timer: 2500
                   });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token;
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token;
+    var id_maspel   = location.hash.substr(14);
 
-    var id_maspel = location.hash.substr(14);
 
     // Show value edit
     $.ajax({
@@ -139,10 +139,12 @@
         // console.log(response);
       },
       error:function(){
-        Toast.fire({
-          type: 'Error',
-          title: 'Gagal Mengakses Server ...',
-        })
+        Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
       }
     });
 
@@ -170,17 +172,22 @@
           data: $('#form_editmaspel').serialize(),
           beforeSend:function(){},
           success:function(response){
-            Toast.fire({
-                  type: 'success',
-                  title: response.message,
-                })
-            window.location.replace('<?= base_url().'admin#/m_pelanggaran' ?>')
+            Swal.fire({
+             type: 'success',
+             title: response.message,
+             showConfirmButton: false,
+             timer: 2000
+            })
+
+            location.hash='#/m_pelanggaran'
           },
           error:function(){
-            Toast.fire({
-                  type: 'warning',
-                  title: 'Tidak dapat mengakses server ...',
-                })
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
           }
         });
       }
@@ -245,7 +252,12 @@
           table.ajax.reload();
         },
         error:function(){
-          alert('Gagal mengakses server ...')
+          Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
         }
       });
     })
@@ -289,17 +301,19 @@
                 })
               }else {
                 Toast.fire({
-                  type: 'Error',
+                  type: 'error',
                   title: response.message,
                 })
               }
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
-              })
+              Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
             }
           });
         }

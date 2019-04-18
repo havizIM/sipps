@@ -55,10 +55,10 @@
                   timer: 2500
                 });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token;
-    var nip = auth.nip;
+    var session   = localStorage.getItem('sipps');
+    var auth      = JSON.parse(session);
+    var token     = auth.token;
+    var nip       = auth.nip;
     // alert(token)
 
     var table = $('#detail_maspel').DataTable({
@@ -120,11 +120,12 @@
             },
             error:function(){
               Swal.fire({
-                type: 'error',
-                title: 'Gagal mengakses server',
-                showConfirmButton: false,
-                timer: 1500
-              })
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
+
             }
           });
         }

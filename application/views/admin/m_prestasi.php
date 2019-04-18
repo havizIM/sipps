@@ -55,10 +55,10 @@
                     timer: 2500
                   });
 
-      var session = localStorage.getItem('sipps');
-      var auth = JSON.parse(session);
-      var token = auth.token;
-      var nip = auth.nip;
+      var session     = localStorage.getItem('sipps');
+      var auth        = JSON.parse(session);
+      var token       = auth.token;
+      var nip         = auth.nip;
       // alert(token)
 
       var table = $('#detail_maspres').DataTable({
@@ -80,7 +80,7 @@
           {"data":"status"},
           {"data":null,"render":function(data,type,row){
 
-              return `<a href="#/edit_maspres/${row.id_maspres}" id="btn_edit" class="btn  btn-sm btn-success" name="button">Edit</a> <button type="button" data-id="${row.id_maspres}" id="btn_delete" class="btn  btn-sm btn-danger" name="button">Hapus</button>`
+              return `<a href="#/edit_maspres/${row.id_maspres}" class="btn  btn-sm btn-success">Edit</a> <button type="button" data-id="${row.id_maspres}" id="btn_delete" class="btn  btn-sm btn-danger" name="button">Hapus</button>`
 
           }},
         ],

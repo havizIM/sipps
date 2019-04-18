@@ -2,38 +2,54 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Add Master Pelanggaran</h3>
+        <h3 class="content-header-title mb-0">Tambah Master Pelanggaran</h3>
+        <div class="row breadcrumbs-top mt-1 mb-0">
+          <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#/dashboard">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item"><a href="#/m_pelanggaran">Master Pelanggaran</a>
+              </li>
+              <li class="breadcrumb-item active">Tambah Pelanggaran
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
       <div class="content-header-right text-md-right col-md-6 col-12">
         <div class="btn-group">
           <a href="#/m_pelanggaran" class="btn btn-round btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
         </div>
       </div>
-    </div>
+    </div><hr>
     <div class="content-body">
-      <form id="form_addmaspel">
-        <div class="form-group">
-            <label>Deskripsi</label>
-            <input type="text" class="form-control" id="deskripsi_pelanggaran" name="deskripsi_pelanggaran">
-        </div>
-        <div class="form-group">
-            <label>Point</label>
-            <input type="text" class="form-control" id="poin_pelanggaran" name="poin_pelanggaran">
-        </div>
-        <div class="form-group">
-          <label>Kategori Pelanggaran</label>
-          <div class="input-group">
-            <input type="hidden" name="id_kapel" id="show_idkapel">
-            <input type="text" class="form-control" name="kategori_pelanggaran" class="form-control" id="show_kapel" placeholder="-- Pilih Kategori --" readonly>
-            <div class="input-group-append">
-              <span class="input-group-text bg-info text-white" id="modal_lookup" style="cursor:pointer;">Cari</span>
+      <div class="card">
+        <div class="card-body">
+          <form id="form_addmaspel">
+            <div class="form-group">
+              <label>Deskripsi</label>
+              <input type="text" class="form-control" id="deskripsi_pelanggaran" name="deskripsi_pelanggaran">
             </div>
-          </div>
+            <div class="form-group">
+              <label>Point</label>
+              <input type="text" class="form-control" id="poin_pelanggaran" name="poin_pelanggaran">
+            </div>
+            <div class="form-group">
+              <label>Kategori Pelanggaran</label>
+              <div class="input-group">
+                <input type="hidden" name="id_kapel" id="show_idkapel">
+                <input type="text" class="form-control" name="kategori_pelanggaran" class="form-control" id="show_kapel" placeholder="-- Pilih Kategori --" readonly>
+                <div class="input-group-append">
+                  <span class="input-group-text bg-info text-white" id="modal_lookup" style="cursor:pointer;">Cari</span>
+                </div>
+              </div>
+            </div>
+            <div class="content-footer">
+              <center><button type="submit" id="btn_add" class="btn btn-info">Tambah Pelanggaran</button></center>
+            </div>
+          </form>
         </div>
-        <div class="content-footer">
-          <center><button type="submit" id="btn_add" class="btn btn-info">Tambah Pelanggaran</button></center>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
@@ -92,9 +108,9 @@
                     // timer: 2500
                   });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token
 
     // Modal show Lookup
     $('#modal_lookup').on('click', function(){
@@ -123,7 +139,7 @@
       order : [[1, 'desc']]
     });
 
-    // Ajax Add Kategori
+    // Ajax Add Kapel
     $('#form_addkat').on('submit',function(e){
       e.preventDefault();
 
@@ -155,7 +171,13 @@
           table.ajax.reload();
         },
         error:function(){
-          alert('Gagal mengakses server ...')
+          Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+
         }
       });
     })
@@ -206,9 +228,11 @@
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
+              Swal.fire({
+               type: 'warning',
+               title: 'Tidak dapat mengakses server ...',
+               showConfirmButton: false,
+               timer: 2000
               })
             }
           });
@@ -244,27 +268,33 @@
           // beforeSend:function(){},
           success:function(response){
             if (response.status === 200) {
-              Toast.fire({
+              Swal.fire({
                 type: 'success',
                 title: response.message,
+                showConfirmButton: false,
+                timer: 1500
               })
-              window.location.replace('<?= base_url().'bpbk#/m_pelanggaran' ?>')
+              location.hash='#/m_pelanggaran'
             }else {
-              Toast.fire({
+              Swal.fire({
                 type: 'error',
                 title: response.message,
+                showConfirmButton: false,
+                timer: 1500
               })
             }
-            Swal.fire({
-              type: 'success',
-              title: response.message,
-              showConfirmButton: false,
-              timer: 1500
-            })
+
             $('#form_addmaspel')[0].reset();
             table.ajax.reload();
           },
-          error:function(){}
+          error:function(){
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
+          }
         });
       }
     })

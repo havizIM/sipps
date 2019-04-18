@@ -32,7 +32,7 @@
                   <thead>
                     <tr>
                       <th>NIP</th>
-                      <th>Nama</th>
+                      <th style="width:15%;">Nama</th>
                       <th>Username</th>
                       <th>Password</th>
                       <th>Level</th>
@@ -145,10 +145,10 @@
                   timer: 2500
                 });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token;
-    var nip = auth.nip;
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token;
+    var nip         = auth.nip;
     // alert(token)
 
     var table = $('#detail_user').DataTable({
@@ -168,9 +168,7 @@
         {"data":"username"},
         {"data":"password"},
         {"data":"level"},
-        {"data":null,"render":function(data,type,row){
-          return moment(row.tgl_registrasi,'YYYY-MM-DD hh:mm:ss').format('L')
-        }},
+        {"data":"tgl_registrasi"},
         {"data":"status"},
         {"data":null,"render":function(data,type,row){
 
@@ -178,7 +176,7 @@
 
         }},
       ],
-      order:[[5,'asc']]
+      order:[[5,'desc']]
     });
 
     // Ajax Add User
@@ -225,10 +223,13 @@
             table.ajax.reload();
           },
           error:function(){
-            Toast.fire({
-              type: 'Error',
-              title: 'Gagal Mengakses Server ...',
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
             })
+
           }
         });
 
@@ -258,22 +259,28 @@
             beforeSend:function(){},
             success:function(response){
               if (response.status === 200) {
-                Toast.fire({
-                  type: 'success',
-                  title: response.message,
+                Swal.fire({
+                 type: 'success',
+                 title: response.message,
+                 showConfirmButton: false,
+                 timer: 1500
                 })
               }else {
-                Toast.fire({
-                  type: 'Error',
-                  title: response.message,
+                Swal.fire({
+                 type: 'error',
+                 title: response.message,
+                 showConfirmButton: false,
+                 timer: 1500
                 })
               }
               table.ajax.reload();
             },
             error:function(){
-              Toast.fire({
-                type: 'Error',
-                title: 'Gagal Mengakses Server ...',
+              Swal.fire({
+               type: 'warning',
+               title: 'Tidak dapat mengakses server ...',
+               showConfirmButton: false,
+               timer: 2000
               })
             }
           });
@@ -306,7 +313,12 @@
           })
         },
         error:function(){
-          alert('Tidak Dapat mengakses server ...')
+          Swal.fire({
+           type: 'warning',
+           title: 'Tidak dapat mengakses server ...',
+           showConfirmButton: false,
+           timer: 2000
+          })
         }
       });
     })
@@ -350,10 +362,12 @@
             table.ajax.reload();
           },
           error:function(){
-            Toast.fire({
-                  type: 'warning',
-                  title: 'Tidak dapat mengakses server ...',
-                })
+            Swal.fire({
+             type: 'warning',
+             title: 'Tidak dapat mengakses server ...',
+             showConfirmButton: false,
+             timer: 2000
+            })
           }
         });
       }

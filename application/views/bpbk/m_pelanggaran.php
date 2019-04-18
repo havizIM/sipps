@@ -3,6 +3,16 @@
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-12 mb-2">
         <h3 class="content-header-title mb-0">Master Pelanggaran</h3>
+        <div class="row breadcrumbs-top mt-1 mb-0">
+          <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#/dashboard">Dashboard</a>
+                </li>
+              <li class="breadcrumb-item active">Master Pelanggaran
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
       <div class="content-header-right text-md-right col-md-6 col-12">
         <div class="btn-group">
@@ -45,10 +55,10 @@
                   timer: 2500
                 });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token;
-    var nip = auth.nip;
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token;
+    var nip         = auth.nip;
     // alert(token)
 
     var table = $('#detail_maspel').DataTable({
@@ -110,11 +120,12 @@
             },
             error:function(){
               Swal.fire({
-                type: 'error',
-                title: 'Gagal mengakses server',
-                showConfirmButton: false,
-                timer: 1500
-              })
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
+
             }
           });
         }
