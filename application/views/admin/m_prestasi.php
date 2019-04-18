@@ -55,10 +55,10 @@
                     timer: 2500
                   });
 
-      var session = localStorage.getItem('sipps');
-      var auth = JSON.parse(session);
-      var token = auth.token;
-      var nip = auth.nip;
+      var session     = localStorage.getItem('sipps');
+      var auth        = JSON.parse(session);
+      var token       = auth.token;
+      var nip         = auth.nip;
       // alert(token)
 
       var table = $('#detail_maspres').DataTable({

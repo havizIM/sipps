@@ -1,5 +1,3 @@
-
-
 <div class="app-content content">
   <div class="content-wrapper">
     <div class="content-header row">
@@ -37,10 +35,10 @@
               <input type="text" class="form-control" id="poin_prestasi" name="poin_prestasi">
             </div>
             <div class="form-group">
-              <label>Kategori Prestasi</label>
+              <h3>Kategori Prestasi</h3>
               <div class="input-group">
                 <input type="hidden" name="id_kapres" id="show_idkapres">
-                <input type="text" class="form-control" name="kategori_prestasi" class="form-control" id="show_kapres" placeholder="-- Pilih Kategori --" readonly>
+                <input type="text" name="kategori_prestasi" class="form-control" id="show_kapres" placeholder="-- Pilih Kategori --" readonly>
                 <div class="input-group-append">
                   <span class="input-group-text bg-info text-white" id="modal_lookup" style="cursor:pointer;">Cari</span>
                 </div>
@@ -112,9 +110,9 @@
                     // timer: 2500
                   });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token
 
     // Modal show Lookup
     $('#modal_lookup').on('click', function(){

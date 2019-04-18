@@ -112,9 +112,9 @@
                     // timer: 2500
                   });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token
 
     // Modal show Lookup
     $('#modal_lookup').on('click', function(){

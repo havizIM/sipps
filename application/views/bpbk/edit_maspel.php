@@ -115,9 +115,9 @@
                     // timer: 2500
                   });
 
-    var session = localStorage.getItem('sipps');
-    var auth = JSON.parse(session);
-    var token = auth.token;
+    var session     = localStorage.getItem('sipps');
+    var auth        = JSON.parse(session);
+    var token       = auth.token;
 
     var id_maspel = location.hash.substr(14);
 

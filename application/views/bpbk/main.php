@@ -183,8 +183,8 @@
                       timer: 2500
                     });
 
-      var session = localStorage.getItem('sipps');
-      var auth = JSON.parse(session);
+      var session     = localStorage.getItem('sipps');
+      var auth        = JSON.parse(session);
 
       $('#nama').text(auth.nama);
       $('#level').text(auth.level);
