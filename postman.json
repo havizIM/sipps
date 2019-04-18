@@ -445,6 +445,7 @@
 						{
 							"key": "nip",
 							"value": "7201160111",
+							"description": "Berelasi ke user dengan level Wali",
 							"type": "text"
 						}
 					]
@@ -628,6 +629,7 @@
 						{
 							"key": "nip",
 							"value": "Coba",
+							"description": "Berelasi ke user dengan level Wali",
 							"type": "text"
 						}
 					]
