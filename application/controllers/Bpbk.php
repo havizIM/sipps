@@ -32,11 +32,11 @@ class Bpbk extends CI_Controller {
 	{
 		$this->load->view('bpbk/add_maspres');
 	}
-	public function edit_maspres()
+	public function edit_maspres($id)
 	{
 		$this->load->view('bpbk/edit_maspres');
 	}
-	public function edit_maspel()
+	public function edit_maspel($id)
 	{
 		$this->load->view('bpbk/edit_maspel');
 	}

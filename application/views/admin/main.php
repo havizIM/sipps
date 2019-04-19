@@ -76,13 +76,18 @@
             <li class="dropdown dropdown-user nav-item">
               <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                 <span class="mr-1">Hello,
-                  <span class="user-name text-bold-700" id="nama"></span>
-                  <b>[<span id="level"></span>]</b>
+                  <span class="user-name text-bold-700 nama"></span>
+                  <b>[<span class="level"></span>]</b>
                 </span>
                 <span class="avatar">
                   <img src="<?= base_url().'assets/image/user2.png' ?>" alt="avatar"><i></i></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item text-disabled"><i class="fas fa-address-card"></i> <span class="nip"></span></a>
+                <a class="dropdown-item text-disabled"><i class="fas fa-user"></i> <span class="nama"></span></a>
+                <a class="dropdown-item text-disabled"><i class="fas fa-star"></i> <span class="level"></span></a>
+                <a class="dropdown-item text-disabled"><i class="fas fa-calendar-alt"></i> <span class="tgl"></span></a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" id="btn_gpass"><i class="fas fa-exchange-alt"></i> Ganti Password</a>
                 <a class="dropdown-item" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
               </div>
@@ -98,6 +103,7 @@
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
         <li class="nav-item"><a href="#/dashboard"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
         <li class="nav-item"><a href="#/user"><i class="la la-user"></i><span class="menu-title" data-i18n="nav.templates.main">User</span></a></li>
+        <li class="nav-item"><a href="#/kelas"><i class="la la-building"></i><span class="menu-title" data-i18n="nav.dash.main">Kelas</span></a></li>
         <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="nav.templates.main">Data Master</span></a>
           <ul class="menu-content">
             <li><a class="menu-item" href="#/m_prestasi">Master Prestasi</a></li>
@@ -191,8 +197,12 @@
       var session   = localStorage.getItem('sipps');
       var auth      = JSON.parse(session);
 
-      $('#nama').text(auth.nama);
-      $('#level').text(auth.level);
+      $('.nama').text(auth.nama);
+      $('.level').text(auth.level);
+      $('.nip').text(auth.nip)
+      $('.tgl').text(auth.tgl_registrasi)
+
+
 
       // Ajax Logout
       $('#btn_logout').on('click',function(){

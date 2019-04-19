@@ -27,12 +27,18 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/m_pelanggaran');
 	}
-
+	public function kelas()
+	{
+		$this->load->view('admin/kelas');
+	}
+	public function add_kelas()
+	{
+		$this->load->view('admin/add_kelas');
+	}
 	public function add_maspel()
 	{
 		$this->load->view('admin/add_maspel');
 	}
-
 	public function add_maspres()
 	{
 		$this->load->view('admin/add_maspres');
@@ -44,5 +50,9 @@ class Admin extends CI_Controller {
 	public function edit_maspel($id)
 	{
 		$this->load->view('admin/edit_maspel');
+	}
+	public function edit_kelas($id)
+	{
+		$this->load->view('admin/edit_kelas');
 	}
 }
