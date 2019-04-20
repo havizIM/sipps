@@ -72,20 +72,20 @@
             <li class="dropdown dropdown-user nav-item">
               <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                 <span class="mr-1">Hello,
-                  <span class="user-name text-bold-700" class="nama"></span>
+                  <span class="user-name text-bold-700 nama"></span>
                   <b>[<span class="level"></span>]</b>
                 </span>
                 <span class="avatar">
                   <img src="<?= base_url().'assets/image/user2.png' ?>" alt="avatar"><i></i></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item text-disabled"><i class="fas fa-address-card"></i> <span class="nip"></span></a>
-                <a class="dropdown-item text-disabled"><i class="fas fa-user"></i> <span class="nama"></span></a>
-                <a class="dropdown-item text-disabled"><i class="fas fa-star"></i> <span class="level"></span></a>
-                <a class="dropdown-item text-disabled"><i class="fas fa-calendar-alt"></i> <span class="tgl"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-address-card"></i> <span class="nip"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-user"></i> <span class="nama"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-star"></i> <span class="level"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-calendar-alt"></i> <span class="tgl"></span></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" id="btn_gpass"><i class="fas fa-exchange-alt"></i> Ganti Password</a>
-                <a class="dropdown-item" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
+                <a class="dropdown-item text-success" id="btn_gpass"><i class="fas fa-exchange-alt"></i> Ganti Password</a>
+                <a class="dropdown-item text-danger" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
               </div>
             </li>
           </ul>
@@ -97,7 +97,7 @@
   <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-        <li class=" nav-item"><a href="#/dashboard"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
+        <li class=" nav-item"><a href="#/dashboard"><i class="la la-home text-info"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
         <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="nav.templates.main">Data Master</span></a>
           <ul class="menu-content">
             <li><a class="menu-item" href="#/m_prestasi">Master Prestasi</a></li>

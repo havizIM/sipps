@@ -83,13 +83,19 @@
                   <img src="<?= base_url().'assets/image/user2.png' ?>" alt="avatar"><i></i></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item text-disabled"><i class="fas fa-address-card"></i> <span class="nip"></span></a>
-                <a class="dropdown-item text-disabled"><i class="fas fa-user"></i> <span class="nama"></span></a>
-                <a class="dropdown-item text-disabled"><i class="fas fa-star"></i> <span class="level"></span></a>
-                <a class="dropdown-item text-disabled"><i class="fas fa-calendar-alt"></i> <span class="tgl"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-address-card"></i> <span class="nip"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-user"></i> <span class="nama"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-star"></i> <span class="level"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-calendar-alt"></i> <span class="tgl"></span></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" id="btn_gpass"><i class="fas fa-exchange-alt"></i> Ganti Password</a>
-                <a class="dropdown-item" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
+                <div class="row">
+                  <div class="col-6 col-md-6">
+                    <a class="dropdown-item text-success" id="btn_gpass"><i class="fas fa-exchange-alt "></i> Ganti Password</a>
+                  </div>
+                  <div class="col-6 col-md-6 text-right">
+                    <a class="dropdown-item text-danger" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
@@ -101,9 +107,9 @@
   <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-        <li class="nav-item"><a href="#/dashboard"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
-        <li class="nav-item"><a href="#/user"><i class="la la-user"></i><span class="menu-title" data-i18n="nav.templates.main">User</span></a></li>
-        <li class="nav-item"><a href="#/kelas"><i class="la la-building"></i><span class="menu-title" data-i18n="nav.dash.main">Kelas</span></a></li>
+        <li class="nav-item"><a href="#/dashboard"><i class="la la-home text-info"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
+        <li class="nav-item"><a href="#/user"><i class="la la-user text-success"></i><span class="menu-title" data-i18n="nav.templates.main">User</span></a></li>
+        <li class="nav-item"><a href="#/kelas"><i class="la la-building text-warning"></i><span class="menu-title" data-i18n="nav.dash.main">Kelas</span></a></li>
         <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="nav.templates.main">Data Master</span></a>
           <ul class="menu-content">
             <li><a class="menu-item" href="#/m_prestasi">Master Prestasi</a></li>
@@ -120,7 +126,7 @@
   <!-- ////////////////////////////////////////////////////////////////////////////-->
   <footer class="footer footer-static footer-light fixed-bottom navbar-border navbar-shadow">
     <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
-      <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block"> Made with <i class="ft-heart pink"></i></span>
+      <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block"> Made with <i class="ft-heart pink"></i> By Suhendar</span>
     </p>
   </footer>
 
