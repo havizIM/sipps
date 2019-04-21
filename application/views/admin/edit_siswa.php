@@ -227,7 +227,7 @@ function loadBasicSelect()
           contentType:false,
           beforeSend:function(){},
           success:function(response){
-            console.log(response.data)
+            console.log(response)
             // if (response.status === 200) {
             //   Toast.fire({
             //       type: 'success',
