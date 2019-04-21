@@ -1,7 +1,7 @@
 <div class="app-content content">
     <div class="content-wrapper">
       <div class="content-header row">
-        <div class="content-header-left col-md-6 col-12 mb-2">
+        <div class="content-header-left col-md-6 col-9 mb-2">
           <h3 class="content-header-title mb-0">Master Prestasi</h3>
           <div class="row breadcrumbs-top mt-1 mb-0">
             <div class="breadcrumb-wrapper col-12">
@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <div class="content-header-right text-md-right col-md-6 col-12">
+        <div class="content-header-right text-md-right mt-2 col-md-6 col-3">
           <div class="btn-group">
             <a href="#/add_maspres" class="btn btn-round btn-info"><i class="fas fa-plus"></i> Tambah</a>
           </div>

@@ -14,6 +14,7 @@
     <!-- END VENDOR CSS-->
     <!-- BEGIN MODERN CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/app.css' ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/vendors/js/jquery-ui/jquery-ui.min.css' ?>">
     <!-- END MODERN CSS-->
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/core/menu/menu-types/vertical-compact-menu.css' ?>">
@@ -109,6 +110,7 @@
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
         <li class="nav-item"><a href="#/dashboard"><i class="la la-home text-info"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
         <li class="nav-item"><a href="#/user"><i class="la la-user text-success"></i><span class="menu-title" data-i18n="nav.templates.main">User</span></a></li>
+        <li class="nav-item"><a href="#/siswa"><i class="la la-users pink"></i><span class="menu-title" data-i18n="nav.templates.main">Siswa</span></a></li>
         <li class="nav-item"><a href="#/kelas"><i class="la la-building text-warning"></i><span class="menu-title" data-i18n="nav.dash.main">Kelas</span></a></li>
         <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="nav.templates.main">Data Master</span></a>
           <ul class="menu-content">
@@ -182,6 +184,8 @@
   <!-- END MODERN JS-->
   <!-- SWEET ALERT 2 -->
   <script src="<?= base_url().'assets/app-assets/vendors/js/sweetalert2/sweetalert2.js' ?>"></script>
+  <!-- JQUERY UI -->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/jquery-ui/jquery-ui.min.js' ?>"></script>
 
   <script type="text/javascript">
   // Load Content

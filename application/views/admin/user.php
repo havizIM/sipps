@@ -1,7 +1,7 @@
 <div class="app-content content">
   <div class="content-wrapper">
     <div class="content-header row">
-      <div class="content-header-left col-md-6 col-12 mb-2">
+      <div class="content-header-left col-md-6 col-9 mb-2">
         <h3 class="content-header-title mb-0">User</h3>
         <div class="row breadcrumbs-top mt-1 mb-0">
           <div class="breadcrumb-wrapper col-12">
@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="content-header-right text-md-right col-md-6 col-12">
+      <div class="content-header-right text-md-right mt-2 col-md-6 col-3">
         <div class="btn-group">
           <button class="btn btn-round btn-info" id="btn_adduser" type="button"><i class="fas fa-plus"></i> Tambah</button>
         </div>
@@ -81,10 +81,10 @@
             <label>Level</label>
             <select class="form-control" name="level" id="select_level">
               <option value="">--Pilih Level--</option>
-              <option value="guru">Guru</option>
-              <option value="wali">Wali</option>
-              <option value="bpbk">BPBK</option>
-              <option value="kepsek">Kepsek</option>
+              <option value="Guru">Guru</option>
+              <option value="Wali">Wali</option>
+              <option value="BPBK">BPBK</option>
+              <option value="Kepsek">Kepsek</option>
             </select>
         </div>
       </div>
@@ -118,9 +118,19 @@
             <input type="text" class="form-control" id="edit_username" name="username">
         </div>
         <div class="form-group">
+            <label>Level</label>
+            <select class="form-control" name="level" id="edit_level">
+              <option value="">--Pilih Level--</option>
+              <option value="Guru">Guru</option>
+              <option value="Wali">Wali</option>
+              <option value="BPBK">BPBK</option>
+              <option value="Kepsek">Kepsek</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label>Status</label>
             <select class="form-control" name="status" id="select_status">
-              <option value="">--Pilih Level--</option>
+              <option value="">--Pilih Status--</option>
               <option value="Aktif">Aktif</option>
               <option value="Nonaktif">Nonaktif</option>
             </select>
@@ -308,6 +318,7 @@
           $.each(response.data,function(k,v){
             $('#edit_nama_user').val(v.nama);
             $('#edit_username').val(v.username);
+            $('#edit_level').val(v.level);
             $('#select_status').val(v.status);
             $('#edit_id').val(v.nip);
           })
@@ -327,15 +338,16 @@
     $('#form_edituser').on('submit',function(e){
       e.preventDefault()
 
-      var edit_id = $('#edit_id').val();
-      var edit_nama = $('#edit_nama_user').val();
+      var edit_id       = $('#edit_id').val();
+      var edit_nama     = $('#edit_nama_user').val();
       var edit_username = $('#edit_username').val();
-      var status = $('#select_status').val();
+      var status        = $('#select_status').val();
+      var level         = $('#edit_level').val();
 
 
       // alert(edit_id)
 
-      if (edit_nama === '' || edit_username === '' || status === '') {
+      if (edit_nama === '' || edit_username === '' || status === '' || level === '') {
         Toast.fire({
             type: 'warning',
             title: 'Data tidak boleh kosong ...',
@@ -349,7 +361,8 @@
               nip : edit_id,
               nama : edit_nama,
               username : edit_username,
-              status : status
+              status : status,
+              level : level
           },
           beforeSend:function(){},
           success:function(response){
