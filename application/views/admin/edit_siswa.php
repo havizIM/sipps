@@ -211,7 +211,6 @@ function loadBasicSelect()
       var email         = $('#email').val()
       var telepon       = $('#telepon').val()
       var alamat        = $('#alamat').val()
-      var foto          = $('#foto').val()
 
       if (status === '' || nama_siswa === '' ||jkel === '' ||tempat_lahir === '' ||tgl_lahir === '' ||kelas === '' ||tahun_ajaran === '' ||nama_wali === '' ||email === '' ||telepon === '' ||alamat === '') {
         Toast.fire({
@@ -223,22 +222,25 @@ function loadBasicSelect()
           url: link_edit,
           type: 'POST',
           dataType: 'JSON',
-          data: $('#form_editsiswa').serialize(),
+          data: new FormData(this),
+          processData:false,
+          contentType:false,
           beforeSend:function(){},
           success:function(response){
-            if (response.status === 200) {
-              Toast.fire({
-                  type: 'success',
-                  title: response.message,
-                })
-                location.hash='#/siswa'
-
-            }else {
-              Toast.fire({
-                  type: 'error',
-                  title: response.message,
-                })
-            }
+            console.log(response.data)
+            // if (response.status === 200) {
+            //   Toast.fire({
+            //       type: 'success',
+            //       title: response.message,
+            //     })
+            //     location.hash='#/siswa'
+            //
+            // }else {
+            //   Toast.fire({
+            //       type: 'error',
+            //       title: response.message,
+            //     })
+            // }
           },
           error:function(){
             Swal.fire({
