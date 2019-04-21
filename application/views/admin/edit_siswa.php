@@ -200,6 +200,9 @@ function loadBasicSelect()
     $('#form_editsiswa').on('submit',function(e){
       e.preventDefault();
 
+      var form = new FormData(this)
+      console.log(form)
+
       var nama_siswa    = $('#nama_siswa').val()
       var jkel          = $('#jkel').val()
       var tempat_lahir  = $('#tempat_lahir').val()
