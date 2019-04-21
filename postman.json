@@ -239,6 +239,28 @@
 			"response": []
 		},
 		{
+			"name": "Show Siswa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/siswa/show/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"siswa",
+						"show",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add User",
 			"request": {
 				"method": "POST",
@@ -451,7 +473,7 @@
 					]
 				},
 				"url": {
-					"raw": "localhost/sipps/api/kelas/add/d033e22ae348aeb",
+					"raw": "localhost/sipps/api/kelas/edit/d033e22ae348aeb",
 					"host": [
 						"localhost"
 					],
@@ -459,6 +481,94 @@
 						"sipps",
 						"api",
 						"kelas",
+						"edit",
+						"d033e22ae348aeb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Siswa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nis",
+							"value": "7201160101",
+							"type": "text"
+						},
+						{
+							"key": "nama_siswa",
+							"value": "Yugi Setiawan",
+							"type": "text"
+						},
+						{
+							"key": "jenis_kelamin",
+							"value": "Laki-laki",
+							"description": "Laki-laki / Perempuan",
+							"type": "text"
+						},
+						{
+							"key": "tempat_lahir",
+							"value": "Jakarta",
+							"type": "text"
+						},
+						{
+							"key": "tgl_lahir",
+							"value": "1992-10-10",
+							"type": "text"
+						},
+						{
+							"key": "kelas",
+							"value": "XII-IPS-3",
+							"description": "Relasi Ke Kelas",
+							"type": "text"
+						},
+						{
+							"key": "tahun_ajaran",
+							"value": "2018/2019",
+							"type": "text"
+						},
+						{
+							"key": "nama_wali",
+							"value": "Titin Solihah",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "viz.ndinq@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "telepon",
+							"value": "081355754092",
+							"type": "text"
+						},
+						{
+							"key": "alamat",
+							"value": "Jakarta",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"value": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/siswa/add/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"siswa",
 						"add",
 						"d033e22ae348aeb"
 					]
@@ -657,6 +767,101 @@
 			"response": []
 		},
 		{
+			"name": "Edit Siswa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nama_siswa",
+							"value": "Yugi Setiawan A",
+							"type": "text"
+						},
+						{
+							"key": "jenis_kelamin",
+							"value": "Perempuan",
+							"description": "Laki-laki / Perempuan",
+							"type": "text"
+						},
+						{
+							"key": "tempat_lahir",
+							"value": "Bogor",
+							"type": "text"
+						},
+						{
+							"key": "tgl_lahir",
+							"value": "1992-10-11",
+							"type": "text"
+						},
+						{
+							"key": "kelas",
+							"value": "XII-IPS-3",
+							"description": "Relasi Ke Kelas",
+							"type": "text"
+						},
+						{
+							"key": "tahun_ajaran",
+							"value": "2018/2020",
+							"type": "text"
+						},
+						{
+							"key": "nama_wali",
+							"value": "Titin Solihahh",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "si.ubk16@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "telepon",
+							"value": "0813557540922",
+							"type": "text"
+						},
+						{
+							"key": "alamat",
+							"value": "Bogor",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"value": "",
+							"type": "file"
+						},
+						{
+							"key": "status",
+							"value": "Nonaktif",
+							"description": "Aktif / Nonaktif",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/siswa/edit/d033e22ae348aeb?nis=7201160101",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"siswa",
+						"edit",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "nis",
+							"value": "7201160101"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete User",
 			"request": {
 				"method": "GET",
@@ -821,6 +1026,34 @@
 						{
 							"key": "kelas",
 							"value": "XII-IPS-2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Siswa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/siswa/delete/d033e22ae348aeb?nis=7201160101",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"siswa",
+						"delete",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "nis",
+							"value": "7201160101"
 						}
 					]
 				}
