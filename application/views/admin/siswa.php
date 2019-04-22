@@ -31,9 +31,8 @@
                 <table class="table table-hover dataTable" id="detail_siswa" >
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>NIS</th>
                       <th>Nama</th>
+                      <th>NIS</th>
                       <th>Jenis Kelamin</th>
                       <th>Tempat Lahir</th>
                       <th>Tanggal Lahir</th>
@@ -44,6 +43,7 @@
                       <th>Email</th>
                       <th>Telepon</th>
                       <th>Alamat</th>
+                      <th>#</th>
                       <th>#</th>
                     </tr>
                   </thead>
@@ -58,6 +58,8 @@
     </div>
   </div>
 </div>
+
+
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -86,9 +88,8 @@
       processing:true,
       ajax:link_show,
       columns:[
-        {"data":"foto"},
-        {"data":"nis"},
         {"data":"nama_siswa"},
+        {"data":"nis"},
         {"data":"jenis_kelamin"},
         {"data":"tempat_lahir"},
         {"data":"tgl_lahir"},
@@ -100,8 +101,11 @@
         {"data":"telepon"},
         {"data":"alamat"},
         {"data":null,"render":function(data,type,row){
+          return `<img src="<?= base_url().'doc/siswa/' ?>${row.foto}" class="avatar" alt="Foto" style="width:70px; height: 70px;">`
+        }},
+        {"data":null,"render":function(data,type,row){
 
-            return `<a href="#/edit_siswa/${row.nis}" id="btn_edit" class="btn  btn-sm btn-success" name="button">Edit</a> <button type="button" data-id="${row.nis}" id="btn_delete" class="btn  btn-sm btn-danger" name="button">Hapus</button>`
+            return `<a href="#/edit_siswa/${row.nis}" id="btn_edit" class="btn  btn-sm btn-success">Edit</a> <button type="button" data-id="${row.nis}" id="btn_delete" class="btn  btn-sm btn-danger" name="button">Hapus</button>`
 
         }},
       ],

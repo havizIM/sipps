@@ -2,7 +2,7 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-9 mb-2">
-        <h3 class="content-header-title mb-0">Tambah Siswa</h3>
+        <h3 class="content-header-title mb-0">Edit Siswa</h3>
         <div class="row breadcrumbs-top mt-1 mb-0">
           <div class="breadcrumb-wrapper col-12">
             <ol class="breadcrumb">
@@ -10,7 +10,7 @@
               </li>
               <li class="breadcrumb-item"><a href="#/kelas">Siswa</a>
               </li>
-              <li class="breadcrumb-item active">Tambah Siswa
+              <li class="breadcrumb-item active">Edit Siswa
               </li>
             </ol>
           </div>
@@ -57,13 +57,13 @@
                   <label>Tahun Ajaran</label>
                   <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran">
                 </div>
-              </div>
-
-              <div class="col-md-6">
                 <div class="form-group">
                   <label>Nama Wali</label>
                   <input type="text" class="form-control" id="nama_wali" name="nama_wali">
                 </div>
+              </div>
+
+              <div class="col-md-6">
                 <div class="form-group">
                   <label>Email</label>
                   <input type="email" class="form-control" id="email" name="email">
@@ -99,7 +99,7 @@
               </div>
             </div>
             <div class="content-footer mt-2">
-              <center><button type="submit" id="btn_add" class="btn btn-md btn-info">Tambah Siswa</button></center>
+              <center><button type="submit" id="btn_edit" class="btn btn-md btn-info">Simpan Perubahan</button></center>
             </div>
           </form>
         </div>
