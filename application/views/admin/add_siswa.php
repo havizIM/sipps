@@ -171,7 +171,6 @@ function loadBasicSelect()
       var alamat        = $('#alamat').val()
       var foto          = $('#foto').val()
 
-      // alert(foto)
 
       // if (jQuery.inArray(foto,['png','jpg','jpeg']) == -1) {
       //   alert('File tidak ditemukan')
@@ -207,7 +206,6 @@ function loadBasicSelect()
                   title: response.message,
                 })
             }
-            $('#form_addsiswa')[0].reset();
           },
           error:function(){
             Swal.fire({

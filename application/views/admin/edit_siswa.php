@@ -2,7 +2,7 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-6 col-9 mb-2">
-        <h3 class="content-header-title mb-0">Edit Siswa</h3>
+        <h3 class="content-header-title mb-0">Tambah Siswa</h3>
         <div class="row breadcrumbs-top mt-1 mb-0">
           <div class="breadcrumb-wrapper col-12">
             <ol class="breadcrumb">
@@ -10,7 +10,7 @@
               </li>
               <li class="breadcrumb-item"><a href="#/kelas">Siswa</a>
               </li>
-              <li class="breadcrumb-item active">Edit Siswa
+              <li class="breadcrumb-item active">Tambah Siswa
               </li>
             </ol>
           </div>
@@ -57,13 +57,13 @@
                   <label>Tahun Ajaran</label>
                   <input type="text" class="form-control" id="tahun_ajaran" name="tahun_ajaran">
                 </div>
+              </div>
+
+              <div class="col-md-6">
                 <div class="form-group">
                   <label>Nama Wali</label>
                   <input type="text" class="form-control" id="nama_wali" name="nama_wali">
                 </div>
-              </div>
-
-              <div class="col-md-6">
                 <div class="form-group">
                   <label>Email</label>
                   <input type="email" class="form-control" id="email" name="email">
@@ -72,14 +72,14 @@
                   <label>Telepon</label>
                   <input type="number" class="form-control" id="telepon" name="telepon">
                 </div>
-                <div class="form-group mb-2">
+                <div class="form-group">
                   <label>Alamat</label>
                   <textarea class="form-control" name="alamat" id="alamat" rows="6" cols="80"></textarea>
                 </div>
-                <div class="form-group mb-3">
+                <div class="form-group">
                   <label>Status</label>
                   <select class="form-control" name="status" id="status">
-                    <option value="">--Pilih Status--</option>
+                    <option value="">-- Pilih Status --</option>
                     <option value="Aktif">Aktif</option>
                     <option value="Nonaktif">Nonaktif</option>
                   </select>
@@ -89,7 +89,7 @@
                     <label class="card-title text-white">Upload Gambar</label>
                   </div>
                   <div class="card-block ">
-                    <div class="card-body">
+                    <div class="card-body row">
                       <fieldset class="form-group">
                         <input type="file" class="form-control-file" id="foto" name="foto">
                       </fieldset>
@@ -99,14 +99,18 @@
               </div>
             </div>
             <div class="content-footer mt-2">
-              <center><button type="submit" id="btn_edit" class="btn btn-md btn-info">Simpan Perubahan</button></center>
+              <center><button type="submit" id="btn_add" class="btn btn-md btn-info">Tambah Siswa</button></center>
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
+  <div class="" id="error">
+
+  </div>
 </div>
+
 
 
 <script type="text/javascript">
@@ -131,9 +135,7 @@ function loadBasicSelect()
       var html = `<option value="">-- Pilih Kelas --</option>`;
 
       $.each(response.data, function(k, v){
-
           html += `<option value="${v.kelas}">${v.kelas}</option>`;
-
       });
 
       $('#kelas').html(html);
@@ -145,7 +147,7 @@ function loadBasicSelect()
   });
 }
   $(document).ready(function() {
-    loadBasicSelect();
+    loadBasicSelect()
 
     const Toast = Swal.mixin({
                   toast: true,
@@ -158,20 +160,15 @@ function loadBasicSelect()
     var auth        = JSON.parse(session);
     var token       = auth.token;
     var nis         = location.hash.substr(13);
-    var link_edit   = `<?= base_url().'api/siswa/edit/' ?>${token}?nis=${nis}`
-    var link_show   = `<?= base_url().'api/siswa/show/' ?>${token}?nis=${nis}`
+    var link_get    = `<?= base_url().'api/siswa/show/'?>${token}?nis=${nis}`;
+    var link_edit   = `<?= base_url().'api/siswa/edit/'?>${token}?nis=${nis}`;
 
-
-    // Show value edit
     $.ajax({
-      url: link_show,
+      url: link_get,
       type: 'GET',
       dataType: 'JSON',
-      // data: {},
-      // beforeSend:function(){},
-      success:function(response){
-        $.each(response.data,function(k,v){
-
+      success: function(response){
+        $.each(response.data, function(k, v){
           $('#nama_siswa').val(v.nama_siswa)
           $('#jkel').val(v.jenis_kelamin)
           $('#tempat_lahir').val(v.tempat_lahir)
@@ -179,29 +176,25 @@ function loadBasicSelect()
           $('#kelas').val(v.kelas)
           $('#tahun_ajaran').val(v.tahun_ajaran)
           $('#nama_wali').val(v.nama_wali)
-          $('#status').val(v.status)
           $('#email').val(v.email)
           $('#telepon').val(v.telepon)
           $('#alamat').val(v.alamat)
+          $('#status').val(v.status)
         })
-        // console.log(response);
       },
-      error:function(){
+      error: function(e){
         Swal.fire({
-             type: 'warning',
-             title: 'Tidak dapat mengakses server ...',
-             showConfirmButton: false,
-             timer: 2000
-            })
+           type: 'warning',
+           title: 'Tidak dapat mengakses server ...',
+           showConfirmButton: false,
+           timer: 2000
+          })
       }
     });
 
-    // Ajax Edit Siswa
+    // Ajax Add Kapel
     $('#form_editsiswa').on('submit',function(e){
       e.preventDefault();
-
-      var form = new FormData(this)
-      console.log(form)
 
       var nama_siswa    = $('#nama_siswa').val()
       var jkel          = $('#jkel').val()
@@ -209,18 +202,28 @@ function loadBasicSelect()
       var tgl_lahir     = $('#tgl_lahir').val()
       var kelas         = $('#kelas').val()
       var tahun_ajaran  = $('#tahun_ajaran').val()
-      var status        = $('#status').val()
       var nama_wali     = $('#nama_wali').val()
       var email         = $('#email').val()
       var telepon       = $('#telepon').val()
       var alamat        = $('#alamat').val()
+      var status        = $('#status').val()
+      var foto          = $('#foto').val()
 
-      if (status === '' || nama_siswa === '' ||jkel === '' ||tempat_lahir === '' ||tgl_lahir === '' ||kelas === '' ||tahun_ajaran === '' ||nama_wali === '' ||email === '' ||telepon === '' ||alamat === '') {
+
+      // if (jQuery.inArray(foto,['png','jpg','jpeg']) == -1) {
+      //   alert('File tidak ditemukan')
+      //   $('#foto').val('')
+      //   return false;
+      // .split('.').pop().toLowerCase();
+      // }
+
+      if (nama_siswa === '' ||jkel === '' ||tempat_lahir === '' ||tgl_lahir === '' ||kelas === '' ||tahun_ajaran === '' ||nama_wali === '' ||email === '' ||telepon === '' ||alamat === '' || status === '') {
         Toast.fire({
-            type: 'warning',
-            title: 'Data tidak boleh kosong ...',
-          })
+          type: 'warning',
+          title: 'Data tidak boleh kosong ...',
+        })
       }else {
+
         $.ajax({
           url: link_edit,
           type: 'POST',
@@ -230,35 +233,38 @@ function loadBasicSelect()
           contentType:false,
           beforeSend:function(){},
           success:function(response){
-            console.log(response)
-            // if (response.status === 200) {
-            //   Toast.fire({
-            //       type: 'success',
-            //       title: response.message,
-            //     })
-            //     location.hash='#/siswa'
-            //
-            // }else {
-            //   Toast.fire({
-            //       type: 'error',
-            //       title: response.message,
-            //     })
-            // }
+            if (response.status === 200) {
+              Toast.fire({
+                type: 'success',
+                title: response.message,
+              })
+              location.hash='#/siswa'
+            }else {
+                Toast.fire({
+                  type: 'error',
+                  title: response.message,
+                })
+            }
           },
-          error:function(){
+          error:function(err){
             Swal.fire({
-             type: 'warning',
-             title: 'Tidak dapat mengakses server ...',
-             showConfirmButton: false,
-             timer: 2000
-            })
+               type: 'warning',
+               title: 'Tidak dapat mengakses server ...',
+               showConfirmButton: false,
+               timer: 2000
+              })
+
+            $('#error').html(err.responseText);
+
           }
         });
-
       }
     })
 
 
-  });
+    $('#tgl_lahir').datepicker({
+      dateFormat:"yy-mm-dd"
+    });
 
+  });
 </script>

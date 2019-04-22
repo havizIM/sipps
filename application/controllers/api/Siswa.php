@@ -158,7 +158,7 @@ class Siswa extends CI_Controller {
 
   function upload_foto($nis)
   {
-    if(isset($_FILES['foto'])){
+    if(isset($_FILES['foto'])  && $_FILES['foto']['name'] != ""){
       $extention = explode('.', $_FILES['foto']['name']);
       $new_name = $nis.'.'.$extention[1];
       $destination = './doc/siswa/'.$new_name;
@@ -170,7 +170,7 @@ class Siswa extends CI_Controller {
         return 'siswa.jpg';
       }
     } else {
-      return null;
+      return 'siswa.jpg';
     }
   }
 
@@ -300,6 +300,8 @@ class Siswa extends CI_Controller {
                   'alamat'      => $alamat
                 );
 
+                // json_output(200, array('status' => 200, 'description' => 'Berhasil', 'siswa' => $siswa, 'akun' => $akun));
+
                 $log  = array('message' => 'Berhasil mengedit siswa');
                 $edit = $this->SiswaModel->edit($nis, $siswa, $akun);
 
@@ -330,7 +332,7 @@ class Siswa extends CI_Controller {
 
   function reupload_foto($nis)
   {
-    if(isset($_FILES['foto'])){
+    if(isset($_FILES['foto']) && $_FILES['foto']['name'] != ""){
       $extention = explode('.', $_FILES['foto']['name']);
       $new_name = $nis.'.'.$extention[1];
       $destination = './doc/siswa/'.$new_name;
