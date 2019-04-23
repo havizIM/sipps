@@ -1,7 +1,7 @@
 <div class="app-content content">
   <div class="content-wrapper">
     <div class="content-header row">
-      <div class="content-header-left col-md-6 col-12 mb-2">
+      <div class="content-header-left col-md-6 col-9 mb-2">
         <h3 class="content-header-title mb-0">Edit Pelanggaran</h3>
         <div class="row breadcrumbs-top mt-1 mb-0">
           <div class="breadcrumb-wrapper col-12">
@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <div class="content-header-right text-md-right col-md-6 col-12">
+      <div class="content-header-right text-md-right mt-2 col-md-6 col-3">
         <div class="btn-group">
           <a href="#/m_pelanggaran" class="btn btn-round btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
         </div>
@@ -53,7 +53,7 @@
               </select>
             </div>
             <div class="content-footer">
-              <center><button type="submit" id="btn_edit" class="btn btn-success">Simpan Perubahan</button></center>
+              <center><button type="submit" id="btn_simpan" class="btn btn-success">Simpan Perubahan</button></center>
             </div>
           </form>
         </div>
@@ -118,8 +118,8 @@
     var session     = localStorage.getItem('sipps');
     var auth        = JSON.parse(session);
     var token       = auth.token;
+    var id_maspel   = location.hash.substr(14);
 
-    var id_maspel = location.hash.substr(14);
 
     // Show value edit
     $.ajax({
@@ -170,16 +170,23 @@
           type: 'POST',
           dataType: 'JSON',
           data: $('#form_editmaspel').serialize(),
-          beforeSend:function(){},
+          beforeSend:function(){
+            $('#btn_simpan').addClass('disabled').attr('disabled','disabled').html('<span>Simpan Perubahan<i class="fas fa-spinner fa-spin"></i></span>')
+          },
           success:function(response){
-            Swal.fire({
-             type: 'success',
-             title: response.message,
-             showConfirmButton: false,
-             timer: 2000
-            })
-
-            location.hash='#/m_pelanggaran'
+            if (response.status === 200) {
+              Toast.fire({
+                  type: 'success',
+                  title: response.message,
+                })
+              location.hash='#/m_pelanggaran'
+            }else {
+              Toast.fire({
+                  type: 'error',
+                  title: response.message,
+                })
+              $('#btn_simpan').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
+            }
           },
           error:function(){
             Swal.fire({
@@ -188,6 +195,7 @@
              showConfirmButton: false,
              timer: 2000
             })
+            $('#btn_simpan').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
           }
         });
       }
@@ -232,10 +240,10 @@
         url: '<?= base_url().'api/kapel/add/' ?>'+token,
         type: 'POST',
         dataType: 'JSON',
-        data: {
-          kategori_pelanggaran : kapel
+        data: $('#form_addkat').serialize(),
+        beforeSend:function(){
+          $('#add_kategori').addClass('disabled').attr('disabled','disabled').html('<span>Tambah <i class="fas fa-spinner fa-spin"></i></span>')
         },
-        beforeSend:function(){},
         success:function(response){
           if (response.status === 200) {
             Toast.fire({
@@ -248,6 +256,7 @@
                 title: response.message,
               })
           }
+          $('#add_kategori').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
           $('#form_addkat')[0].reset();
           table.ajax.reload();
         },
@@ -258,6 +267,7 @@
              showConfirmButton: false,
              timer: 2000
             })
+        $('#add_kategori').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
         }
       });
     })

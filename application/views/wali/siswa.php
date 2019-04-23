@@ -14,11 +14,11 @@
           </div>
         </div>
       </div>
-      <div class="content-header-right text-md-right mt-2 col-md-6 col-3">
+      <!-- <div class="content-header-right text-md-right mt-2 col-md-6 col-3">
         <div class="btn-group">
           <a href="#/add_siswa" class="btn btn-round btn-info"><i class="fas fa-plus"></i> Tambah</a>
         </div>
-      </div>
+      </div> -->
     </div><hr>
     <div class="content-body">
       <section>
@@ -31,19 +31,20 @@
                 <table class="table table-hover dataTable" id="detail_siswa" >
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>NIS</th>
                       <th>Nama</th>
+                      <th>NIS</th>
                       <th>Jenis Kelamin</th>
                       <th>Tempat Lahir</th>
                       <th>Tanggal Lahir</th>
                       <th>Kelas</th>
                       <th>Tahun Ajaran</th>
+                      <th>Status</th>
                       <th>Wali</th>
                       <th>Email</th>
                       <th>Telepon</th>
                       <th>Alamat</th>
                       <th>#</th>
+
                     </tr>
                   </thead>
                   <tbody>
@@ -57,6 +58,8 @@
     </div>
   </div>
 </div>
+
+
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -85,22 +88,20 @@
       processing:true,
       ajax:link_show,
       columns:[
-        {"data":"foto"},
-        {"data":"nis"},
         {"data":"nama_siswa"},
+        {"data":"nis"},
         {"data":"jenis_kelamin"},
         {"data":"tempat_lahir"},
         {"data":"tgl_lahir"},
         {"data":"kelas"},
         {"data":"tahun_ajaran"},
+        {"data":"status"},
         {"data":"nama_wali"},
         {"data":"email"},
         {"data":"telepon"},
         {"data":"alamat"},
         {"data":null,"render":function(data,type,row){
-
-            return `<a href="#/edit_siswa/${row.nis}" id="btn_edit" class="btn  btn-sm btn-success" name="button">Edit</a> <button type="button" data-id="${row.nis}" id="btn_delete" class="btn  btn-sm btn-danger" name="button">Hapus</button>`
-
+          return `<img src="<?= base_url().'doc/siswa/' ?>${row.foto}" class="avatar" alt="Foto" style="width:70px; height: 70px;">`
         }},
       ],
       order:[[7,'desc']]
@@ -109,8 +110,8 @@
     // Ajax Delete Maspel
     $(document).on('click','#btn_delete',function(){
 
-      var nis = $(this).attr('data-id');
-
+      var nis           = $(this).attr('data-id');
+      var link_delete   = `<?= base_url().'api/siswa/delete/' ?>${token}?nis=${nis}`
 
       Swal.fire({
         title: 'Apakah anda yakin...',
@@ -124,7 +125,7 @@
       }).then((result) => {
         if (result.value) {
           $.ajax({
-            url: `<?= base_url().'api/siswa/delete/' ?>${token}?nis=${nis}`,
+            url: link_delete,
             type: 'GET',
             dataType: 'JSON',
             // beforeSend:function(){},

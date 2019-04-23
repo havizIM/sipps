@@ -285,7 +285,10 @@
               password_lama : pass_lama,
               password_baru : pass_baru
             },
-            beforeSend:function(){},
+            beforeSend:function(){
+              $('#btn_savepass').addClass('disabled').attr('disabled','disabled').html('<span>Simpan Perubahan <i class="fas fa-spinner fa-spin"></i></span>')
+
+            },
             success:function(response){
 
               if (response.status === 200) {
@@ -300,7 +303,7 @@
                   title: response.message,
                 })
               }
-
+              $('#btn_savepass').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
             },
             error:function(){
               Swal.fire({
@@ -309,6 +312,7 @@
                showConfirmButton: false,
                timer: 2000
               })
+                $('#btn_savepass').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
             }
           });
         }

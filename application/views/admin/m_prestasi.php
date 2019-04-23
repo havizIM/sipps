@@ -80,7 +80,7 @@
           {"data":"status"},
           {"data":null,"render":function(data,type,row){
 
-              return `<a href="#/edit_maspres/${row.id_maspres}" class="btn  btn-sm btn-success">Edit</a> <button type="button" data-id="${row.id_maspres}" id="btn_delete" class="btn  btn-sm btn-danger" name="button">Hapus</button>`
+              return `<a href="#/edit_maspres/${row.id_maspres}" class="btn  btn-sm btn-success">Edit</a> <button type="button" data-id="${row.id_maspres}" id="btn_delete" class="btn  btn-sm btn-danger" >Hapus</button>`
 
           }},
         ],
@@ -90,7 +90,8 @@
       // Ajax Delete Maspel
       $(document).on('click','#btn_delete',function(){
 
-        var id_maspres = $(this).attr('data-id');
+        var id_maspres    = $(this).attr('data-id');
+        var link_delete   = `<?= base_url().'api/maspres/delete/' ?>${token}?id_maspres=${id_maspres}`
 
 
         Swal.fire({
@@ -105,7 +106,7 @@
         }).then((result) => {
           if (result.value) {
             $.ajax({
-              url: `<?= base_url().'api/maspres/delete/' ?>${token}?id_maspres=${id_maspres}`,
+              url: link_delete,
               type: 'GET',
               dataType: 'JSON',
               // beforeSend:function(){},

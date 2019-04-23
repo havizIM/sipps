@@ -95,7 +95,7 @@
               </div>
             </div>
             <div class="content-footer mt-2">
-              <center><button type="submit" id="btn_add" class="btn btn-md btn-info">Tambah Siswa</button></center>
+              <center><button type="submit" id="btn_add" class="btn btn-md btn-info">Tambah</button></center>
             </div>
           </form>
         </div>
@@ -135,7 +135,12 @@ function loadBasicSelect()
 
     },
     error: function(){
-      alert('Tidak dapat mengakses server')
+      Swal.fire({
+         type: 'warning',
+         title: 'Tidak dapat mengakses server ...',
+         showConfirmButton: false,
+         timer: 2000
+        })
     }
   });
 }
@@ -192,7 +197,10 @@ function loadBasicSelect()
           data: new FormData(this),
           processData:false,
           contentType:false,
-          beforeSend:function(){},
+          beforeSend:function(){
+            $('#btn_add').addClass('disabled').attr('disabled','disabled').html('<span>Tambah <i class="fas fa-spinner fa-spin"></i></span>')
+
+          },
           success:function(response){
             if (response.status === 200) {
               Toast.fire({
@@ -205,6 +213,7 @@ function loadBasicSelect()
                   type: 'error',
                   title: response.message,
                 })
+                $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
             }
           },
           error:function(){
@@ -214,7 +223,7 @@ function loadBasicSelect()
                showConfirmButton: false,
                timer: 2000
               })
-
+              $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
           }
         });
       }

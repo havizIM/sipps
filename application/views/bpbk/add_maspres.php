@@ -1,9 +1,7 @@
-
-
 <div class="app-content content">
   <div class="content-wrapper">
     <div class="content-header row">
-      <div class="content-header-left col-md-6 col-12 mb-2">
+      <div class="content-header-left col-md-6 col-9 mb-2">
         <h3 class="content-header-title mb-0">Tambah Master Prestasi</h3>
         <div class="row breadcrumbs-top mt-1 mb-0">
           <div class="breadcrumb-wrapper col-12">
@@ -18,7 +16,7 @@
           </div>
         </div>
       </div>
-      <div class="content-header-right text-md-right col-md-6 col-12">
+      <div class="content-header-right text-md-right mt-2 col-md-6 col-3">
         <div class="btn-group">
           <a href="#/m_prestasi" class="btn btn-round btn-danger"><i class="fas fa-arrow-left"></i> Kembali</a>
         </div>
@@ -37,10 +35,10 @@
               <input type="text" class="form-control" id="poin_prestasi" name="poin_prestasi">
             </div>
             <div class="form-group">
-              <label>Kategori Prestasi</label>
+              <h3>Kategori Prestasi</h3>
               <div class="input-group">
                 <input type="hidden" name="id_kapres" id="show_idkapres">
-                <input type="text" class="form-control" name="kategori_prestasi" class="form-control" id="show_kapres" placeholder="-- Pilih Kategori --" readonly>
+                <input type="text" name="kategori_prestasi" class="form-control" id="show_kapres" placeholder="-- Pilih Kategori --" readonly>
                 <div class="input-group-append">
                   <span class="input-group-text bg-info text-white" id="modal_lookup" style="cursor:pointer;">Cari</span>
                 </div>
@@ -158,7 +156,10 @@
         data: {
           kategori_prestasi : kapres
         },
-        beforeSend:function(){},
+        beforeSend:function(){
+          $('#add_kategori').addClass('disabled').attr('disabled','disabled').html('<span>Tambah<i class="fas fa-spinner fa-spin"></i></span>')
+
+        },
         success:function(response){
           if (response.status === 200) {
             Toast.fire({
@@ -173,6 +174,7 @@
           }
           $('#form_addpres')[0].reset();
           table.ajax.reload();
+          $('#add_kategori').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
         },
         error:function(){
           Swal.fire({
@@ -181,6 +183,7 @@
                showConfirmButton: false,
                timer: 2000
               })
+          $('#add_kategori').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
         }
       });
     })
@@ -269,7 +272,9 @@
             poin_prestasi:poin,
             id_kapres:id_kapres
           },
-          // beforeSend:function(){},
+          beforeSend:function(){
+            $('#btn_add').addClass('disabled').attr('disabled','disabled').html('<span>Tambah Prestasi<i class="fas fa-spinner fa-spin"></i></span>')
+          },
           success:function(response){
             if (response.status === 200) {
               Swal.fire({
@@ -286,8 +291,8 @@
                 showConfirmButton: false,
                 timer: 1500
               })
+              $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah Prestasi</span>')
             }
-
             $('#form_addmaspres')[0].reset();
             table.ajax.reload();
           },
@@ -298,6 +303,7 @@
              showConfirmButton: false,
              timer: 2000
             })
+            $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah Prestasi</span>')
           }
         });
 

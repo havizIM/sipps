@@ -35,7 +35,7 @@
               <select class="form-control" name="nip" id="nip" ></select>
             </div>
             <div class="content-footer">
-              <center><button type="submit" id="btn_edit" class="btn btn-info">Simpan Perubahan</button></center>
+              <center><button type="submit" id="btn_simpan" class="btn btn-info">Simpan Perubahan</button></center>
             </div>
           </form>
         </div>
@@ -122,7 +122,7 @@ function loadBasicSelect()
       }
     });
 
-
+    // Ajax Edit Kelas
     $('#form_editkelas').on('submit',function(e){
       e.preventDefault();
 
@@ -139,7 +139,9 @@ function loadBasicSelect()
           type: 'POST',
           dataType: 'JSON',
           data: $('#form_editkelas').serialize(),
-          beforeSend:function(){},
+          beforeSend:function(){
+            $('#btn_simpan').addClass('disabled').attr('disabled','disabled').html('<span>Simpan Perubahan <i class="fas fa-spinner fa-spin"></i></span>')
+          },
           success:function(response){
             if (response.status === 200) {
               Toast.fire({
@@ -153,6 +155,7 @@ function loadBasicSelect()
                   type: 'error',
                   title: response.message,
                 })
+              $('#btn_simpan').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
             }
           },
           error:function(){
@@ -162,6 +165,7 @@ function loadBasicSelect()
              showConfirmButton: false,
              timer: 2000
             })
+            $('#btn_simpan').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
           }
         });
 

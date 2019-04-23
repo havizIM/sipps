@@ -105,7 +105,7 @@
         }},
         {"data":null,"render":function(data,type,row){
 
-            return `<a href="#/edit_siswa/${row.nis}" id="btn_edit" class="btn  btn-sm btn-success">Edit</a> <button type="button" data-id="${row.nis}" id="btn_delete" class="btn  btn-sm btn-danger" name="button">Hapus</button>`
+            return `<a href="#/edit_siswa/${row.nis}" id="btn_edit" class="btn  btn-sm btn-success">Edit</a> <button type="button" data-id="${row.nis}" id="btn_delete" class="btn  btn-sm btn-danger" >Hapus</button>`
 
         }},
       ],
@@ -115,8 +115,8 @@
     // Ajax Delete Maspel
     $(document).on('click','#btn_delete',function(){
 
-      var nis = $(this).attr('data-id');
-
+      var nis           = $(this).attr('data-id');
+      var link_delete   = `<?= base_url().'api/siswa/delete/' ?>${token}?nis=${nis}`
 
       Swal.fire({
         title: 'Apakah anda yakin...',
@@ -130,7 +130,7 @@
       }).then((result) => {
         if (result.value) {
           $.ajax({
-            url: `<?= base_url().'api/siswa/delete/' ?>${token}?nis=${nis}`,
+            url: link_delete,
             type: 'GET',
             dataType: 'JSON',
             // beforeSend:function(){},

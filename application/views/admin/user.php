@@ -102,7 +102,7 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header bg-info">
-      <h5 class="modal-title text-white" id="exampleModalLabel">Tambah User</h5>
+      <h5 class="modal-title text-white" id="exampleModalLabel">Edit User</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -159,6 +159,7 @@
     var auth        = JSON.parse(session);
     var token       = auth.token;
     var nip         = auth.nip;
+    var link_add    = '<?= base_url().'api/user/add/' ?>'+token
     // alert(token)
 
     var table = $('#detail_user').DataTable({
@@ -182,7 +183,7 @@
         {"data":"status"},
         {"data":null,"render":function(data,type,row){
 
-            return `<button type="button" id="btn_edit" data-id="${row.nip}" class="btn  btn-sm btn-success" name="button">Edit</button> <button type="button" data-id="${row.nip}" id="btn_delete" class="btn  btn-sm btn-danger" name="button">Hapus</button>`
+            return `<button type="button" id="btn_edit" data-id="${row.nip}" class="btn  btn-sm btn-success">Edit</button> <button type="button" data-id="${row.nip}" id="btn_delete" class="btn  btn-sm btn-danger">Hapus</button>`
 
         }},
       ],
@@ -206,16 +207,14 @@
 
       }else {
         $.ajax({
-          url: '<?= base_url().'api/user/add/' ?>'+token,
+          url: link_add,
           type: 'POST',
           dataType: 'JSON',
-          data: {
-            nip : nip,
-            nama : nama,
-            username : username,
-            level : level
+          data:$('#form_adduser').serialize(),
+          beforeSend:function(){
+            $('#btn_add').addClass('disabled').attr('disabled','disabled').html('<span>Tambah <i class="fas fa-spinner fa-spin"></i></span>')
+
           },
-          // beforeSend:function(){},
           success:function(response){
             if (response.status === 200) {
               Toast.fire({
@@ -229,6 +228,7 @@
                 title: response.message,
               })
             }
+            $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
             $('#form_adduser')[0].reset();
             table.ajax.reload();
           },
@@ -239,7 +239,7 @@
              showConfirmButton: false,
              timer: 2000
             })
-
+            $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
           }
         });
 
@@ -250,7 +250,8 @@
     $(document).on('click','#btn_delete',function(e){
       e.preventDefault();
 
-      var nip = $(this).attr('data-id')
+      var nip         = $(this).attr('data-id')
+      var link_delete = `<?= base_url().'api/user/delete/'?>${token}?nip=${nip}`
 
       Swal.fire({
         title: 'Hapus user ?',
@@ -262,11 +263,13 @@
       }).then((result) => {
         if (result.value) {
           $.ajax({
-            url: `<?= base_url().'api/user/delete/'?>${token}?nip=${nip}`,
+            url: link_delete,
             type: 'GET',
             dataType: 'JSON',
             // data: {},
-            beforeSend:function(){},
+            // beforeSend:function(){
+            //   $('#btn_delete').addClass('disabled').attr('disabled','disabled').html('<span>Hapus <i class="fas fa-spinner fa-spin"></i></span>')
+            // },
             success:function(response){
               if (response.status === 200) {
                 Swal.fire({
@@ -282,6 +285,7 @@
                  showConfirmButton: false,
                  timer: 1500
                 })
+                // $('#btn_delete').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Hapus</span>')
               }
               table.ajax.reload();
             },
@@ -292,6 +296,7 @@
                showConfirmButton: false,
                timer: 2000
               })
+              // $('#btn_delete').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Hapus</span>')
             }
           });
         }
@@ -302,11 +307,12 @@
     $(document).on('click','#btn_edit',function(e){
       e.preventDefault()
 
-      var nip = $(this).attr('data-id')
+      var nip       = $(this).attr('data-id')
+      var link_show = `<?= base_url().'api/user/show/' ?>${token}?nip=${nip}`
       // alert(id_user)
 
       $.ajax({
-        url: `<?= base_url().'api/user/show/' ?>${token}?nip=${nip}`,
+        url: link_show,
         type: 'GET',
         dataType: 'JSON',
         // data: {},
@@ -338,11 +344,13 @@
     $('#form_edituser').on('submit',function(e){
       e.preventDefault()
 
-      var edit_id       = $('#edit_id').val();
       var edit_nama     = $('#edit_nama_user').val();
       var edit_username = $('#edit_username').val();
       var status        = $('#select_status').val();
       var level         = $('#edit_level').val();
+
+      var edit_id       = $('#edit_id').val();
+      var link_edit     = `<?= base_url().'api/user/edit/' ?>${token}?nip=${edit_id}`
 
 
       // alert(edit_id)
@@ -354,7 +362,7 @@
           })
       }else {
         $.ajax({
-          url: `<?= base_url().'api/user/edit/' ?>${token}?nip=${edit_id}`,
+          url: link_edit,
           type: 'POST',
           dataType: 'JSON',
           data: {
@@ -364,15 +372,25 @@
               status : status,
               level : level
           },
-          beforeSend:function(){},
+          beforeSend:function(){
+            $('#btn_simpan').addClass('disabled').attr('disabled','disabled').html('<span>Simpan Perubahan <i class="fas fa-spinner fa-spin"></i></span>')
+          },
           success:function(response){
-            Toast.fire({
-                  type: 'success',
-                  title: response.message,
-                })
-            $('#form_edituser')[0].reset();
-            $('#modal_edit').modal('hide');
+            if (response.status === 200) {
+              Toast.fire({
+                type: 'success',
+                title: response.message,
+              })
+              $('#form_edituser')[0].reset();
+              $('#modal_edit').modal('hide');
+            }else {
+              Toast.fire({
+                type: 'error',
+                title: response.message,
+              })
+            }
             table.ajax.reload();
+            $('#btn_simpan').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
           },
           error:function(){
             Swal.fire({
@@ -381,6 +399,7 @@
              showConfirmButton: false,
              timer: 2000
             })
+            $('#btn_simpan').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
           }
         });
       }

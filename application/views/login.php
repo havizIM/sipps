@@ -133,8 +133,9 @@
       $('#form_login').on('submit',function(e){
         e.preventDefault();
 
-        var nip = $('#nip').val();
-        var password = $('#password').val();
+        var nip         = $('#nip').val();
+        var password    = $('#password').val();
+        var link_login  = '<?= base_url().'api/auth/login_user/' ?>'
 
         if (nip === '' || password === '') {
           Toast.fire({
@@ -143,7 +144,7 @@
           })
         }else {
           $.ajax({
-            url: '<?= base_url().'api/auth/login_user/' ?>',
+            url: link_login,
             type: 'POST',
             dataType: 'JSON',
             data: $('#form_login').serialize(),

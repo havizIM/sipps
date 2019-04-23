@@ -154,7 +154,10 @@
         data: {
           kategori_pelanggaran : kapel
         },
-        beforeSend:function(){},
+        beforeSend:function(){
+          $('#add_kategori').addClass('disabled').attr('disabled','disabled').html('<span>Tambah<i class="fas fa-spinner fa-spin"></i></span>')
+
+        },
         success:function(response){
           if (response.status === 200) {
             Toast.fire({
@@ -169,6 +172,7 @@
           }
           $('#form_addkat')[0].reset();
           table.ajax.reload();
+          $('#add_kategori').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
         },
         error:function(){
           Swal.fire({
@@ -177,7 +181,7 @@
              showConfirmButton: false,
              timer: 2000
             })
-
+            $('#add_kategori').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
         }
       });
     })
@@ -260,12 +264,10 @@
           url: '<?= base_url().'api/maspel/add/' ?>'+token,
           type: 'POST',
           dataType: 'JSON',
-          data: {
-            deskripsi_pelanggaran:dpel,
-            poin_pelanggaran:poin,
-            id_kapel:id_kapel
+          data: $('#form_addmaspel').serialize(),
+          beforeSend:function(){
+              $('#btn_add').addClass('disabled').attr('disabled','disabled').html('<span>Tambah Pelanggaran<i class="fas fa-spinner fa-spin"></i></span>')
           },
-          // beforeSend:function(){},
           success:function(response){
             if (response.status === 200) {
               Swal.fire({
@@ -282,8 +284,8 @@
                 showConfirmButton: false,
                 timer: 1500
               })
+              $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah Pelanggaran</span>')
             }
-
             $('#form_addmaspel')[0].reset();
             table.ajax.reload();
           },
@@ -294,6 +296,7 @@
              showConfirmButton: false,
              timer: 2000
             })
+            $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah Pelanggaran</span>')
           }
         });
       }

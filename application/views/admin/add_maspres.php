@@ -156,7 +156,10 @@
         data: {
           kategori_prestasi : kapres
         },
-        beforeSend:function(){},
+        beforeSend:function(){
+          $('#add_kategori').addClass('disabled').attr('disabled','disabled').html('<span>Tambah<i class="fas fa-spinner fa-spin"></i></span>')
+
+        },
         success:function(response){
           if (response.status === 200) {
             Toast.fire({
@@ -171,6 +174,7 @@
           }
           $('#form_addpres')[0].reset();
           table.ajax.reload();
+          $('#add_kategori').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
         },
         error:function(){
           Swal.fire({
@@ -179,6 +183,7 @@
                showConfirmButton: false,
                timer: 2000
               })
+          $('#add_kategori').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah</span>')
         }
       });
     })
@@ -267,7 +272,9 @@
             poin_prestasi:poin,
             id_kapres:id_kapres
           },
-          // beforeSend:function(){},
+          beforeSend:function(){
+            $('#btn_add').addClass('disabled').attr('disabled','disabled').html('<span>Tambah Prestasi<i class="fas fa-spinner fa-spin"></i></span>')
+          },
           success:function(response){
             if (response.status === 200) {
               Swal.fire({
@@ -284,8 +291,8 @@
                 showConfirmButton: false,
                 timer: 1500
               })
+              $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah Prestasi</span>')
             }
-
             $('#form_addmaspres')[0].reset();
             table.ajax.reload();
           },
@@ -296,6 +303,7 @@
              showConfirmButton: false,
              timer: 2000
             })
+            $('#btn_add').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Tambah Prestasi</span>')
           }
         });
 
