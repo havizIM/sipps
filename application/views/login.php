@@ -153,7 +153,7 @@
             },
             success:function(response){
               if (response.status === 200) {
-                var link = '<?= base_url().'' ?>'+response.data.level
+                var link = '<?= base_url().'' ?>'+response.data.level+'/'
 
                 localStorage.setItem("sipps",JSON.stringify(response.data));
                 window.location.replace(link)
