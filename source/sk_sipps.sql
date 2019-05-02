@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2019 at 10:24 AM
+-- Generation Time: May 02, 2019 at 02:42 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
@@ -25,18 +25,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `akun_siswa`
+-- Table structure for table `akun_wali`
 --
 
-CREATE TABLE `akun_siswa` (
+CREATE TABLE `akun_wali` (
   `id_user` varchar(11) NOT NULL,
   `nis` varchar(20) NOT NULL,
+  `nama_wali` varchar(30) NOT NULL,
   `password` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL,
   `telepon` varchar(15) NOT NULL,
   `alamat` varchar(200) NOT NULL,
-  `tgl_registrasi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `tgl_registrasi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `token` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `akun_wali`
+--
+
+INSERT INTO `akun_wali` (`id_user`, `nis`, `nama_wali`, `password`, `email`, `telepon`, `alamat`, `tgl_registrasi`, `token`) VALUES
+('WLM00000001', '7201160101', 'Titin Solihahh', '7201160101', 'si.ubk16@gmail.com', '0813557540922', 'Jakarta', '2019-04-20 20:39:47', '36216d9d5b389b947da8'),
+('WLM00000002', '7201160106', 'Dian Ratna Sari', '7201160106', 'viz.ndinq@gmail.com', '15134141', 'Jakarta Barat', '2019-04-21 19:25:32', '839ce9d4eb060fd7ab4d'),
+('WLM00000003', '12345', 'Muhammad Hanafi', '12345', 'hanafi@gmail.com', '08134456781', 'Jakarta', '2019-04-22 03:11:12', 'e15d340e6075f881395b');
 
 -- --------------------------------------------------------
 
@@ -54,7 +65,9 @@ CREATE TABLE `kapel` (
 --
 
 INSERT INTO `kapel` (`id_kapel`, `kategori_pelanggaran`) VALUES
-('KPL01', 'Coba yaaahhh');
+('KPL01', 'Coba yaaahhh'),
+('KPL02', 'Ketertiban'),
+('KPL03', 'Melawan Guru');
 
 -- --------------------------------------------------------
 
@@ -85,6 +98,13 @@ CREATE TABLE `kelas` (
   `wali_kelas` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`kelas`, `wali_kelas`) VALUES
+('XII-IPS-3', 'Coba');
+
 -- --------------------------------------------------------
 
 --
@@ -105,7 +125,9 @@ CREATE TABLE `maspel` (
 
 INSERT INTO `maspel` (`id_maspel`, `deskripsi_pelanggaran`, `poin_pelanggaran`, `kapel`, `status`) VALUES
 ('MPL002', 'Merokok di kelas', 10, 'KPL01', 'Aktif'),
-('MPL003', 'Memakai Narkoba', 50, 'KPL01', 'Nonaktif');
+('MPL003', 'Memakai Narkoba', 50, 'KPL01', 'Nonaktif'),
+('MPL004', 'Merokok di dalam kelas', 15, 'KPL02', 'Aktif'),
+('MPL005', 'Disertai Pemukulan', 100, 'KPL03', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -127,7 +149,8 @@ CREATE TABLE `maspres` (
 
 INSERT INTO `maspres` (`id_maspres`, `deskripsi_prestasi`, `poin_prestasi`, `kapres`, `status`) VALUES
 ('MPS002', 'Ranking 2', 20, 'KPS01', 'Aktif'),
-('MPS003', 'Ranking 3', 15, 'KPS01', 'Nonaktif');
+('MPS003', 'Ranking 3', 15, 'KPS01', 'Nonaktif'),
+('MPS004', 'Coba', 10, 'KPS01', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -154,11 +177,17 @@ CREATE TABLE `pelanggaran` (
   `id_pelanggaran` varchar(11) NOT NULL,
   `deskripsi` varchar(100) NOT NULL,
   `nis` varchar(20) NOT NULL,
-  `kelas` varchar(10) NOT NULL,
   `maspel` varchar(11) NOT NULL,
   `user` varchar(20) NOT NULL,
   `tgl_input` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pelanggaran`
+--
+
+INSERT INTO `pelanggaran` (`id_pelanggaran`, `deskripsi`, `nis`, `maspel`, `user`, `tgl_input`) VALUES
+('PL00001', 'Coba 3', '7201160101', 'MPL003', '7201160101', '2019-05-02 06:20:15');
 
 -- --------------------------------------------------------
 
@@ -184,11 +213,18 @@ CREATE TABLE `prestasi` (
   `id_prestasi` varchar(11) NOT NULL,
   `deskripsi` varchar(100) NOT NULL,
   `nis` varchar(20) NOT NULL,
-  `kelas` varchar(10) NOT NULL,
   `maspres` varchar(11) NOT NULL,
   `user` varchar(20) NOT NULL,
   `tgl_input` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `prestasi`
+--
+
+INSERT INTO `prestasi` (`id_prestasi`, `deskripsi`, `nis`, `maspres`, `user`, `tgl_input`) VALUES
+('PR', 'Coba coba', '7201160101', 'MPS002', '7201160106', '2019-05-02 06:15:00'),
+('PR0000002', 'Coba 2', '12345', 'MPS004', '7201160101', '2019-05-02 06:16:46');
 
 -- --------------------------------------------------------
 
@@ -207,6 +243,15 @@ CREATE TABLE `siswa` (
   `status` enum('Aktif','Nonaktif','','') NOT NULL,
   `foto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `siswa`
+--
+
+INSERT INTO `siswa` (`nis`, `nama_siswa`, `jenis_kelamin`, `tempat_lahir`, `tgl_lahir`, `kelas`, `tahun_ajaran`, `status`, `foto`) VALUES
+('12345', 'Tezar Tri Handika', 'Laki-laki', 'Jakarta', '2019-04-22', 'XII-IPS-3', '2019/2020', 'Aktif', '12345.jpg'),
+('7201160101', 'Yugi Setiawan A', 'Perempuan', 'Bogor', '1992-10-11', 'XII-IPS-3', '2018/2020', 'Nonaktif', '7201160101.jpg'),
+('7201160106', 'Haviz Indra Maulana', 'Laki-laki', 'Jakarta', '2018-12-06', 'XII-IPS-3', '2016/2017', 'Aktif', '7201160106.jpg');
 
 -- --------------------------------------------------------
 
@@ -231,18 +276,22 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`nip`, `nama`, `username`, `password`, `level`, `foto`, `tgl_registrasi`, `status`, `token`) VALUES
+('06122', 'Hendar', 'hendarjr', 'dl0f1', 'Bpbk', 'user.jpg', '2019-04-12 10:19:38', 'Aktif', '50471475f0c31d4'),
 ('7201160101', 'Dian Ratna Sari', 'dianrs', '0i1qs', 'Wali', 'user.jpg', '2019-03-28 17:51:57', 'Aktif', 'e2baa50d717f2e8'),
 ('7201160106', 'Kalyssa Innara Putri', 'kalyssaip', '1ixhd', 'Guru', 'user.jpg', '2019-03-28 17:38:51', 'Aktif', 'e2baa50d717f2e8'),
-('admin', 'Administrator', 'admin', 'admin', 'Admin', 'user.jpg', '2019-03-28 10:55:33', 'Aktif', 'd033e22ae348aeb');
+('7201160111', 'Wahyu Alfarisi', 'wahyuais', 'fiad7', 'Wali', 'user.jpg', '2019-04-18 19:23:34', 'Aktif', '74a7642f47f73c4'),
+('admin', 'Administrator', 'admin', 'admin', 'Admin', 'user.jpg', '2019-03-28 10:55:33', 'Aktif', 'd033e22ae348aeb'),
+('Coba', 'Coba', 'Coba', '59mb0', 'Wali', 'user.jpg', '2019-04-11 10:50:48', 'Aktif', '2866a3fd7a01fce'),
+('Lagi', 'lagi', 'lagi', 'tpysz', 'Guru', 'user.jpg', '2019-04-11 10:52:14', 'Aktif', '4b0aba0f566991a');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `akun_siswa`
+-- Indexes for table `akun_wali`
 --
-ALTER TABLE `akun_siswa`
+ALTER TABLE `akun_wali`
   ADD PRIMARY KEY (`id_user`),
   ADD KEY `nis` (`nis`);
 
@@ -333,10 +382,10 @@ ALTER TABLE `user`
 --
 
 --
--- Constraints for table `akun_siswa`
+-- Constraints for table `akun_wali`
 --
-ALTER TABLE `akun_siswa`
-  ADD CONSTRAINT `akun_siswa_ibfk_1` FOREIGN KEY (`nis`) REFERENCES `siswa` (`nis`) ON UPDATE CASCADE;
+ALTER TABLE `akun_wali`
+  ADD CONSTRAINT `akun_wali_ibfk_1` FOREIGN KEY (`nis`) REFERENCES `siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `kelas`

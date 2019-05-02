@@ -18,7 +18,7 @@ class Auth extends CI_Controller {
       json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Metode request salah' ));
     } else {
 
-      $nip = $this->input->post('nip');
+      $nip      = $this->input->post('nip');
       $password = $this->input->post('password');
 
       if($nip == null || $password == null) {

@@ -8,6 +8,18 @@ class Kapel extends CI_Controller {
   function __construct(){
     parent::__construct();
 
+    $this->options = array(
+      'cluster' => 'ap1',
+      'useTLS' => true
+    );
+
+    $this->pusher = new Pusher\Pusher(
+      'ced47fc67559a6b88345',
+      '79da97fe54e6633c3802',
+      '746694',
+      $this->options
+    );
+
 		$this->load->model('KapelModel');
   }
 
@@ -89,18 +101,7 @@ class Kapel extends CI_Controller {
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah kategori pelanggaran'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  'ced47fc67559a6b88345',
-                  '79da97fe54e6633c3802',
-                  '746694',
-                  $options
-                );
-
-                $pusher->trigger('sipps', 'kapel', $log);
+                $this->pusher->trigger('sipps', 'kapel', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah kategori pelanggaran'));
               }
             }
@@ -144,18 +145,7 @@ class Kapel extends CI_Controller {
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus kategori pelanggaran'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  'ced47fc67559a6b88345',
-                  '79da97fe54e6633c3802',
-                  '746694',
-                  $options
-                );
-
-                $pusher->trigger('sipps', 'kapel', $log);
+                $this->pusher->trigger('sipps', 'kapel', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus kategori pelanggaran'));
               }
             }

@@ -38,7 +38,8 @@
 						"login_user",
 						""
 					]
-				}
+				},
+				"description": "Link : \n- localhost/sipps/api/auth/login_user\n\n\nMethod :\n- POST\n\n\nData : \n- nip\n- password\n\n\nHak Akses :\n- Admin\n- Guru\n- Wali\n- Kepsek\n- BPBK\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya\n- Masukan response ke session localStorage"
 			},
 			"response": []
 		},
@@ -63,7 +64,8 @@
 						"logout_user",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/auth/logout_user/--token--\n\n\nMethod :\n- GET\n\n\nHak Akses :\n- Admin\n- Guru\n- Wali\n- BPBK\n- Kepsek\n\n\nNote : \n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -99,7 +101,8 @@
 						"password_user",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/auth/password_user/--token--\n\nMethod :\n- POST\n\nData :\n- password_lama\n- password_baru\n\nHak Akses : \n- Admin\n- Guru\n- Wali\n- BPBK\n- Kepsek\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -124,7 +127,8 @@
 						"show",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/user/show/--token--\n\nMethod :\n- GET\n\nParams : \n- nip\n- nama\n- level\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik"
 			},
 			"response": []
 		},
@@ -146,7 +150,8 @@
 						"show",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/user/kapres/--token--\n\nMethod :\n- GET\n\nParams : \n- id_kapres\n- kategori_prestasi\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik"
 			},
 			"response": []
 		},
@@ -168,7 +173,8 @@
 						"show",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/user/kapel/--token--\n\nMethod :\n- GET\n\nParams : \n- id_kapel\n- kategori_pelanggaran\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik"
 			},
 			"response": []
 		},
@@ -190,7 +196,8 @@
 						"show",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/user/maspel/--token--\n\nMethod :\n- GET\n\nParams : \n- id_maspel\n- deskripsi_pelanggaran\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik"
 			},
 			"response": []
 		},
@@ -212,7 +219,8 @@
 						"show",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/maspres/show/--token--\n\nMethod :\n- GET\n\nParams : \n- id_maspres\n- deskripsi_prestasi\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik"
 			},
 			"response": []
 		},
@@ -234,7 +242,8 @@
 						"show",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/kelas/show/--token--\n\nMethod :\n- GET\n\nParams : \n- kelas\n- wali_kelas\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik"
 			},
 			"response": []
 		},
@@ -245,7 +254,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost/sipps/api/siswa/show/d033e22ae348aeb",
+					"raw": "localhost/sipps/api/siswa/show/74a7642f47f73c4",
 					"host": [
 						"localhost"
 					],
@@ -254,9 +263,56 @@
 						"api",
 						"siswa",
 						"show",
+						"74a7642f47f73c4"
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/siswa/show/--token--\n\nMethod :\n- GET\n\nParams : \n- nis\n- nama_siswa\n\nHak Akses : \n- Admin\n- Wali\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik"
+			},
+			"response": []
+		},
+		{
+			"name": "Show Pengumuman",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/pengumuman/show/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"pengumuman",
+						"show",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/pengumuman/show/--token--\n\nMethod :\n- GET\n\nParams : \n- id_pengumuman\n- deskripsi\n\nHak Akses : \n- Admin\n- Guru\n- Wali\n- Kepsek\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik"
+			},
+			"response": []
+		},
+		{
+			"name": "Show Panggilan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/panggilan/show/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"panggilan",
+						"show",
+						"d033e22ae348aeb"
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/panggilan/show/--token--\n\nMethod :\n- GET\n\nParams : \n- id_panggilan\n- keterangan\n\nHak Akses : \n- Wali\n- BPBK\n- Kepsek\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat optional, bertujuan untuk mendapatkan data yang spesifik"
 			},
 			"response": []
 		},
@@ -303,7 +359,8 @@
 						"add",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/user/add/--token--\n\nMethod :\n- POST\n\nData : \n- nip\n- nama\n- username\n- level (Guru / Wali / BPBK / Kepsek)\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -334,7 +391,8 @@
 						"add",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/kapel/add/--token--\n\nMethod :\n- POST\n\nData : \n- kategori_pelanggaran\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -365,7 +423,8 @@
 						"add",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/kapres/add/--token--\n\nMethod :\n- POST\n\nData : \n- kategori_prestasi\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -406,7 +465,8 @@
 						"add",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/maspres/add/--token--\n\nMethod :\n- POST\n\nData : \n- deskripsi_prestasi\n- poin_prestasi\n- id_kapres\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -447,7 +507,8 @@
 						"add",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/maspel/add/--token--\n\nMethod :\n- POST\n\nData : \n- deskripsi_pelanggaran\n- poin_pelanggaran\n- id_kapel\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -484,7 +545,8 @@
 						"edit",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/kelas/add/--token--\n\nMethod :\n- POST\n\nData : \n- kelas\n- nip (Relasi ke User dengan level Wali)\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -572,7 +634,86 @@
 						"add",
 						"d033e22ae348aeb"
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/siswa/add/--token--\n\nMethod :\n- POST\n\nData : \n- nis\n- nama_siswa\n- jenis_kelamin (Laki-laki / Perempuan)\n- tempat_lahir\n- tgl_lahir\n- kelas (Relasi ke Kelas)\n- tahun_ajaran\n- nama_wali\n- email\n- telepon\n- alamat\n- foto (file .jpg / file .png)\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Pengumuman",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deskripsi",
+							"value": "Coba 2",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"value": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/pengumuman/add/d033e22ae348aeb",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"pengumuman",
+						"add",
+						"d033e22ae348aeb"
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/pengumuman/add/--token--\n\nMethod :\n- POST\n\nData : \n- deskripsi\n- file (.pdf)\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Panggilan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "keterangan",
+							"value": "Coba 2",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file"
+						},
+						{
+							"key": "nis",
+							"value": "7201160106",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/panggilan/add/74a7642f47f73c4",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"panggilan",
+						"add",
+						"74a7642f47f73c4"
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/panggilan/add/--token--\n\nMethod :\n- POST\n\nData : \n- keterangan\n- nis\n- file (.pdf)\n\nHak Akses : \n- Wali\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -620,7 +761,8 @@
 							"value": "7201160106"
 						}
 					]
-				}
+				},
+				"description": "Link:\n- localhost/sipps/api/user/edit/--token--\n\nMethod :\n- POST\n\nParams :\n- nip\n\nData : \n- nama\n- username\n- level (Guru / BPBK / Wali / Kepsek)\n- status (Aktif / Nonaktif)\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib\n- Lihat dokumentasi di postman"
 			},
 			"response": []
 		},
@@ -672,7 +814,8 @@
 							"value": "MPL003"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/maspel/edit/--token--\n\nMethod :\n- POST\n\nParams : \n- id_maspel\n\nData : \n- deskripsi_pelanggaran\n- poin_pelanggaran\n- id_kapel\n- status (Aktif / Nonaktif)\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params dan Data bersifat wajib"
 			},
 			"response": []
 		},
@@ -724,7 +867,8 @@
 							"value": "MPS003"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/maspres/edit/--token--\n\nMethod :\n- POST\n\nParams : \n- id_maspres\n\nData : \n- deskripsi_prestasi\n- poin_prestasi\n- id_kapres\n- status (Aktif / Nonaktif)\n\nHak Akses : \n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params dan Data bersifat wajib"
 			},
 			"response": []
 		},
@@ -762,7 +906,8 @@
 							"value": "XII-IPS-3"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/kelas/edit/--token--\n\nMethod :\n- POST\n\nParams:\n- kelas\n\nData : \n- nip (Relasi ke User dengan level Wali)\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -833,7 +978,7 @@
 						},
 						{
 							"key": "status",
-							"value": "Nonaktif",
+							"value": "Aktif",
 							"description": "Aktif / Nonaktif",
 							"type": "text"
 						}
@@ -857,7 +1002,57 @@
 							"value": "7201160101"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/siswa/edit/--token--\n\nMethod :\n- POST\n\nParams: \n- nis\n\nData : \n- nama_siswa\n- jenis_kelamin (Laki-laki / Perempuan)\n- tempat_lahir\n- tgl_lahir\n- kelas (Relasi ke Kelas)\n- tahun_ajaran\n- nama_wali\n- email\n- telepon\n- alamat\n- foto (file .jpg / file .png)\n- status (Aktif / Nonaktif)\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Panggilan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "keterangan",
+							"value": "Coba 3",
+							"type": "text"
+						},
+						{
+							"key": "nis",
+							"value": "7201160101",
+							"description": "Relasi",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"value": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/panggilan/edit/d033e22ae348aeb?id_panggilan=PL00000001",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"panggilan",
+						"edit",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "id_panggilan",
+							"value": "PL00000001"
+						}
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/panggilan/edit/--token--\n\nMethod :\n- POST\n\nParams: \n- id_panggilan\n\nData : \n- keterangan\n- nis (Relasi ke Siswa)\n- file (.pdf)\n\nHak Akses : \n- Wali\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -888,7 +1083,8 @@
 							"value": "7201160101"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/user/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- nip\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},
@@ -916,7 +1112,8 @@
 							"value": "KPS00"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/kapres/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- id_kapres\n\nHak Akses :\n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},
@@ -944,7 +1141,8 @@
 							"value": "KPL02"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/kapel/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- id_kapel\n\nHak Akses :\n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},
@@ -972,7 +1170,8 @@
 							"value": "MPL001"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/maspel/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- id_maspel\n\nHak Akses :\n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},
@@ -1000,7 +1199,8 @@
 							"value": "MPS001"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/maspres/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- id_maspres\n\nHak Akses :\n- Admin\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},
@@ -1028,7 +1228,8 @@
 							"value": "XII-IPS-2"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/kelas/delete/--token--\n\nMethod :\n- GET\n\nParams :\n- kelas\n\nHak Akses :\n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib digunakan. Karena dibutuhkan untuk menentukan user mana yang dihapus"
 			},
 			"response": []
 		},
@@ -1056,7 +1257,66 @@
 							"value": "7201160101"
 						}
 					]
-				}
+				},
+				"description": "Link :\n- localhost/sipps/api/siswa/delete/--token--\n\nMethod :\n- GET\n\nParams : \n- nis\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib, bertujuan untuk menentukan data mana yang akan dihapus"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Pengumuman",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/pengumuman/delete/d033e22ae348aeb?id_pengumuman=PM00000001",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"pengumuman",
+						"delete",
+						"d033e22ae348aeb"
+					],
+					"query": [
+						{
+							"key": "id_pengumuman",
+							"value": "PM00000001"
+						}
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/pengumuman/delete/--token--\n\nMethod :\n- GET\n\nParams : \n- id_pengumuman\n\nHak Akses : \n- Admin\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib, bertujuan untuk menentukan data mana yang akan dihapus"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Panggilan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost/sipps/api/panggilan/delete/74a7642f47f73c4?id_panggilan=PL00000002",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"panggilan",
+						"delete",
+						"74a7642f47f73c4"
+					],
+					"query": [
+						{
+							"key": "id_panggilan",
+							"value": "PL00000002"
+						}
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/panggilan/delete/--token--\n\nMethod :\n- GET\n\nParams : \n- id_panggilan\n\nHak Akses : \n- Wali\n- BPBK\n\nNote :\n- Token bisa didapatkan dari localStorage\n- Params bersifat wajib, bertujuan untuk menentukan data mana yang akan dihapus"
 			},
 			"response": []
 		}

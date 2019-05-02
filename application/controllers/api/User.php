@@ -8,6 +8,18 @@ class User extends CI_Controller {
   function __construct(){
     parent::__construct();
 
+    $this->options = array(
+      'cluster' => 'ap1',
+      'useTLS' => true
+    );
+
+    $this->pusher = new Pusher\Pusher(
+      'ced47fc67559a6b88345',
+      '79da97fe54e6633c3802',
+      '746694',
+      $this->options
+    );
+
 		$this->load->model('UserModel');
   }
 
@@ -108,18 +120,7 @@ class User extends CI_Controller {
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah data user'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  'ced47fc67559a6b88345',
-                  '79da97fe54e6633c3802',
-                  '746694',
-                  $options
-                );
-
-                $pusher->trigger('sipps', 'user', $log);
+                $this->pusher->trigger('sipps', 'user', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah data user'));
               }
             }
@@ -129,7 +130,7 @@ class User extends CI_Controller {
     }
   }
 
-  public function edit($token = null){
+  function edit($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method != 'POST') {
@@ -174,18 +175,7 @@ class User extends CI_Controller {
                 if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit user'));
                 } else {
-                  $options = array(
-                    'cluster' => 'ap1',
-                    'useTLS' => true
-                  );
-                  $pusher = new Pusher\Pusher(
-                    'ced47fc67559a6b88345',
-                    '79da97fe54e6633c3802',
-                    '746694',
-                    $options
-                  );
-
-                  $pusher->trigger('sipps', 'user', $log);
+                  $this->pusher->trigger('sipps', 'user', $log);
                   json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit user'));
                 }
               }
@@ -196,7 +186,7 @@ class User extends CI_Controller {
     }
   }
 
-  public function delete($token = null){
+  function delete($token = null){
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method != 'GET') {
@@ -228,18 +218,7 @@ class User extends CI_Controller {
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus user'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  'ced47fc67559a6b88345',
-                  '79da97fe54e6633c3802',
-                  '746694',
-                  $options
-                );
-
-                $pusher->trigger('sipps', 'user', $log);
+                $this->pusher->trigger('sipps', 'user', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus user'));
               }
             }

@@ -8,6 +8,18 @@ class Kelas extends CI_Controller {
   function __construct(){
     parent::__construct();
 
+    $this->options = array(
+      'cluster' => 'ap1',
+      'useTLS' => true
+    );
+
+    $this->pusher = new Pusher\Pusher(
+      'ced47fc67559a6b88345',
+      '79da97fe54e6633c3802',
+      '746694',
+      $this->options
+    );
+
 		$this->load->model('KelasModel');
   }
 
@@ -95,18 +107,7 @@ class Kelas extends CI_Controller {
               if(!$add){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah kelas'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  'ced47fc67559a6b88345',
-                  '79da97fe54e6633c3802',
-                  '746694',
-                  $options
-                );
-
-                $pusher->trigger('sipps', 'kelas', $log);
+                $this->pusher->trigger('sipps', 'kelas', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah kelas'));
               }
             }
@@ -158,18 +159,7 @@ class Kelas extends CI_Controller {
                 if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit kelas'));
                 } else {
-                  $options = array(
-                    'cluster' => 'ap1',
-                    'useTLS' => true
-                  );
-                  $pusher = new Pusher\Pusher(
-                    'ced47fc67559a6b88345',
-                    '79da97fe54e6633c3802',
-                    '746694',
-                    $options
-                  );
-
-                  $pusher->trigger('sipps', 'kelas', $log);
+                  $this->pusher->trigger('sipps', 'kelas', $log);
                   json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit kelas'));
                 }
               }
@@ -211,18 +201,7 @@ class Kelas extends CI_Controller {
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus kelas'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  'ced47fc67559a6b88345',
-                  '79da97fe54e6633c3802',
-                  '746694',
-                  $options
-                );
-
-                $pusher->trigger('sipps', 'kelas', $log);
+                $this->pusher->trigger('sipps', 'kelas', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus kelas'));
               }
             }

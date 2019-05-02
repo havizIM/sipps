@@ -8,6 +8,18 @@ class Siswa extends CI_Controller {
   function __construct(){
     parent::__construct();
 
+    $this->options = array(
+      'cluster' => 'ap1',
+      'useTLS' => true
+    );
+
+    $this->pusher = new Pusher\Pusher(
+      'ced47fc67559a6b88345',
+      '79da97fe54e6633c3802',
+      '746694',
+      $this->options
+    );
+
 		$this->load->model('SiswaModel');
   }
 
@@ -31,27 +43,30 @@ class Siswa extends CI_Controller {
           $nis  	       = $this->input->get('nis');
     			$nama_siswa    = $this->input->get('nama_siswa');
 
-          $show  = $this->SiswaModel->show($nis, $nama_siswa, $otorisasi);
+          $show   = $this->SiswaModel->show($nis, $nama_siswa, $otorisasi);
           $siswa  = array();
 
           foreach($show->result() as $key){
             $json = array();
 
-            $json['nis']            = $key->nis;
-            $json['nama_siswa']     = $key->nama_siswa;
-            $json['jenis_kelamin']  = $key->jenis_kelamin;
-            $json['tempat_lahir']   = $key->tempat_lahir;
-            $json['tgl_lahir']      = $key->tgl_lahir;
-            $json['tahun_ajaran']   = $key->tahun_ajaran;
-            $json['status']         = $key->status;
-            $json['foto']           = $key->foto;
-            $json['id_user']        = $key->id_user;
-            $json['nama_wali']      = $key->nama_wali;
-            $json['email']          = $key->email;
-            $json['telepon']        = $key->telepon;
-            $json['alamat']         = $key->alamat;
-            $json['tgl_registrasi'] = $key->tgl_registrasi;
-            $json['kelas']          = $key->kelas;
+            $json['nis']                = $key->nis;
+            $json['nama_siswa']         = $key->nama_siswa;
+            $json['jenis_kelamin']      = $key->jenis_kelamin;
+            $json['tempat_lahir']       = $key->tempat_lahir;
+            $json['tgl_lahir']          = $key->tgl_lahir;
+            $json['tahun_ajaran']       = $key->tahun_ajaran;
+            $json['status']             = $key->status;
+            $json['foto']               = $key->foto;
+            $json['id_user']            = $key->id_user;
+            $json['nama_wali']          = $key->nama_wali;
+            $json['email']              = $key->email;
+            $json['telepon']            = $key->telepon;
+            $json['alamat']             = $key->alamat;
+            $json['tgl_registrasi']     = $key->tgl_registrasi;
+            $json['kelas']              = $key->kelas;
+            $json['sum_prestasi']       = $key->sum_prestasi;
+            $json['sum_pelanggaran']    = $key->sum_pelanggaran;
+            $json['sisa_poin']          = 100 - $key->sum_pelanggaran + $key->sum_prestasi;
 
             $siswa[] = $json;
           }
@@ -98,79 +113,83 @@ class Siswa extends CI_Controller {
             $email          = $this->input->post('email');
             $telepon        = $this->input->post('telepon');
             $alamat         = $this->input->post('alamat');
-            $foto           = $this->upload_foto($nis);
+
 
 
             if($nis == '' || $nama_siswa == null || $jenis_kelamin == null || $tempat_lahir == null || $tgl_lahir == null || $kelas == null || $tahun_ajaran == null || $nama_wali == null || $email == null || $telepon == null || $alamat == null){
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
             } else {
+              $foto           = $this->upload_file('foto', $nis);
 
-              $siswa = array(
-                'nis'             => $nis,
-                'nama_siswa'      => $nama_siswa,
-                'jenis_kelamin'   => $jenis_kelamin,
-                'tempat_lahir'    => $tempat_lahir,
-                'tgl_lahir'       => $tgl_lahir,
-                'kelas'           => $kelas,
-                'tahun_ajaran'    => $tahun_ajaran,
-                'foto'            => $foto,
-                'status'          => 'Aktif'
-              );
-
-              $akun = array(
-                'id_user'     => $id_user,
-                'nis'         => $nis,
-                'nama_wali'   => $nama_wali,
-                'password'    => $nis,
-                'email'       => $email,
-                'telepon'     => $telepon,
-                'alamat'      => $alamat,
-                'token'       => sha1($nama_wali)
-              );
-
-              $log = array('message' => 'Berhasil menambah siswa');
-              $add = $this->SiswaModel->add($siswa, $akun);
-
-              if(!$add){
-                json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah siswa'));
+              if($foto == null){
+                json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Foto gagal diupload'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  'ced47fc67559a6b88345',
-                  '79da97fe54e6633c3802',
-                  '746694',
-                  $options
+                $siswa = array(
+                  'nis'             => $nis,
+                  'nama_siswa'      => $nama_siswa,
+                  'jenis_kelamin'   => $jenis_kelamin,
+                  'tempat_lahir'    => $tempat_lahir,
+                  'tgl_lahir'       => $tgl_lahir,
+                  'kelas'           => $kelas,
+                  'tahun_ajaran'    => $tahun_ajaran,
+                  'foto'            => $foto,
+                  'status'          => 'Aktif'
                 );
 
-                $pusher->trigger('sipps', 'siswa', $log);
-                json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah siswa'));
+                $akun = array(
+                  'id_user'     => $id_user,
+                  'nis'         => $nis,
+                  'nama_wali'   => $nama_wali,
+                  'password'    => $nis,
+                  'email'       => $email,
+                  'telepon'     => $telepon,
+                  'alamat'      => $alamat,
+                  'token'       => sha1($nama_wali)
+                );
+
+                $log = array('message' => 'Berhasil menambah siswa');
+                $add = $this->SiswaModel->add($siswa, $akun);
+
+                if(!$add){
+                  json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menambah siswa'));
+                } else {
+                  $this->pusher->trigger('sipps', 'siswa', $log);
+                  json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menambah siswa'));
+                }
               }
             }
-
           }
         }
       }
     }
   }
 
-  function upload_foto($nis)
+  function upload_file($name, $id)
   {
-    if(isset($_FILES['foto'])  && $_FILES['foto']['name'] != ""){
-      $extention = explode('.', $_FILES['foto']['name']);
-      $new_name = $nis.'.'.$extention[1];
-      $destination = './doc/siswa/'.$new_name;
-      $upload = move_uploaded_file($_FILES['foto']['tmp_name'], $destination);
+    if(isset($_FILES[$name]) && $_FILES[$name]['name'] != ""){
+      $files = glob('doc/'.$name.'/'.$id.'.*');
+      foreach ($files as $key) {
+        unlink($key);
+      }
 
-      if($upload){
-        return $new_name;
+      $config['upload_path']   = './doc/'.$name.'/';
+      $config['allowed_types'] = 'jpg|jpeg|png';
+      $config['overwrite']     = TRUE;
+			$config['max_size']      = '3048';
+			$config['remove_space']  = TRUE;
+			$config['file_name']     = $id;
+
+      $this->load->library('upload', $config);
+      $this->upload->initialize($config);
+
+      if(!$this->upload->do_upload($name)){
+        return null;
       } else {
-        return 'siswa.jpg';
+        $file = $this->upload->data();
+        return $file['file_name'];
       }
     } else {
-      return 'siswa.jpg';
+      return null;
     }
   }
 
@@ -206,18 +225,13 @@ class Siswa extends CI_Controller {
               if(!$delete){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal menghapus siswa'));
               } else {
-                $options = array(
-                  'cluster' => 'ap1',
-                  'useTLS' => true
-                );
-                $pusher = new Pusher\Pusher(
-                  'ced47fc67559a6b88345',
-                  '79da97fe54e6633c3802',
-                  '746694',
-                  $options
-                );
 
-                $pusher->trigger('sipps', 'siswa', $log);
+                $files = glob('doc/siswa/'.$nis.'.*');
+                foreach ($files as $key) {
+                  unlink($key);
+                }
+
+                $this->pusher->trigger('sipps', 'siswa', $log);
                 json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil menghapus siswa'));
               }
             }
@@ -261,7 +275,7 @@ class Siswa extends CI_Controller {
             $telepon        = $this->input->post('telepon');
             $alamat         = $this->input->post('alamat');
             $status         = $this->input->post('status');
-            $foto           = $this->reupload_foto($nis);
+
 
             if ($nis == null) {
               json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'NIS tidak ditemukan'));
@@ -269,28 +283,20 @@ class Siswa extends CI_Controller {
               if($nama_siswa == null || $jenis_kelamin == null || $tempat_lahir == null || $tgl_lahir == null || $kelas == null || $tahun_ajaran == null || $nama_wali == null || $email == null || $telepon == null || $alamat == null || $status == null){
                 json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Data yang dikirim tidak lengkap'));
               } else {
+                $foto           = $this->upload_file('foto', $nis);
 
-                if($foto == null){
-                  $siswa = array(
-                    'nama_siswa'      => $nama_siswa,
-                    'jenis_kelamin'   => $jenis_kelamin,
-                    'tempat_lahir'    => $tempat_lahir,
-                    'tgl_lahir'       => $tgl_lahir,
-                    'kelas'           => $kelas,
-                    'tahun_ajaran'    => $tahun_ajaran,
-                    'status'          => $status
-                  );
-                } else {
-                  $siswa = array(
-                    'nama_siswa'      => $nama_siswa,
-                    'jenis_kelamin'   => $jenis_kelamin,
-                    'tempat_lahir'    => $tempat_lahir,
-                    'tgl_lahir'       => $tgl_lahir,
-                    'kelas'           => $kelas,
-                    'tahun_ajaran'    => $tahun_ajaran,
-                    'foto'            => $foto,
-                    'status'          => $status
-                  );
+                $siswa = array(
+                  'nama_siswa'      => $nama_siswa,
+                  'jenis_kelamin'   => $jenis_kelamin,
+                  'tempat_lahir'    => $tempat_lahir,
+                  'tgl_lahir'       => $tgl_lahir,
+                  'kelas'           => $kelas,
+                  'tahun_ajaran'    => $tahun_ajaran,
+                  'status'          => $status
+                );
+
+                if($foto != null){
+                  $siswa['foto'] = $foto;
                 }
 
                 $akun = array(
@@ -300,7 +306,6 @@ class Siswa extends CI_Controller {
                   'alamat'      => $alamat
                 );
 
-                // json_output(200, array('status' => 200, 'description' => 'Berhasil', 'siswa' => $siswa, 'akun' => $akun));
 
                 $log  = array('message' => 'Berhasil mengedit siswa');
                 $edit = $this->SiswaModel->edit($nis, $siswa, $akun);
@@ -308,18 +313,7 @@ class Siswa extends CI_Controller {
                 if(!$edit){
                   json_output(400, array('status' => 400, 'description' => 'Gagal', 'message' => 'Gagal mengedit siswa'));
                 } else {
-                  $options = array(
-                    'cluster' => 'ap1',
-                    'useTLS' => true
-                  );
-                  $pusher = new Pusher\Pusher(
-                    'ced47fc67559a6b88345',
-                    '79da97fe54e6633c3802',
-                    '746694',
-                    $options
-                  );
-
-                  $pusher->trigger('sipps', 'siswa', $log);
+                  $this->pusher->trigger('sipps', 'siswa', $log);
                   json_output(200, array('status' => 200, 'description' => 'Berhasil', 'message' => 'Berhasil mengedit siswa'));
                 }
               }
@@ -330,23 +324,6 @@ class Siswa extends CI_Controller {
     }
   }
 
-  function reupload_foto($nis)
-  {
-    if(isset($_FILES['foto']) && $_FILES['foto']['name'] != ""){
-      $extention = explode('.', $_FILES['foto']['name']);
-      $new_name = $nis.'.'.$extention[1];
-      $destination = './doc/siswa/'.$new_name;
-      $upload = move_uploaded_file($_FILES['foto']['tmp_name'], $destination);
-
-      if($upload){
-        return $new_name;
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
-  }
 }
 
 ?>

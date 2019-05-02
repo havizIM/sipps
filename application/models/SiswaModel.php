@@ -7,6 +7,8 @@ class SiswaModel extends CI_Model {
     function show($nis = null, $nama_siswa = null, $otorisasi)
     {
       $this->db->select('a.*, b.*, c.*, d.nip')
+               ->select('(SELECT SUM(poin_prestasi) FROM maspres,prestasi WHERE maspres.id_maspres = prestasi.maspres AND prestasi.nis = a.nis) as sum_prestasi')
+               ->select('(SELECT SUM(poin_pelanggaran) FROM maspel,pelanggaran WHERE maspel.id_maspel = pelanggaran.maspel AND pelanggaran.nis = a.nis) as sum_pelanggaran')
                ->from('siswa a')
                ->join('akun_wali b', 'b.nis = a.nis')
                ->join('kelas c', 'c.kelas = a.kelas')
@@ -22,6 +24,7 @@ class SiswaModel extends CI_Model {
 
       if($otorisasi->level == 'Wali'){
         $this->db->where('d.nip', $otorisasi->nip);
+        $this->db->where('a.status', 'Aktif');
       }
 
       $this->db->order_by('a.nis', 'desc');
