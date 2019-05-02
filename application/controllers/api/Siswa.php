@@ -167,12 +167,12 @@ class Siswa extends CI_Controller {
   function upload_file($name, $id)
   {
     if(isset($_FILES[$name]) && $_FILES[$name]['name'] != ""){
-      $files = glob('doc/'.$name.'/'.$id.'.*');
+      $files = glob('doc/siswa/'.$id.'.*');
       foreach ($files as $key) {
         unlink($key);
       }
 
-      $config['upload_path']   = './doc/'.$name.'/';
+      $config['upload_path']   = './doc/siswa/';
       $config['allowed_types'] = 'jpg|jpeg|png';
       $config['overwrite']     = TRUE;
 			$config['max_size']      = '3048';
