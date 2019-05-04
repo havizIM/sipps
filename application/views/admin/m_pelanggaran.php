@@ -28,7 +28,7 @@
                 <thead>
                   <tr>
                     <th>ID Pelanggaran</th>
-                    <th>Deskripsi</th>
+                    <th>Jenis Pelanggaran</th>
                     <th>Jumlah Point</th>
                     <th>Kategori</th>
                     <th>Status</th>

@@ -78,10 +78,10 @@
 
     var table = $('#detail_siswa').DataTable({
       columnDefs :[{
-        targets:[0,3,4,5,8,9,10,11,12,13],
+        targets:[3,4,5,8,9,10,11,12,13],
         searchable:false
       },{
-        targets:[0,3,4,5,8,9,10,11,12,13],
+        targets:[3,4,5,8,9,10,11,12,13],
         orderable:false
       }],
       responsive:true,

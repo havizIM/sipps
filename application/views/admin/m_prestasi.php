@@ -28,7 +28,7 @@
                   <thead>
                     <tr>
                       <th>ID Prestasi</th>
-                      <th>Deskripsi</th>
+                      <th>Jenis Prestasi</th>
                       <th>Jumlah Point</th>
                       <th>Kategori</th>
                       <th>Status</th>
