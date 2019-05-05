@@ -40,27 +40,23 @@ class Kelas extends CI_Controller {
         } else {
           $otorisasi = $auth->row();
 
-          if($otorisasi->level != 'Admin'){
-            json_output(401, array('status' => 401, 'description' => 'Gagal', 'message' => 'Hak akses tidak disetujui'));
-          } else {
-            $id_kelas  	  = $this->input->get('kelas');
-      			$wali_kelas   = $this->input->get('wali_kelas');
+          $id_kelas  	  = $this->input->get('kelas');
+    			$wali_kelas   = $this->input->get('wali_kelas');
 
-            $show    = $this->KelasModel->show($id_kelas, $wali_kelas);
-            $kelas   = array();
+          $show    = $this->KelasModel->show($id_kelas, $wali_kelas);
+          $kelas   = array();
 
-            foreach($show->result() as $key){
-              $json = array();
+          foreach($show->result() as $key){
+            $json = array();
 
-              $json['kelas']   = $key->kelas;
-              $json['nip']     = $key->nip;
-              $json['nama']    = $key->nama;
+            $json['kelas']   = $key->kelas;
+            $json['nip']     = $key->nip;
+            $json['nama']    = $key->nama;
 
-              $kelas[] = $json;
-            }
-
-            json_output(200, array('status' => 200, 'description' => 'Berhasil', 'data' => $kelas));
+            $kelas[] = $json;
           }
+
+          json_output(200, array('status' => 200, 'description' => 'Berhasil', 'data' => $kelas));
         }
       }
     }
