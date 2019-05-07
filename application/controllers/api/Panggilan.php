@@ -202,7 +202,7 @@ class Panggilan extends CI_Controller {
                   'user'           => $otorisasi->nip
                 );
 
-                if($foto != null){
+                if($file != null){
                   $data['file'] = $file;
                 }
 
