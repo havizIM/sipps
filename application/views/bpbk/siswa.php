@@ -14,11 +14,7 @@
           </div>
         </div>
       </div>
-      <!-- <div class="content-header-right text-md-right mt-2 col-md-6 col-3">
-        <div class="btn-group">
-          <a href="#/add_siswa" class="btn btn-round btn-info"><i class="fas fa-plus"></i> Tambah</a>
-        </div>
-      </div> -->
+
     </div><hr>
     <div class="content-body">
       <section>
@@ -78,10 +74,10 @@
 
     var table = $('#detail_siswa').DataTable({
       columnDefs :[{
-        targets:[0,3,4,5,8,9,10,11,12],
+        targets:[3,4,5,8,9,10,11,12],
         searchable:false
       },{
-        targets:[0,3,4,5,8,9,10,11,12],
+        targets:[3,4,5,8,9,10,11,12],
         orderable:false
       }],
       responsive:true,
@@ -102,9 +98,11 @@
         {"data":"alamat"},
         {"data":null,"render":function(data,type,row){
           return `<img src="<?= base_url().'doc/siswa/' ?>${row.foto}" class="avatar" alt="Foto" style="width:70px; height: 70px;">`
-        }},
+        }}
       ],
       order:[[7,'desc']]
     });
+
+  
   });
 </script>

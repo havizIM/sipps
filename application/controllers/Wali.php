@@ -17,6 +17,26 @@ class Wali extends CI_Controller {
 	{
 		$this->load->view('wali/siswa');
 	}
+	public function pengumuman()
+	{
+		$this->load->view('wali/pengumuman');
+	}
+	public function panggilan()
+	{
+		$this->load->view('wali/panggilan');
+	}
+
+
+	public function add_panggilan()
+	{
+		$this->load->view('wali/add_panggilan');
+	}
 
 	
+	public function edit_panggilan($id)
+	{
+		$this->load->view('wali/edit_panggilan');
+	}
+
+
 }

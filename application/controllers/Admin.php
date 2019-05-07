@@ -33,6 +33,10 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/siswa');
 	}
+	public function pengumuman()
+	{
+		$this->load->view('admin/pengumuman');
+	}
 
 	// Function Add
 

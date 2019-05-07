@@ -83,7 +83,7 @@
               <option value="">--Pilih Level--</option>
               <option value="Guru">Guru</option>
               <option value="Wali">Wali</option>
-              <option value="BPBK">BPBK</option>
+              <option value="Bpbk">BPBK</option>
               <option value="Kepsek">Kepsek</option>
             </select>
         </div>
@@ -123,7 +123,7 @@
               <option value="">--Pilih Level--</option>
               <option value="Guru">Guru</option>
               <option value="Wali">Wali</option>
-              <option value="BPBK">BPBK</option>
+              <option value="Bpbk">BPBK</option>
               <option value="Kepsek">Kepsek</option>
             </select>
         </div>

@@ -74,7 +74,7 @@
                   <div class="card-body">
                     <form class="form-horizontal" id="form_login">
                       <fieldset class="form-group position-relative has-icon-left">
-                        <input type="text" class="form-control input-lg" id="nip" name="nip" placeholder="NIP">
+                        <input type="text" class="form-control input-lg" id="nip" name="nip" placeholder="NIP/Username">
                         <div class="form-control-position">
                           <i class="ft-user"></i>
                         </div>

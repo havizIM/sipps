@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>SIPPS | BP/BK</title>
+    <title>SIPPS | Bpbk</title>
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets/image/logo.png' ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"rel="stylesheet">
@@ -14,6 +14,7 @@
     <!-- END VENDOR CSS-->
     <!-- BEGIN MODERN CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/app.css' ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/vendors/js/jquery-ui/jquery-ui.min.css' ?>">
     <!-- END MODERN CSS-->
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/core/menu/menu-types/vertical-compact-menu.css' ?>">
@@ -44,8 +45,12 @@
       };
     cek_auth();
     </script>
+
+    <style media="screen">
+
+    </style>
   </head>
-  <body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
+  <body class="vertical-layout vertical-compact-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
   <!-- fixed-top-->
   <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-dark bg-cyan navbar-shadow navbar-brand-center">
     <div class="navbar-wrapper">
@@ -84,8 +89,14 @@
                 <a class="dropdown-item"><i class="text-info fas fa-star"></i> <span class="level"></span></a>
                 <a class="dropdown-item"><i class="text-info fas fa-calendar-alt"></i> <span class="tgl"></span></a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-success" id="btn_gpass"><i class="fas fa-exchange-alt"></i> Ganti Password</a>
-                <a class="dropdown-item text-danger" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
+                <div class="row">
+                  <div class="col-6 col-md-6">
+                    <a class="dropdown-item text-success" id="btn_gpass"><i class="fas fa-exchange-alt "></i> Ganti Password</a>
+                  </div>
+                  <div class="col-6 col-md-6 text-right">
+                    <a class="dropdown-item text-danger" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
@@ -97,7 +108,10 @@
   <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-        <li class=" nav-item"><a href="#/dashboard"><i class="la la-home text-info"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
+        <li class="nav-item"><a href="#/dashboard"><i class="la la-home text-info"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
+        <li class="nav-item"><a href="#/siswa"><i class="la la-users pink"></i><span class="menu-title" data-i18n="nav.templates.main">Siswa</span></a></li>
+        <li class="nav-item"><a href="#/pengumuman"><i class="la la-bullhorn" style="color:#D500F9"></i><span class="menu-title" data-i18n="nav.dash.main" style="font-size:14px;">Pengumuman</span></a></li>
+        <li class="nav-item"><a href="#/panggilan"><i class="la la-envelope text-danger"></i><span class="menu-title" data-i18n="nav.dash.main">Panggilan</span></a></li>
         <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="nav.templates.main">Data Master</span></a>
           <ul class="menu-content">
             <li><a class="menu-item" href="#/m_prestasi">Master Prestasi</a></li>
@@ -114,7 +128,7 @@
   <!-- ////////////////////////////////////////////////////////////////////////////-->
   <footer class="footer footer-static footer-light fixed-bottom navbar-border navbar-shadow">
     <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
-      <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block"> Made with <i class="ft-heart pink"></i></span>
+      <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block"> Made with <i class="ft-heart pink"></i> By Suhendar</span>
     </p>
   </footer>
 
@@ -158,18 +172,20 @@
   </div>
 </div>
 
-<!-- BEGIN VENDOR JS-->
-<script src="<?= base_url().'assets/app-assets/vendors/js/vendors.min.js' ?>" type="text/javascript"></script>
-<script src="<?= base_url().'assets/app-assets/vendors/js/tables/datatable/datatables.min.js' ?>" type="text/javascript"></script>
-<!-- BEGIN VENDOR JS-->
-<!-- BEGIN MODERN JS-->
-<script src="<?= base_url().'assets/app-assets/js/core/app-menu.js' ?>" type="text/javascript"></script>
-<script src="<?= base_url().'assets/app-assets/js/core/app.js' ?>" type="text/javascript"></script>
-<script src="<?= base_url().'assets/app-assets/js/scripts/customizer.js ' ?>" type="text/javascript"></script>
-<script src="<?= base_url().'assets/app-assets/js/scripts/moment/moment.js ' ?>" type="text/javascript"></script>
-<!-- END MODERN JS-->
-<!-- SWEET ALERT 2 -->
-<script src="<?= base_url().'assets/app-assets/vendors/js/sweetalert2/sweetalert2.js' ?>"></script>
+  <!-- BEGIN VENDOR JS-->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/vendors.min.js' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/vendors/js/tables/datatable/datatables.min.js' ?>" type="text/javascript"></script>
+  <!-- BEGIN VENDOR JS-->
+  <!-- BEGIN MODERN JS-->
+  <script src="<?= base_url().'assets/app-assets/js/core/app-menu.js' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/js/core/app.js' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/js/scripts/customizer.js ' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/js/scripts/moment/moment.js ' ?>" type="text/javascript"></script>
+  <!-- END MODERN JS-->
+  <!-- SWEET ALERT 2 -->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/sweetalert2/sweetalert2.js' ?>"></script>
+  <!-- JQUERY UI -->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/jquery-ui/jquery-ui.min.js' ?>"></script>
 
   <script type="text/javascript">
   // Load Content
@@ -188,13 +204,15 @@
                       timer: 2500
                     });
 
-      var session     = localStorage.getItem('sipps');
-      var auth        = JSON.parse(session);
+      var session   = localStorage.getItem('sipps');
+      var auth      = JSON.parse(session);
 
       $('.nama').text(auth.nama);
       $('.level').text(auth.level);
       $('.nip').text(auth.nip)
       $('.tgl').text(auth.tgl_registrasi)
+
+
 
       // Ajax Logout
       $('#btn_logout').on('click',function(){
@@ -267,7 +285,10 @@
               password_lama : pass_lama,
               password_baru : pass_baru
             },
-            beforeSend:function(){},
+            beforeSend:function(){
+              $('#btn_savepass').addClass('disabled').attr('disabled','disabled').html('<span>Simpan Perubahan <i class="fas fa-spinner fa-spin"></i></span>')
+
+            },
             success:function(response){
 
               if (response.status === 200) {
@@ -282,7 +303,7 @@
                   title: response.message,
                 })
               }
-
+              $('#btn_savepass').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
             },
             error:function(){
               Swal.fire({
@@ -291,6 +312,7 @@
                showConfirmButton: false,
                timer: 2000
               })
+                $('#btn_savepass').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
             }
           });
         }
@@ -298,7 +320,7 @@
 
       // Modal Ganti Password
       $('#btn_gpass').on('click',function(){
-        $('#modal_gpass').modal('show')
+        $('#modal_gpass').modal('show');
         $('#form_gpass')[0].reset();
       })
 

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <title>SIPPS | Kepsek</title>
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets/image/logo.png' ?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets/image/logo.png' ?>">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"rel="stylesheet">
     <!-- BEGIN VENDOR CSS-->
@@ -15,6 +14,7 @@
     <!-- END VENDOR CSS-->
     <!-- BEGIN MODERN CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/app.css' ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/vendors/js/jquery-ui/jquery-ui.min.css' ?>">
     <!-- END MODERN CSS-->
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/app-assets/css/core/menu/menu-types/vertical-compact-menu.css' ?>">
@@ -45,8 +45,12 @@
       };
     cek_auth();
     </script>
+
+    <style media="screen">
+
+    </style>
   </head>
-  <body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
+  <body class="vertical-layout vertical-compact-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
   <!-- fixed-top-->
   <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-dark bg-cyan navbar-shadow navbar-brand-center">
     <div class="navbar-wrapper">
@@ -73,15 +77,26 @@
             <li class="dropdown dropdown-user nav-item">
               <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                 <span class="mr-1">Hello,
-                  <span class="user-name text-bold-700" id="nama"></span>
-                  <b>[<span id="level"></span>]</b>
+                  <span class="user-name text-bold-700 nama"></span>
+                  <b>[<span class="level"></span>]</b>
                 </span>
                 <span class="avatar">
                   <img src="<?= base_url().'assets/image/user2.png' ?>" alt="avatar"><i></i></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" id="btn_gpass"><i class="fas fa-exchange-alt"></i> Ganti Password</a>
-                <a class="dropdown-item" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
+                <a class="dropdown-item"><i class="text-info fas fa-address-card"></i> <span class="nip"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-user"></i> <span class="nama"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-star"></i> <span class="level"></span></a>
+                <a class="dropdown-item"><i class="text-info fas fa-calendar-alt"></i> <span class="tgl"></span></a>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                  <div class="col-6 col-md-6">
+                    <a class="dropdown-item text-success" id="btn_gpass"><i class="fas fa-exchange-alt "></i> Ganti Password</a>
+                  </div>
+                  <div class="col-6 col-md-6 text-right">
+                    <a class="dropdown-item text-danger" id="btn_logout"><i class="fas fa-power-off"></i> Logout</a>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
@@ -93,11 +108,15 @@
   <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-        <li class=" nav-item"><a href="#/dashboard"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
-        <li class=" nav-item"><a href="#"><i class="la la-user"></i><span class="menu-title" data-i18n="nav.templates.main">User</span></a>
+        <li class="nav-item"><a href="#/dashboard"><i class="la la-home text-info"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
+        <li class="nav-item"><a href="#/siswa"><i class="la la-users pink"></i><span class="menu-title" data-i18n="nav.templates.main">Siswa</span></a></li>
+        <li class="nav-item"><a href="#/kelas"><i class="la la-building text-warning"></i><span class="menu-title" data-i18n="nav.dash.main">Kelas</span></a></li>
+        <li class="nav-item"><a href="#/pengumuman"><i class="la la-bullhorn" style="color:#D500F9"></i><span class="menu-title" data-i18n="nav.dash.main" style="font-size:14px;">Pengumuman</span></a></li>
+        <li class="nav-item"><a href="#/panggilan"><i class="la la-envelope text-danger"></i><span class="menu-title" data-i18n="nav.dash.main">Panggilan</span></a></li>
+        <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="nav.templates.main">Data Master</span></a>
           <ul class="menu-content">
-            <li><a class="menu-item" href="#/user">Data User</a></li>
-            <li><a class="menu-item">Log User</a></li>
+            <li><a class="menu-item" href="#/m_prestasi">Master Prestasi</a></li>
+            <li><a class="menu-item" href="#/m_pelanggaran">Master Pelanggaran</a></li>
           </ul>
         </li>
       </ul>
@@ -110,7 +129,7 @@
   <!-- ////////////////////////////////////////////////////////////////////////////-->
   <footer class="footer footer-static footer-light fixed-bottom navbar-border navbar-shadow">
     <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
-      <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block"> Made with <i class="ft-heart pink"></i></span>
+      <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block"> Made with <i class="ft-heart pink"></i> By Suhendar</span>
     </p>
   </footer>
 
@@ -154,18 +173,20 @@
   </div>
 </div>
 
-<!-- BEGIN VENDOR JS-->
-<script src="<?= base_url().'assets/app-assets/vendors/js/vendors.min.js' ?>" type="text/javascript"></script>
-<script src="<?= base_url().'assets/app-assets/vendors/js/tables/datatable/datatables.min.js' ?>" type="text/javascript"></script>
-<!-- BEGIN VENDOR JS-->
-<!-- BEGIN MODERN JS-->
-<script src="<?= base_url().'assets/app-assets/js/core/app-menu.js' ?>" type="text/javascript"></script>
-<script src="<?= base_url().'assets/app-assets/js/core/app.js' ?>" type="text/javascript"></script>
-<script src="<?= base_url().'assets/app-assets/js/scripts/customizer.js ' ?>" type="text/javascript"></script>
-<script src="<?= base_url().'assets/app-assets/js/scripts/moment/moment.js ' ?>" type="text/javascript"></script>
-<!-- END MODERN JS-->
-<!-- SWEET ALERT 2 -->
-<script src="<?= base_url().'assets/app-assets/vendors/js/sweetalert2/sweetalert2.js' ?>"></script>
+  <!-- BEGIN VENDOR JS-->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/vendors.min.js' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/vendors/js/tables/datatable/datatables.min.js' ?>" type="text/javascript"></script>
+  <!-- BEGIN VENDOR JS-->
+  <!-- BEGIN MODERN JS-->
+  <script src="<?= base_url().'assets/app-assets/js/core/app-menu.js' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/js/core/app.js' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/js/scripts/customizer.js ' ?>" type="text/javascript"></script>
+  <script src="<?= base_url().'assets/app-assets/js/scripts/moment/moment.js ' ?>" type="text/javascript"></script>
+  <!-- END MODERN JS-->
+  <!-- SWEET ALERT 2 -->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/sweetalert2/sweetalert2.js' ?>"></script>
+  <!-- JQUERY UI -->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/jquery-ui/jquery-ui.min.js' ?>"></script>
 
   <script type="text/javascript">
   // Load Content
@@ -184,11 +205,15 @@
                       timer: 2500
                     });
 
-      var session = localStorage.getItem('sipps');
-      var auth = JSON.parse(session);
+      var session   = localStorage.getItem('sipps');
+      var auth      = JSON.parse(session);
 
-      $('#nama').text(auth.nama);
-      $('#level').text(auth.level);
+      $('.nama').text(auth.nama);
+      $('.level').text(auth.level);
+      $('.nip').text(auth.nip)
+      $('.tgl').text(auth.tgl_registrasi)
+
+
 
       // Ajax Logout
       $('#btn_logout').on('click',function(){
@@ -214,11 +239,19 @@
                   localStorage.clear();
                   window.location.replace('<?= base_url().'auth' ?>')
                 }else {
-                  alert(response.message)
+                  Toast.fire({
+                    type: 'warning',
+                    title: response.message,
+                  })
                 }
               },
               error:function(){
-                alert('Gagal Mengakses Server')
+                Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
               }
             });
           }
@@ -239,12 +272,12 @@
             type: 'warning',
             title: 'Password tidak boleh kosong ...',
           })
-        }else if(rtp_pass !== pass_baru) {
+        }else if (rtp_pass !== pass_baru) {
           Toast.fire({
             type: 'warning',
             title: 'Password tidak sama ...',
           })
-        }else{
+        }else {
           $.ajax({
             url: link,
             type: 'POST',
@@ -253,7 +286,10 @@
               password_lama : pass_lama,
               password_baru : pass_baru
             },
-            beforeSend:function(){},
+            beforeSend:function(){
+              $('#btn_savepass').addClass('disabled').attr('disabled','disabled').html('<span>Simpan Perubahan <i class="fas fa-spinner fa-spin"></i></span>')
+
+            },
             success:function(response){
 
               if (response.status === 200) {
@@ -268,7 +304,7 @@
                   title: response.message,
                 })
               }
-
+              $('#btn_savepass').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
             },
             error:function(){
               Swal.fire({
@@ -277,6 +313,7 @@
                showConfirmButton: false,
                timer: 2000
               })
+                $('#btn_savepass').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Simpan Perubahan</span>')
             }
           });
         }
@@ -284,7 +321,7 @@
 
       // Modal Ganti Password
       $('#btn_gpass').on('click',function(){
-        $('#modal_gpass').modal('show')
+        $('#modal_gpass').modal('show');
         $('#form_gpass')[0].reset();
       })
 
