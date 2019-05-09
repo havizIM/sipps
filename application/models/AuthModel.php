@@ -19,7 +19,15 @@ class AuthModel extends CI_Model {
       return $this->db->where('nip', $param)->update('user', $data);
     }
 
+    function cekAuthWali($param)
+    {
+      return $this->db->select('*')->from('akun_wali a')->join('siswa b', 'b.nis = a.nis')->where($param)->get();
+    }
 
+    function updateWali($param, $data)
+    {
+      return $this->db->where($param)->update('akun_wali', $data);
+    }
 
 }
 

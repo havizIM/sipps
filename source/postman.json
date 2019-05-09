@@ -44,6 +44,80 @@
 			"response": []
 		},
 		{
+			"name": "Login Wali",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nis",
+							"value": "7201160106",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "7201160106",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/auth/login_wali/",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"auth",
+						"login_wali",
+						""
+					]
+				},
+				"description": "Link : \n- localhost/sipps/api/auth/login_wali\n\n\nMethod :\n- POST\n\n\nData : \n- nis\n- password\n\n\nHak Akses :\n- Wali Murid\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya\n- Masukan response ke session localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Lupa Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "viz.ndinq@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/auth/lupa_password/",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"auth",
+						"lupa_password",
+						""
+					]
+				},
+				"description": "Link : \n- localhost/sipps/api/auth/lupa_password\n\n\nMethod :\n- POST\n\n\nData : \n- email\n\n\nHak Akses :\n- Wali Murid\n\n\nNote : \n- Response berupa data user\n- Didalam response terdapat token yang digunakan untuk akses API lainnya"
+			},
+			"response": []
+		},
+		{
 			"name": "Logout User",
 			"request": {
 				"method": "GET",
@@ -66,6 +140,58 @@
 					]
 				},
 				"description": "Link :\n- localhost/sipps/api/auth/logout_user/--token--\n\n\nMethod :\n- GET\n\n\nHak Akses :\n- Admin\n- Guru\n- Wali\n- BPBK\n- Kepsek\n\n\nNote : \n- Token bisa didapatkan dari localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout Wali",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/sipps/api/auth/logout_wali/839ce9d4eb060fd7ab4d",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"auth",
+						"logout_wali",
+						"839ce9d4eb060fd7ab4d"
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/auth/logout_wali/--token--\n\n\nMethod :\n- GET\n\n\nHak Akses :\n- Wali Murid\n\n\nNote : \n- Token bisa didapatkan dari localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Profile Wali",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/sipps/api/auth/profile_wali/839ce9d4eb060fd7ab4d",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"auth",
+						"profile_wali",
+						"839ce9d4eb060fd7ab4d"
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/auth/profile_wali/--token--\n\n\nMethod :\n- GET\n\n\nHak Akses :\n- Wali Murid\n\n\nNote : \n- Token bisa didapatkan dari localStorage"
 			},
 			"response": []
 		},
@@ -100,6 +226,43 @@
 						"auth",
 						"password_user",
 						"d033e22ae348aeb"
+					]
+				},
+				"description": "Link :\n- localhost/sipps/api/auth/password_user/--token--\n\nMethod :\n- POST\n\nData :\n- password_lama\n- password_baru\n\nHak Akses : \n- Admin\n- Guru\n- Wali\n- BPBK\n- Kepsek\n\nNote :\n- Token bisa didapatkan dari localStorage"
+			},
+			"response": []
+		},
+		{
+			"name": "Ganti Password Wali",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "password_lama",
+							"value": "7201160106",
+							"type": "text"
+						},
+						{
+							"key": "password_baru",
+							"value": "haviz123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost/sipps/api/auth/password_wali/839ce9d4eb060fd7ab4d",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"sipps",
+						"api",
+						"auth",
+						"password_wali",
+						"839ce9d4eb060fd7ab4d"
 					]
 				},
 				"description": "Link :\n- localhost/sipps/api/auth/password_user/--token--\n\nMethod :\n- POST\n\nData :\n- password_lama\n- password_baru\n\nHak Akses : \n- Admin\n- Guru\n- Wali\n- BPBK\n- Kepsek\n\nNote :\n- Token bisa didapatkan dari localStorage"
