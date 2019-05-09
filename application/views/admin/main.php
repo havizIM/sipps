@@ -112,6 +112,7 @@
         <li class="nav-item"><a href="#/user"><i class="la la-user text-success"></i><span class="menu-title" data-i18n="nav.templates.main">User</span></a></li>
         <li class="nav-item"><a href="#/siswa"><i class="la la-users pink"></i><span class="menu-title" data-i18n="nav.templates.main">Siswa</span></a></li>
         <li class="nav-item"><a href="#/kelas"><i class="la la-building text-warning"></i><span class="menu-title" data-i18n="nav.dash.main">Kelas</span></a></li>
+        <li class="nav-item"><a href="#/pengumuman"><i class="la la-bullhorn" style="color:#D500F9"></i><span class="menu-title" data-i18n="nav.dash.main" style="font-size:14px;">Pengumuman</span></a></li>
         <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="nav.templates.main">Data Master</span></a>
           <ul class="menu-content">
             <li><a class="menu-item" href="#/m_prestasi">Master Prestasi</a></li>

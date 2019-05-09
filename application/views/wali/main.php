@@ -110,6 +110,8 @@
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
         <li class="nav-item"><a href="#/dashboard"><i class="la la-home text-info"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span></a></li>
         <li class="nav-item"><a href="#/siswa"><i class="la la-users pink"></i><span class="menu-title" data-i18n="nav.templates.main">Siswa</span></a></li>
+        <li class="nav-item"><a href="#/pengumuman"><i class="la la-bullhorn" style="color:#D500F9"></i><span class="menu-title" data-i18n="nav.dash.main" style="font-size:14px;">Pengumuman</span></a></li>
+        <li class="nav-item"><a href="#/panggilan"><i class="la la-envelope text-danger"></i><span class="menu-title" data-i18n="nav.dash.main">Panggilan</span></a></li>
       </ul>
     </div>
   </div>
