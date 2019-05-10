@@ -94,7 +94,7 @@
 
 
       Swal.fire({
-        title: 'Apakah anda yakin...',
+        title: 'Hapus data ?',
         type: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -110,12 +110,18 @@
             dataType: 'JSON',
             // beforeSend:function(){},
             success:function(response){
-              Swal.fire({
-                type: 'success',
-                title: response.message,
-                showConfirmButton: false,
-                timer: 1500
-              })
+              if (response.status === 200) {
+                Toast.fire({
+  			            type: 'success',
+  			            title: response.message,
+  			          })
+              }else {
+                Toast.fire({
+  			            type: 'error',
+  			            title: response.message,
+  			          })
+                // $('#btn_delete').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Hapus</span>')
+              }
               table.ajax.reload();
             },
             error:function(){

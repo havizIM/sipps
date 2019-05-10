@@ -32,10 +32,10 @@
                   <thead>
                     <tr>
                       <th>Keterangan</th>
-                      <th>Document</th>
                       <th>Tanggal</th>
                       <th>Nip</th>
                       <th>Nama</th>
+
                       <th></th>
                     </tr>
                   </thead>
@@ -109,10 +109,10 @@
 
     var table = $('#detail_pengumuman').DataTable({
       columnDefs :[{
-        targets:[0,1,2,5],
+        targets:[0,1,2],
         searchable:false
       },{
-        targets:[0,1,3,4,5],
+        targets:[0,1,3,4],
         orderable:false
       }],
       responsive:true,
@@ -120,15 +120,13 @@
       ajax:'<?= base_url().'api/pengumuman/show/'?>'+token,
       columns:[
         {"data":"deskripsi"},
-        {"data":null,"render":function(data,type,row){
-          return `<a href="<?= base_url().'doc/pengumuman/' ?>${row.file}" target="blank">${row.file}</a>`
-        }},
         {"data":"tgl_input"},
         {"data":"nip"},
         {"data":"nama"},
+
         {"data":null,"render":function(data,type,row){
 
-            return `<button type="button" data-id="${row.id_pengumuman}" id="btn_delete" class="btn  btn-sm btn-danger">Hapus</button>`
+            return `<a href="<?= base_url().'doc/pengumuman/' ?>${row.file}" class="btn  btn-sm btn-info" target="blank">Download</a> <button type="button" data-id="${row.id_pengumuman}" id="btn_delete" class="btn  btn-sm btn-danger">Hapus</button>`
 
         }},
       ],
@@ -162,19 +160,15 @@
             // },
             success:function(response){
               if (response.status === 200) {
-                Swal.fire({
-                 type: 'success',
-                 title: response.message,
-                 showConfirmButton: false,
-                 timer: 1500
-                })
+                Toast.fire({
+  			            type: 'success',
+  			            title: response.message,
+  			          })
               }else {
-                Swal.fire({
-                 type: 'error',
-                 title: response.message,
-                 showConfirmButton: false,
-                 timer: 1500
-                })
+                Toast.fire({
+  			            type: 'error',
+  			            title: response.message,
+  			          })
                 // $('#btn_delete').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Hapus</span>')
               }
               table.ajax.reload();

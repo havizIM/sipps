@@ -183,7 +183,7 @@
         {"data":"status"},
         {"data":null,"render":function(data,type,row){
 
-            return `<button type="button" id="btn_edit" data-id="${row.nip}" class="btn  btn-sm btn-success">Edit</button> <button type="button" data-id="${row.nip}" id="btn_delete" class="btn  btn-sm btn-danger">Hapus</button>`
+            return `<button type="button" id="btn_edit" data-id="${row.nip}" class="btn  btn-sm btn-success">Edit</button> <button type="button" data-id="${row.nip}" data-name="${row.nama}" id="btn_delete" class="btn  btn-sm btn-danger">Hapus</button>`
 
         }},
       ],
@@ -251,10 +251,11 @@
       e.preventDefault();
 
       var nip         = $(this).attr('data-id')
+      var nama        = $(this).attr('data-name')
       var link_delete = `<?= base_url().'api/user/delete/'?>${token}?nip=${nip}`
 
       Swal.fire({
-        title: 'Hapus user ?',
+        title: `Hapus ${nama} ?`,
         type: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -272,19 +273,15 @@
             // },
             success:function(response){
               if (response.status === 200) {
-                Swal.fire({
-                 type: 'success',
-                 title: response.message,
-                 showConfirmButton: false,
-                 timer: 1500
-                })
+                Toast.fire({
+  			            type: 'success',
+  			            title: response.message,
+  			          })
               }else {
-                Swal.fire({
-                 type: 'error',
-                 title: response.message,
-                 showConfirmButton: false,
-                 timer: 1500
-                })
+                Toast.fire({
+  			            type: 'error',
+  			            title: response.message,
+  			          })
                 // $('#btn_delete').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Hapus</span>')
               }
               table.ajax.reload();

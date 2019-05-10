@@ -77,7 +77,7 @@
           {"data":"nama"},
           {"data":null,"render":function(data,type,row){
 
-              return `<a href="#/edit_kelas/${row.kelas}" id="btn_edit" class="btn  btn-sm btn-success" >Edit</a> <button type="button" data-id="${row.kelas}" id="btn_delete" class="btn  btn-sm btn-danger" >Hapus</button>`
+              return `<a href="#/edit_kelas/${row.kelas}" id="btn_edit" class="btn  btn-sm btn-success" >Edit</a> <button type="button" data-id="${row.kelas}" data-name="${row.kelas}" id="btn_delete" class="btn  btn-sm btn-danger" >Hapus</button>`
 
           }},
         ],
@@ -88,10 +88,10 @@
       $(document).on('click','#btn_delete',function(){
 
         var kelas = $(this).attr('data-id');
-
+        var nama = $(this).attr('data-name');
 
         Swal.fire({
-          title: 'Apakah anda yakin...',
+          title: `Hapus kelas ${nama} ?`,
           type: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -107,12 +107,10 @@
               dataType: 'JSON',
               // beforeSend:function(){},
               success:function(response){
-                Swal.fire({
-                  type: 'success',
-                  title: response.message,
-                  showConfirmButton: false,
-                  timer: 1500
-                })
+                Toast.fire({
+  			            type: 'success',
+  			            title: response.message,
+  			          })
                 table.ajax.reload();
               },
               error:function(){

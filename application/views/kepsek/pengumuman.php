@@ -27,10 +27,10 @@
                   <thead>
                     <tr>
                       <th>Keterangan</th>
-                      <th>Document</th>
                       <th>Tanggal</th>
                       <th>Nip</th>
                       <th>Nama</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -75,12 +75,12 @@
       ajax:'<?= base_url().'api/pengumuman/show/'?>'+token,
       columns:[
         {"data":"deskripsi"},
-        {"data":null,"render":function(data,type,row){
-          return `<a href="<?= base_url().'doc/pengumuman/' ?>${row.file}" target="blank">${row.file}</a>`
-        }},
         {"data":"tgl_input"},
         {"data":"nip"},
         {"data":"nama"},
+        {"data":null,"render":function(data,type,row){
+          return `<a href="<?= base_url().'doc/pengumuman/' ?>${row.file}" class="btn  btn-sm btn-info" target="blank">Download</a>`
+        }},
       ],
       order:[[2,'desc']]
     });

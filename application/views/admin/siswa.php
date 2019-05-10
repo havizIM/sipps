@@ -105,7 +105,7 @@
         }},
         {"data":null,"render":function(data,type,row){
 
-            return `<a href="#/edit_siswa/${row.nis}" id="btn_edit" class="btn  btn-sm btn-success">Edit</a> <button type="button" data-id="${row.nis}" id="btn_delete" class="btn  btn-sm btn-danger" >Hapus</button>`
+            return `<a href="#/edit_siswa/${row.nis}" id="btn_edit" class="btn  btn-sm btn-success">Edit</a> <button type="button" data-name="${row.nama_siswa}" data-id="${row.nis}" id="btn_delete" class="btn  btn-sm btn-danger" >Hapus</button>`
 
         }},
       ],
@@ -116,10 +116,12 @@
     $(document).on('click','#btn_delete',function(){
 
       var nis           = $(this).attr('data-id');
+      var nama          = $(this).attr('data-name');
+
       var link_delete   = `<?= base_url().'api/siswa/delete/' ?>${token}?nis=${nis}`
 
       Swal.fire({
-        title: 'Apakah anda yakin...',
+        title: `Hapus siswa ${nama} ?`,
         type: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -135,12 +137,18 @@
             dataType: 'JSON',
             // beforeSend:function(){},
             success:function(response){
-              Swal.fire({
-                type: 'success',
-                title: response.message,
-                showConfirmButton: false,
-                timer: 1500
-              })
+              if (response.status === 200) {
+                Toast.fire({
+  			            type: 'success',
+  			            title: response.message,
+  			          })
+              }else {
+                Toast.fire({
+  			            type: 'error',
+  			            title: response.message,
+  			          })
+                // $('#btn_delete').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Hapus</span>')
+              }
               table.ajax.reload();
             },
             error:function(){

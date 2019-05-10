@@ -125,19 +125,16 @@
             dataType: 'JSON',
             success:function(response){
               if (response.status === 200) {
-                Swal.fire({
-                 type: 'success',
-                 title: response.message,
-                 showConfirmButton: false,
-                 timer: 1500
-                })
+                Toast.fire({
+  			            type: 'success',
+  			            title: response.message,
+  			          })
               }else {
-                Swal.fire({
-                 type: 'error',
-                 title: response.message,
-                 showConfirmButton: false,
-                 timer: 1500
-                })
+                Toast.fire({
+  			            type: 'error',
+  			            title: response.message,
+  			          })
+                // $('#btn_delete').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Hapus</span>')
               }
               table.ajax.reload();
             },
