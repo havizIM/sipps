@@ -45,44 +45,8 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    const Toast = Swal.mixin({
-                  toast: true,
-                  position:'bottom-end',
-                  showConfirmButton: false,
-                  timer: 2500
-                });
-
-    var session     = localStorage.getItem('sipps');
-    var auth        = JSON.parse(session);
-    var token       = auth.token;
-    var nip         = auth.nip;
-    var link_add    = '<?= base_url().'api/pengumuman/add/' ?>'+token
-    // alert(token)
-
-    var table = $('#detail_pengumuman').DataTable({
-      columnDefs :[{
-        targets:[0,1,2],
-        searchable:false
-      },{
-        targets:[0,1,3,4],
-        orderable:false
-      }],
-      responsive:true,
-      processing:true,
-      ajax:'<?= base_url().'api/pengumuman/show/'?>'+token,
-      columns:[
-        {"data":"deskripsi"},
-        {"data":"tgl_input"},
-        {"data":"nip"},
-        {"data":"nama"},
-        {"data":null,"render":function(data,type,row){
-          return `<a href="<?= base_url().'doc/pengumuman/' ?>${row.file}" class="btn  btn-sm btn-info" target="blank">Download</a>`
-        }},
-      ],
-      order:[[2,'desc']]
-    });
-  });
+<script>
+  var BASE_URL = '<?= base_url() ?>';
 </script>
+<script src="<?= base_url().'public/localStorageGlobal.js' ?>"></script>
+<script src="<?= base_url().'public/guru/pengumuman.js' ?>"></script>

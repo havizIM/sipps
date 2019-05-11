@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        
+
       </div><hr>
       <div class="content-body">
         <div class="card">
@@ -41,41 +41,8 @@
     </div>
   </div>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      const Toast = Swal.mixin({
-                    toast: true,
-                    position:'bottom-end',
-                    showConfirmButton: false,
-                    timer: 2500
-                  });
-
-      var session     = localStorage.getItem('sipps');
-      var auth        = JSON.parse(session);
-      var token       = auth.token;
-      var nip         = auth.nip;
-      // alert(token)
-
-      var table = $('#detail_maspres').DataTable({
-        columnDefs :[{
-          targets:[0,3,4],
-          searchable:false
-        },{
-          targets:[0,1],
-          orderable:false
-        }],
-        responsive:true,
-        processing:true,
-        ajax:'<?= base_url().'api/maspres/show/'?>'+token,
-        columns:[
-          {"data":"id_maspres"},
-          {"data":"deskripsi_prestasi"},
-          {"data":"poin_prestasi"},
-          {"data":"kategori_prestasi"},
-          {"data":"status"},
-
-        ],
-        order:[[0,'desc']]
-      });
-    });
+  <script>
+    var BASE_URL = '<?= base_url() ?>';
   </script>
+  <script src="<?= base_url().'public/localStorageGlobal.js' ?>"></script>
+  <script src="<?= base_url().'public/kepsek/m_prestasi.js' ?>"></script>

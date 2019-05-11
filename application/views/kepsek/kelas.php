@@ -14,7 +14,6 @@
             </div>
           </div>
         </div>
-
       </div><hr>
       <div class="content-body">
         <div class="card">
@@ -39,40 +38,8 @@
     </div>
   </div>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      const Toast = Swal.mixin({
-                    toast: true,
-                    position:'bottom-end',
-                    showConfirmButton: false,
-                    timer: 2500
-                  });
-
-      var session     = localStorage.getItem('sipps');
-      var auth        = JSON.parse(session);
-      var token       = auth.token;
-      var nip         = auth.nip;
-      var link_show   = '<?= base_url().'api/kelas/show/'?>'+token
-      // alert(token)
-
-      var table = $('#detail_kelas').DataTable({
-        columnDefs :[{
-          targets:[],
-          searchable:false
-        },{
-          targets:[],
-          orderable:false
-        }],
-        responsive:true,
-        processing:true,
-        ajax:link_show,
-        columns:[
-          {"data":"kelas"},
-          {"data":"nip"},
-          {"data":"nama"},
-        ],
-        order:[[0,'desc']]
-      });
-
-    });
+  <script>
+    var BASE_URL = '<?= base_url() ?>';
   </script>
+  <script src="<?= base_url().'public/localStorageGlobal.js' ?>"></script>
+  <script src="<?= base_url().'public/kepsek/kelas.js' ?>"></script>

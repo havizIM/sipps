@@ -49,48 +49,8 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    const Toast = Swal.mixin({
-                  toast: true,
-                  position:'bottom-end',
-                  showConfirmButton: false,
-                  timer: 2500
-                });
-
-    var session     = localStorage.getItem('sipps');
-    var auth        = JSON.parse(session);
-    var token       = auth.token;
-    var nip         = auth.nip;
-    var link_add    = '<?= base_url().'api/panggilan/add/' ?>'+token
-    // alert(token)
-
-    var table = $('#detail_panggilan').DataTable({
-      columnDefs :[{
-        targets:[0,1,2,5,6,7],
-        searchable:false
-      },{
-        targets:[0,1,3,4,6,7],
-        orderable:false
-      }],
-      responsive:true,
-      processing:true,
-      ajax:'<?= base_url().'api/panggilan/show/'?>'+token,
-      columns:[
-        {"data":"keterangan"},
-        {"data":null,"render":function(data,type,row){
-          return `<a href="<?= base_url().'doc/panggilan/' ?>${row.file}" target="blank">${row.file}</a>`
-        }},
-        {"data":"tgl_input"},
-        {"data":"nis"},
-        {"data":"nama_siswa"},
-        {"data":"kelas"},
-        {"data":"wali_kelas"},
-        {"data":"pemberi_sanksi"},
-
-      ],
-      order:[[2,'desc']]
-    });
-  });
+<script>
+  var BASE_URL = '<?= base_url() ?>';
 </script>
+<script src="<?= base_url().'public/localStorageGlobal.js' ?>"></script>
+<script src="<?= base_url().'public/kepsek/panggilan.js' ?>"></script>
