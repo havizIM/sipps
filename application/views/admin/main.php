@@ -36,7 +36,7 @@
       var auth = JSON.parse(session);
 
       if (!session) {
-        window.location.replace('<?= base_url().'auth' ?>')
+        window.location.replace('<?= base_url().'auth/login' ?>')
       }else{
           if (auth.level !== 'admin') {
             window.location.replace('<?= base_url().'' ?>'+auth.level+'/')
@@ -237,7 +237,7 @@
               success:function(response){
                 if (response.status === 200) {
                   localStorage.clear();
-                  window.location.replace('<?= base_url().'auth' ?>')
+                  window.location.replace('<?= base_url().'auth/login' ?>')
                 }else {
                   Toast.fire({
                     type: 'warning',
