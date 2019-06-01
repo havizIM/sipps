@@ -6,8 +6,8 @@ $(document).ready(function() {
                 timer: 2500
               });
 
-  var link_show   = BASE_URL+'api/siswa/show/'+token
-  // alert(token)
+  var link_show   = `${BASE_URL}api/siswa/show/${token}`
+  console.log(link_show);
 
   var table = $('#detail_siswa').DataTable({
     columnDefs :[{

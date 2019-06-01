@@ -121,7 +121,7 @@
 
 
         <!-- Reset Password -->
-        <section class="flexbox-container animated flipInY" id="res_pass">
+        <section class="flexbox-container animated flipInY" id="res_pass" style="display:none;">
           <div class="col-12 d-flex align-items-center justify-content-center">
             <div class="col-md-4 col-10 box-shadow-2 p-0" style="margin-top:5%;">
               <div class="card border-grey border-lighten-3 m-0">
@@ -276,16 +276,17 @@
                     title: response.message,
                   })
                 }
-                $('#btn_login').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Reset Password</span>')
+                $('#btn_respass').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Reset Password</span>')
               },
-              error:function(){
-                Swal.fire({
-                 type: 'warning',
-                 title: 'Tidak dapat mengakses server ...',
-                 showConfirmButton: false,
-                 timer: 2000
-                })
-                $('#btn_login').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Reset Password</span>')
+              error:function(err){
+                console.log(err.responseText);
+                // Swal.fire({
+                //  type: 'warning',
+                //  title: 'Tidak dapat mengakses server ...',
+                //  showConfirmButton: false,
+                //  timer: 2000
+                // })
+                $('#btn_respass').removeClass('disabled').removeAttr('disabled','disabled').html('<span>Reset Password</span>')
               }
             });
 
@@ -316,7 +317,6 @@
           $('#res_pass').hide()
         })
 
-        $('#res_pass').hide()
       });
     </script>
   </body>

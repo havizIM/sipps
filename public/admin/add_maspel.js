@@ -31,7 +31,7 @@ $(document).ready(function() {
     ajax : BASE_URL+'api/kapel/show/'+token,
     columns : [
       {"data" : null, "render" : function(data, type, row){
-        return `<button type="button" class="btn btn-info btn-sm" id="pilih" data-id="${row.id_kapel}" data-nama="${row.kategori_pelanggaran}"><i class="icon-trash"></i> Pilih</button>`;
+        return `<button type="button" class="btn btn-info btn-sm" id="pilih" data-id="${row.id_kapel}" data-name="${row.kategori_pelanggaran}"><i class="icon-trash"></i> Pilih</button>`;
       }},
       {"data" : "id_kapel"},
       {"data" : "kategori_pelanggaran"},
@@ -91,7 +91,7 @@ $(document).ready(function() {
   $('#t_kapel tbody').on('click', '#pilih', function(){
     // alert('Coba');
     var id_kapel = $(this).attr('data-id');
-    var nama_kategori = $(this).attr('data-nama');
+    var nama_kategori = $(this).attr('data-name');
 
     $('#show_idkapel').val(id_kapel);
     $('#show_kapel').val(nama_kategori);

@@ -237,7 +237,7 @@
               success:function(response){
                 if (response.status === 200) {
                   localStorage.clear();
-                  window.location.replace('<?= base_url().'auth' ?>')
+                  window.location.replace('<?= base_url().'auth/login' ?>')
                 }else {
                   Toast.fire({
                     type: 'warning',

@@ -31,7 +31,7 @@ $(document).ready(function() {
 
       {"data":null,"render":function(data,type,row){
 
-          return `<a href="${BASE_URL}doc/pengumuman/${row.file}" class="btn  btn-sm btn-info" target="blank">Download</a> <button type="button" data-id="${row.id_pengumuman}" id="btn_delete" class="btn  btn-sm btn-danger">Hapus</button>`
+          return `<a href="${BASE_URL}doc/pengumuman/${row.file}" class="btn  btn-sm btn-info" target="blank">Download</a> <button type="button" data-id="${row.id_pengumuman}" data-name="${row.deskripsi}" id="btn_delete" class="btn  btn-sm btn-danger">Hapus</button>`
 
       }},
     ],
@@ -44,10 +44,11 @@ $(document).ready(function() {
     e.preventDefault();
 
     var id_pengumuman = $(this).attr('data-id')
+    var nama = $(this).attr('data-name')
     var link_delete   = BASE_URL+`api/pengumuman/delete/${token}?id_pengumuman=${id_pengumuman}`
 
     Swal.fire({
-      title: 'Hapus data ?',
+      title: `Hapus data ${nama} ?`,
       type: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
