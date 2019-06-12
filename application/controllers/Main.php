@@ -7,7 +7,10 @@ class Main extends CI_Controller {
 	{
 		$this->load->view('siswa/main');
 	}
-
+	public function profil()
+	{
+		$this->load->view('siswa/profil');
+	}
 	public function dashboard()
 	{
 		$this->load->view('siswa/dashboard');

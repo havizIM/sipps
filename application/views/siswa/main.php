@@ -24,9 +24,25 @@
   <!-- BEGIN Custom CSS-->
   <link rel="stylesheet" type="text/css" href="<?= base_url().'assets/css/style.css' ?>">
   <!-- END Custom CSS-->
+
+  <!-- Jqoery -->
+  <script src="<?= base_url().'assets/app-assets/js/core/libraries/jquery/jquery.min.js' ?>" type="text/javascript"></script>
+  <script type="text/javascript">
+
+  function cek_auth(){
+    var session = localStorage.getItem('ext_sipps');
+    var auth = JSON.parse(session);
+
+    if (!session) {
+      window.location.replace('<?= base_url().'auth/login_ext' ?>')
+    }
+  };
+  cek_auth();
+  </script>
+
 </head>
-<body class="horizontal-layout horizontal-menu 2-columns   menu-expanded" data-open="hover"
-data-menu="horizontal-menu" data-col="2-columns">
+
+<body class="horizontal-layout horizontal-menu 2-columns   menu-expanded" data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
   <!-- fixed-top-->
   <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow navbar-static-top navbar-light navbar-border navbar-brand-center">
     <div class="navbar-wrapper">
@@ -48,39 +64,7 @@ data-menu="horizontal-menu" data-col="2-columns">
         <div class="collapse navbar-collapse" id="navbar-mobile">
           <ul class="nav navbar-nav mr-auto float-left">
             <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-            <li class="dropdown nav-item mega-dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Profil</a>
-              <ul class="mega-dropdown-menu dropdown-menu row">
-                <li class="col-md-2">
-                  <h6 class="dropdown-menu-header text-uppercase mb-1"><i class="la la-picture-o"></i>Foto Profil</h6>
-                  <div id="mega-menu-carousel-example">
-                    <div>
-                      <img class="rounded img-fluid mb-1" src="<?= base_url().'assets/image/user1.png' ?>" alt="User">
-                      <p class="news-content">
-                        <span class="font-small-2">Murid</span>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li class="col-md-3">
-                  <h6 class="dropdown-menu-header text-uppercase"><i class="la la-paste"></i> Profil</h6>
-                  <ul class="drilldown-menu">
-                    <li class="menu-list">
-                      <ul>
-                        <li class="row mb-2">
-                          <label class="col-sm-4 form-control-label">Nama</label>
-                          <label class="col-sm-8 form-control-label">: Yugi Setiawan</label>
-                        </li>
-                        <li class="row">
-                          <label class="col-sm-4 form-control-label">Tempat Lahir</label>
-                          <label class="col-sm-8 form-control-label">: Cilacap</label>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
 
-              </ul>
-            </li>
           </ul>
           <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-user nav-item">
@@ -95,8 +79,8 @@ data-menu="horizontal-menu" data-col="2-columns">
             <li class="dropdown dropdown-notification nav-item">
               <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="la la-gear la-spin text-danger" style="font-size:25px;"></i></a>
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item text-success" href="#" ><i class="ft-repeat"></i> Ganti Password</a>
                 <a class="dropdown-item text-danger" id="btn_logout"><i class="ft-power"></i> Logout</a>
+              </div>
             </li>
           </ul>
         </div>
@@ -108,18 +92,15 @@ data-menu="horizontal-menu" data-col="2-columns">
   role="navigation" data-menu="menu-wrapper">
     <div class="navbar-container main-menu-content" data-menu="menu-container">
       <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
-        <li class="dropdown nav-item" data-menu="dropdown">
-          <a class="dropdown-toggle nav-link" href="index.html" data-toggle="dropdown"><i class="la la-home"></i>
+        <li class="nav-item">
+          <a class="nav-link" href="#/dashboard"><i class="la la-home"></i>
             <span>Dashboard</span>
           </a>
-          <ul class="dropdown-menu">
-            <li data-menu=""><a class="dropdown-item" href="dashboard-ecommerce.html" data-toggle="dropdown">eCommerce</a>
-            </li>
-            <li data-menu=""><a class="dropdown-item" href="dashboard-crypto.html" data-toggle="dropdown">Crypto</a>
-            </li>
-            <li data-menu=""><a class="dropdown-item" href="dashboard-sales.html" data-toggle="dropdown">Sales</a>
-            </li>
-          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#/profil"><i class="la la-user"></i>
+            <span>Profil</span>
+          </a>
         </li>
 
       </ul>
@@ -127,39 +108,10 @@ data-menu="horizontal-menu" data-col="2-columns">
   </div>
   <div class="app-content content">
     <div class="content-wrapper">
-      <div class="content-header row">
-        <div class="content-header-left col-md-6 col-12 mb-2">
-          <h3 class="content-header-title">Light Layout</h3>
-          <div class="row breadcrumbs-top">
-            <div class="breadcrumb-wrapper col-12">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">Page Layouts</a>
-                </li>
-                <li class="breadcrumb-item active">Light Layout
-                </li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="content-body">
-        <!-- Description -->
-        <section id="description" class="card">
-          <div class="card-header">
-            <h4 class="card-title">Description</h4>
-          </div>
-          <div class="card-content">
-            <div class="card-body">
-              <div class="card-text">
-                <p>The light layout has a light color navbar, navigation menu and footer.
-                  In this page you can experience it. If you want to create a light
-                  version template you can use this layout.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <div id="content">
+
+        </div>
       </div>
     </div>
   </div>
@@ -171,6 +123,7 @@ data-menu="horizontal-menu" data-col="2-columns">
       <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Hand-crafted & Made with <i class="ft-heart pink"></i></span>
     </p>
   </footer>
+
   <!-- BEGIN VENDOR JS-->
   <script src="<?= base_url().'assets/app-assets/vendors/js/vendors.min.js' ?>" type="text/javascript"></script>
   <!-- BEGIN VENDOR JS-->
@@ -184,8 +137,93 @@ data-menu="horizontal-menu" data-col="2-columns">
   <script src="<?= base_url().'assets/app-assets/js/core/app.js' ?>" type="text/javascript"></script>
   <script src="<?= base_url().'assets/app-assets/js/scripts/customizer.js' ?>" type="text/javascript"></script>
   <!-- END MODERN JS-->
+  <!-- SWEET ALERT 2 -->
+  <script src="<?= base_url().'assets/app-assets/vendors/js/sweetalert2/sweetalert2.js' ?>"></script>
+
   <!-- BEGIN PAGE LEVEL JS-->
   <script type="text/javascript" src="<?= base_url().'assets/app-assets/js/scripts/ui/breadcrumbs-with-stats.js' ?>"></script>
   <!-- END PAGE LEVEL JS-->
+
+
+  <script type="text/javascript">
+
+  // Load Content
+  function load_content(link) {
+    $.get(`<?= base_url().'main/'?>${link}`,function(response){
+        $('#content').html(response);
+      });
+    };
+
+    $(document).ready(function() {
+
+      const Toast = Swal.mixin({
+                      toast: true,
+                      position:'bottom-end',
+                      showConfirmButton: false,
+                      timer: 2500
+                    });
+
+      var session   = localStorage.getItem('ext_sipps');
+      var auth      = JSON.parse(session);
+
+      // Load with URL
+      if (location.hash) {
+        link = location.hash.substr(2);
+        load_content(link);
+      }else {
+        location.hash ='#/dashboard';
+      }
+
+      // load with navigasi
+      $(window).on('hashchange',function(){
+        link = location.hash.substr(2);
+        load_content(link);
+      });
+
+      // Ajax Logout
+      $('#btn_logout').on('click',function(){
+        var link = '<?= base_url().'api/auth/logout_wali/' ?>'+auth.token
+        // alert(link)
+        Swal.fire({
+          title: 'Yakin untuk Logout ?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya logout !'
+        }).then((result) => {
+          if (result.value) {
+            $.ajax({
+              url: link,
+              type: 'GET',
+              dataType: 'JSON',
+              // data: {},
+              beforeSend:function(){},
+              success:function(response){
+                if (response.status === 200) {
+                  localStorage.clear();
+                  window.location.replace('<?= base_url().'auth/login_ext' ?>')
+                }else {
+                  Toast.fire({
+                    type: 'warning',
+                    title: response.message,
+                  })
+                }
+              },
+              error:function(){
+                Swal.fire({
+                 type: 'warning',
+                 title: 'Tidak dapat mengakses server ...',
+                 showConfirmButton: false,
+                 timer: 2000
+                })
+              }
+            });
+          }
+        })
+      })
+
+    });
+  </script>
 </body>
 </html>
